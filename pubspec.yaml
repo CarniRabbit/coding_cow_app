@@ -72,6 +72,10 @@ flutter:
     - icon/python-file.png
     - icon/K&R.png
     - icon/BSD.png
+    - icon/cmd.png
+    - icon/problem_bg.png
+    - icon/note.png
+    - icon/light-bulb.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

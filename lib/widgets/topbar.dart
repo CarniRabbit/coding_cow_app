@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Main_TopBar extends StatelessWidget {
+class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container ( // top bar

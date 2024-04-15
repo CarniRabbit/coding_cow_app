@@ -13,7 +13,7 @@
 * */
 
 import 'package:flutter/material.dart';
-import 'package:coding_cow_app/widgets/main_topbar.dart';
+import 'package:coding_cow_app/widgets/topbar.dart';
 import 'package:coding_cow_app/widgets/main_navigator.dart';
 import 'package:coding_cow_app/widgets/main_address_input.dart';
 import 'package:coding_cow_app/widgets/main_process_of_study.dart';
@@ -21,10 +21,10 @@ import 'package:coding_cow_app/widgets/main_today_coding_button.dart';
 import 'package:coding_cow_app/widgets/main_bottom_menu.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(Main_Page());
 }
 
-class MyApp extends StatelessWidget {
+class Main_Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp( // root widget
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         body: SafeArea( // 앱이 상태창 아래부터 표시되도록 함
           child: Column(
             children: [
-              Main_TopBar(),
+              TopBar(),
               Main_Navigator(),
               Main_Adress_Input(),
               Container( // middle part (today status ~ 4 bottom menu)

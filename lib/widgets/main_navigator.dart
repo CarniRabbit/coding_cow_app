@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:coding_cow_app/widgets/main_setting_C.dart';
-import 'package:coding_cow_app/widgets/main_setting_Python.dart';
-import 'package:coding_cow_app/widgets/main_setting_K&R.dart';
-import 'package:coding_cow_app/widgets/main_setting_BSD.dart';
+import 'package:coding_cow_app/widgets/main_setting_popup.dart';
 
 class Main_Navigator extends StatelessWidget {
   @override
@@ -102,67 +99,3 @@ class Main_Navigator extends StatelessWidget {
     ); // end of navigator
   }
 }
-
-void setting_dialog(context) { // setting popup
-  showDialog(
-    context: context,
-    builder: (context) {
-      return Dialog(
-        child: Container(
-          padding: EdgeInsets.all(20),
-          // color: Colors.white,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "사용 언어",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  letterSpacing: -2,
-                  color: Color(0xff2355DA),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Setting_C(),
-                  Setting_Python(),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "괄호 위치",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  letterSpacing: -2,
-                  color: Color(0xff2355DA),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Column(
-                children: [
-                  Row( // K&R
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Setting_KR(),
-                      Setting_BSD(),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
-} // end of setting popup

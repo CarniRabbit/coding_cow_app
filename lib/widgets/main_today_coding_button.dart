@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:coding_cow_app/problem.dart';
 
 class Main_Today_Coding_Button extends StatelessWidget {
   @override
@@ -9,7 +10,10 @@ class Main_Today_Coding_Button extends StatelessWidget {
         width: double.infinity,
         child: TextButton(
           onPressed: () {
-
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Problem_Page()),
+            );
           },
           style: TextButton.styleFrom(
             backgroundColor: Color(0xff2355DA),
