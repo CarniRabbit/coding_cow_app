@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TopBar extends StatelessWidget {
   @override
@@ -15,7 +16,7 @@ class TopBar extends StatelessWidget {
             height: 50,
             child: TextButton(
               onPressed: () {
-
+                quit_dialog(context);
               },
               style: TextButton.styleFrom(
                 backgroundColor: Color(0xffCD4F2C),
@@ -39,4 +40,44 @@ class TopBar extends StatelessWidget {
       ),
     ); // end of topbar
   }
+}
+
+void quit_dialog(context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text(
+          "앱을 종료하시겠습니까?",
+          style: TextStyle(
+            fontSize: 20,
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () async {
+              SystemNavigator.pop(); // 앱 종료
+            },
+            child: const Text(
+              '예',
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context, false); // 앱 종료X
+            },
+            child: const Text(
+              '아니요',
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+  );
 }
