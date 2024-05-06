@@ -4,45 +4,40 @@ class Problem_Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded( // problem body
-      child: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('icon/problem_bg.png'),
-                fit: BoxFit.contain,
-              ),
+      child: Container( // background of problem body
+        child: Stack(
+          children: [
+            Container(
+              alignment: FractionalOffset(0.2, 0.01),
+              child: FractionallySizedBox( // level
+                child: Text(
+                  "Lv.???",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ), // end of level
             ),
-          ),
-          Positioned( // level
-            top: 10,
-            left: 80,
-            child: Text(
-              "Lv.???",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+            Container( // problem type
+              alignment: FractionalOffset(0.84, 0.16),
+              child: FractionallySizedBox(
+                child: Text(
+                  "단답형 문제",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-            ),
-          ), // end of level
-          Positioned( // problem type
-            top: 85,
-            left: 275,
-            child: Text(
-              "단답형 문제",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ), // end of problem type
-          Positioned( // code part
-            top: 125,
-            left: 50,
-            width: 310,
-            height: 385,
-            child: Container(
-              padding: EdgeInsets.all(20),
-              child: Text(
-                '''#include <stdio.h>
+            ), // end of problem type
+            Container( // code part
+              alignment: FractionalOffset(0.5, 0.85),
+              child: FractionallySizedBox(
+                widthFactor: 0.8,
+                heightFactor: 0.72,
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  child: Text(
+                    '''#include <stdio.h>
 void main() {
   int n=3;
   if(   ) {
@@ -53,18 +48,25 @@ void main() {
   }
 }
                 ''',
-                style: TextStyle(
-                  // letterSpacing: -2,
-                  fontSize: 20,
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ),
                 ),
               ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-            ),
-          ), // end of code part
-        ],
-      ),
+            ), // end of code part
+          ],
+        ),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('icon/problem_bg.png'),
+            fit: BoxFit.contain,
+          ),
+        ),
+      ), // end of background of problem body
     ); // end of problem body
   }
 }
