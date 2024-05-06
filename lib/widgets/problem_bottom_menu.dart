@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_hint_popup.dart';
+import 'package:coding_cow_app/result.dart';
 
 class Problem_Bottom_Menu extends StatelessWidget {
   @override
@@ -69,7 +70,10 @@ class Problem_Bottom_Menu extends StatelessWidget {
                   height: 80,
                   child: TextButton(
                     onPressed: () {
-
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Result_Page()),
+                      );
                     },
                     child: Row(
                       children: [
@@ -108,33 +112,5 @@ class Problem_Bottom_Menu extends StatelessWidget {
 
       ],
     );
-
-    //   Column( // bottom menu
-    //   children: [
-    //     BottomNavigationBar(
-    //       type: BottomNavigationBarType.fixed,
-    //       items: [
-    //         BottomNavigationBarItem(
-    //           label: '힌트',
-    //           backgroundColor: Color(0xff1f8e22),
-    //           icon: Image.asset(
-    //             'icon/light-bulb.png',
-    //             width: 30,
-    //             height: 30,
-    //           ),
-    //         ),
-    //         BottomNavigationBarItem(
-    //             label: '메모',
-    //             backgroundColor: Color(0xff0e8cea),
-    //             icon: Image.asset(
-    //               'icon/note.png',
-    //               width: 30,
-    //               height: 30,
-    //             ),
-    //         ),
-    //       ],
-    //     ),
-    //   ],
-    // );
   }
 }

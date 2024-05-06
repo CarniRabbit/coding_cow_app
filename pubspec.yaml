@@ -76,6 +76,9 @@ flutter:
     - icon/problem_bg.png
     - icon/note.png
     - icon/light-bulb.png
+    - icon/solution.png
+    - icon/next.png
+    - icon/full-battery.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
