@@ -13,7 +13,7 @@ class Result_Bottom_Menu extends StatelessWidget {
           ),
           Container(
             // color: Colors.black,
-            padding: EdgeInsets.only(left: 20, top: 0, right: 20, bottom: 0),
+            padding: EdgeInsets.only(left: 25, top: 0, right: 25, bottom: 0),
             child: Row( // Bottom Navigation Bar
               children: [
                 Expanded(
