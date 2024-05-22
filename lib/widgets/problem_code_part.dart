@@ -9,6 +9,7 @@
 * */
 
 
+import 'package:coding_cow_app/widgets/problem_answer_input_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -30,11 +31,44 @@ class Problem_Code_Part extends StatelessWidget {
         heightFactor: 0.72,
         child: Container(
           padding: EdgeInsets.all(20),
-          child: Text(
-            '''#include <stdio.h>
+          child: Text.rich(
+            TextSpan(
+              children: <InlineSpan> [
+                TextSpan(
+                  text: '''#include <stdio.h>
 void main() {
   int n=3;
-  if(   ) {
+  if(''',
+                ),
+                WidgetSpan(
+                  alignment: PlaceholderAlignment.middle,
+                  child: TextButton(
+                    onPressed: () {
+                      answer_input_dialog(context);
+                    },
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                      ),
+                      minimumSize: Size.zero,
+                      padding: EdgeInsets.zero,
+                      backgroundColor: Color(0xff2355DA),
+                    ),
+                    child: Text(
+                      '정답 입력',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: -2,
+                      ),
+                    ),
+                  )
+                ),
+                TextSpan(
+                  text: ''') {
     printf("짝수");
   }
   else {
@@ -42,8 +76,8 @@ void main() {
   }
 }
                 ''',
-            style: TextStyle(
-              fontSize: 20,
+                ),
+              ],
             ),
           ),
           decoration: BoxDecoration(
