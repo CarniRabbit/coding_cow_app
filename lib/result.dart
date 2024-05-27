@@ -16,11 +16,9 @@ import 'package:coding_cow_app/widgets/result_body.dart';
 import 'package:coding_cow_app/widgets/result_bottom_menu.dart';
 import 'package:flutter/services.dart';
 
-void main() {
-  runApp(Result_Page());
-}
-
 class Result_Page extends StatelessWidget {
+  final int status;
+  Result_Page(this.status);
   @override
   Widget build(BuildContext context) {
     // hide navigation bar
@@ -37,7 +35,7 @@ class Result_Page extends StatelessWidget {
             children: [
               TopBar(),
               Problem_Title(),
-              Result_Body(),
+              Result_Body(this.status),
               Result_Bottom_Menu(),
             ],
           ),

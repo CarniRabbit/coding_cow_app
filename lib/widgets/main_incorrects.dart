@@ -1,3 +1,4 @@
+import 'package:coding_cow_app/widgets/problem_multiple_choice.dart';
 import 'package:flutter/material.dart';
 
 class Main_Incorrects extends StatelessWidget {
@@ -7,7 +8,10 @@ class Main_Incorrects extends StatelessWidget {
       flex: 4,
       child: TextButton(
         onPressed: () {
-
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Problem_Multiple_Choice()),
+          );
         },
         style: TextButton.styleFrom(
           backgroundColor: Color(0xff9bbb49),

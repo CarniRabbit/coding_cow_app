@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_hint_popup.dart';
 import 'package:coding_cow_app/result.dart';
+import 'dart:math';
 
 class Problem_Bottom_Menu extends StatelessWidget {
   @override
@@ -70,9 +71,10 @@ class Problem_Bottom_Menu extends StatelessWidget {
                   height: 80,
                   child: TextButton(
                     onPressed: () {
+                      int status = Random().nextInt(3);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Result_Page()),
+                        MaterialPageRoute(builder: (context) => Result_Page(status)),
                       );
                     },
                     child: Row(

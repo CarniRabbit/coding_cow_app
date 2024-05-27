@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/result_status.dart';
 
 class Result_Body extends StatelessWidget {
+  final int status;
+  Result_Body(this.status);
   @override
   Widget build(BuildContext context) {
     return Expanded( // problem body
@@ -52,7 +54,7 @@ class Result_Body extends StatelessWidget {
                 ),
               ),
             ), // end of problem type
-            Result_Status(),
+            Result_Status(status),
           ],
         ),
         decoration: BoxDecoration(

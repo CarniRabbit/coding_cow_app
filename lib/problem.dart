@@ -31,6 +31,7 @@ class Problem_Page extends StatelessWidget {
         fontFamily: 'NanumCoding',
       ),
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SafeArea( // 앱이 상태창 아래부터 표시되도록 함
           bottom: false,
           child: Column(

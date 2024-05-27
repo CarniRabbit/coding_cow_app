@@ -57,7 +57,7 @@ void main() {
                       backgroundColor: Color(0xff2355DA),
                     ),
                     child: Text(
-                      '정답 입력',
+                      '           ',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -65,7 +65,7 @@ void main() {
                         letterSpacing: -2,
                       ),
                     ),
-                  )
+                  ),
                 ),
                 TextSpan(
                   text: ''') {
