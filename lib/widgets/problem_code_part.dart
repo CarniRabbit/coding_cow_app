@@ -13,10 +13,6 @@ import 'package:coding_cow_app/widgets/problem_answer_input_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() {
-  runApp(Problem_Code_Part());
-}
-
 class Problem_Code_Part extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

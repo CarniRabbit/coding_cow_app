@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_hint_popup.dart';
-import 'package:coding_cow_app/result.dart';
-import 'dart:math';
+
+var hint = false;
 
 class Problem_Bottom_Menu extends StatelessWidget {
   @override
@@ -24,6 +24,7 @@ class Problem_Bottom_Menu extends StatelessWidget {
                   height: 80,
                   child: TextButton( // Hint Button
                     onPressed: () {
+                      hint = true;
                       hint_dialog(context);
                     },
                     child: Row(
@@ -52,7 +53,7 @@ class Problem_Bottom_Menu extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(0)),
                       ),
                       padding: EdgeInsets.all(10),
-                      // 상화좌우 padding 5px
+                      // 상하좌우 padding 10px
                     ),
                   ), // end of Hint Button
                 ),
@@ -71,11 +72,11 @@ class Problem_Bottom_Menu extends StatelessWidget {
                   height: 80,
                   child: TextButton(
                     onPressed: () {
-                      int status = Random().nextInt(3);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Result_Page(status)),
-                      );
+                      // int status = Random().nextInt(3);
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => Result_Page(status)),
+                      // );
                     },
                     child: Row(
                       children: [

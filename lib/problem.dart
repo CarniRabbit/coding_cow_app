@@ -24,7 +24,7 @@ class Problem_Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // hide navigation bar
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
 
     return MaterialApp( // root widget
       theme: ThemeData( // font setting (나눔고딕코딩)
