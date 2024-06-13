@@ -1,5 +1,5 @@
 /*
-* Edit date: 2024-05-25
+* Edit date: 2024-06-05
 * 딩카 문제화면 - 결과 화면
 * 각 위젯마다 시작, 끝 주석으로 표기하기
 * 속성에 대한 간략한 설명 주석으로 넣기
@@ -19,8 +19,6 @@ class Result_Status extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(this.status);
-
     return Container( // code part
       alignment: FractionalOffset(0.5, 0.85),
       child: FractionallySizedBox(

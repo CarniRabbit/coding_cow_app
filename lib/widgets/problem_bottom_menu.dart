@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_hint_popup.dart';
-
-var hint = false;
+import 'package:coding_cow_app/data.dart';
 
 class Problem_Bottom_Menu extends StatelessWidget {
   @override

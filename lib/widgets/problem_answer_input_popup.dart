@@ -1,12 +1,9 @@
 import 'package:coding_cow_app/result.dart';
 import 'package:flutter/material.dart';
-import 'package:coding_cow_app/widgets/problem_bottom_menu.dart';
+import 'package:coding_cow_app/data.dart';
 
 void answer_input_dialog(context) {
-  var answers = [
-    'n%2==0',
-    'n++',
-  ];
+  print(problems[0][5]); // answer index = 5
 
   showDialog(
     context: context,
@@ -31,10 +28,10 @@ void answer_input_dialog(context) {
 
                     print(hint);
 
-                    if (text.trim() == answers[0] && !hint)
+                    if (text.replaceAll(RegExp('\\s'), "") == problems[0][5] && !hint)
                       status = 0;
 
-                    else if (text.trim() == answers[0])
+                    else if (text.replaceAll(RegExp('\\s'), "") == problems[0][5])
                       status = 1;
 
                     else
