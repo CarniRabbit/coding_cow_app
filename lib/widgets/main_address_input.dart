@@ -1,17 +1,22 @@
+/*
+ * edit: 2024-04-01
+ * 딩카 메인 화면 - 주소창(닉네임 표시)
+ */
+
 import 'package:flutter/material.dart';
 
 class Main_Adress_Input extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container( // address input
-      decoration: BoxDecoration( // 상하좌우 모두 3px border
-        border: Border.all( // border
+      decoration: BoxDecoration(
+        border: Border.all( // 상하좌우 모두 3px border
           color: Color(0xffAEAEAE),
           width: 3,
         ),
       ),
       // padding: EdgeInsets.all(5),
-      child: SizedBox(
+      child: SizedBox( //
         width: double.infinity,
         height: 50,
         child: Row(

@@ -1,3 +1,8 @@
+/*
+ * edit: 2024-05-01
+ * 딩카 메인 화면 - 설정 팝업(언어 종류)
+ */
+
 import 'package:flutter/material.dart';
 
 class Setting_Language extends StatefulWidget {
@@ -13,19 +18,19 @@ class _Setting_Language_State extends State<Setting_Language> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Row( // align(→)
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Column( // C language
+        Column(  // align(↓), C language
           children: [
             Image(
               image: AssetImage('icon/c-.png'),
               width: 50,
               height: 50,
             ),
-            Row(
+            Row( // align(→)
               children: [
-                Checkbox(
+                Checkbox( // checkbox state(한쪽이 체크되면 다른 한쪽은 체크X)
                   value: _isC,
                   onChanged: (value) {
                     setState(() {
@@ -35,10 +40,11 @@ class _Setting_Language_State extends State<Setting_Language> {
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
+                    // 모든 꼭짓점을 20만큼 둥글게
                   ),
-                  checkColor: Colors.white,
-                  activeColor: Color(0xff2355DA),
-                  materialTapTargetSize: MaterialTapTargetSize.padded,
+                  checkColor: Colors.white, // check icon color
+                  activeColor: Color(0xff2355DA), // check = true일때 background color
+                  materialTapTargetSize: MaterialTapTargetSize.padded, // min size
                 ),
                 Text(
                   'C언어',
@@ -47,16 +53,16 @@ class _Setting_Language_State extends State<Setting_Language> {
             ),
           ],
         ), // end of C language
-        Column( // Python language
+        Column( // align(↓), Python language
           children: [
             Image(
               image: AssetImage('icon/python-file.png'),
               width: 50,
               height: 50,
             ),
-            Row(
+            Row( // align(→)
               children: [
-                Checkbox(
+                Checkbox( // checkbox state(한쪽이 체크되면 다른 한쪽은 체크X)
                   value: _isPython,
                   onChanged: (value) {
                     setState(() {
@@ -66,10 +72,11 @@ class _Setting_Language_State extends State<Setting_Language> {
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
+                    // 모든 꼭짓점을 20만큼 둥글게
                   ),
-                  checkColor: Colors.white,
-                  activeColor: Color(0xff2355DA),
-                  materialTapTargetSize: MaterialTapTargetSize.padded,
+                  checkColor: Colors.white, // check icon color
+                  activeColor: Color(0xff2355DA), // check = true일때 background color
+                  materialTapTargetSize: MaterialTapTargetSize.padded, // min size
                 ),
                 Text(
                   'Python',

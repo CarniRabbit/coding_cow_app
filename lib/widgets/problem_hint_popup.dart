@@ -1,6 +1,11 @@
+/*
+ * edit: 2024-05-22
+ * 딩카 문제 화면 - 힌트 팝업
+ */
+
 import 'package:flutter/material.dart';
 
-void hint_dialog(context) { // setting popup
+void hint_dialog(context) { // hint popup
   showDialog(
     context: context,
     builder: (context) {
@@ -11,7 +16,7 @@ void hint_dialog(context) { // setting popup
             color: Color(0xffeafceb),
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Column(
+          child: Column( // align(↓)
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
@@ -23,10 +28,10 @@ void hint_dialog(context) { // setting popup
                   color: Colors.black,
                 ),
               ),
-              SizedBox(
+              SizedBox( // 제목과 본문 사이 공백
                 height: 20,
               ),
-              RichText(
+              RichText( // TextSpan을 통해 중간에 다른 글자색 설정, 추후 DB의 hint 속성에서 가져오는 방식으로 구현
                 text: TextSpan(
                   text: '어떤 수를 짝수라고 하고, 어떤 수를 홀수라고 할까요? 짝수는 ',
                   style: TextStyle(

@@ -1,3 +1,8 @@
+/*
+ * edit: 2024-04-01
+ * 딩카 메인 화면 - 하단 메뉴 버튼(실력측정)
+ */
+
 import 'package:flutter/material.dart';
 
 class Main_Measure extends StatelessWidget {
@@ -16,16 +21,16 @@ class Main_Measure extends StatelessWidget {
           ),
           padding: EdgeInsets.all(10),
         ),
-        child: Row(
+        child: Row( // align(→)
           children: [
-            Image(
+            Image( // icon
               image: AssetImage('icon/speedometer.png'),
               width: 80,
             ),
-            SizedBox(
+            SizedBox( // 공백
               width: 20,
             ),
-            Text(
+            Text( // text
               '실력\n측정',
               style: TextStyle(
                 letterSpacing: -2,

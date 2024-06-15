@@ -1,3 +1,8 @@
+/*
+ * edit: 2024-05-01
+ * 딩카 문제 화면 - 하단 메뉴
+ */
+
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_hint_popup.dart';
 import 'package:coding_cow_app/data.dart';

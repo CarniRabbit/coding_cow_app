@@ -1,11 +1,16 @@
+/*
+ * edit: 2024-05-01
+ * 딩카 문제 화면 - 프로그램 제목
+ */
+
 import 'package:flutter/material.dart';
 
 class Problem_Title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row( // problem title
+    return Row( // align(→), problem title
       children: [
-        Container(
+        Container( // icon
           child: Image(
             image: AssetImage('icon/cmd.png'),
             width: 50,
@@ -13,7 +18,7 @@ class Problem_Title extends StatelessWidget {
           ),
           padding: EdgeInsets.all(20),
         ),
-        Container (
+        Container ( // text
           child: Text(
             '짝수/홀수 판별 프로그램',
             style: TextStyle(

@@ -1,3 +1,8 @@
+/*
+ * edit: 2024-04-01
+ * 딩카 공통 - 상단 바
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,7 +21,7 @@ class TopBar extends StatelessWidget {
             height: 50,
             child: TextButton(
               onPressed: () {
-                quit_dialog(context);
+                quit_dialog(context); // x버튼 눌렀을 때 종료
               },
               style: TextButton.styleFrom(
                 backgroundColor: Color(0xffCD4F2C),
@@ -42,7 +47,7 @@ class TopBar extends StatelessWidget {
   }
 }
 
-void quit_dialog(context) {
+void quit_dialog(context) { // X버튼 눌렀을 때 종료
   showDialog(
     context: context,
     builder: (context) {

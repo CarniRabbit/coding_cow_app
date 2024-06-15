@@ -1,12 +1,7 @@
 /*
-* 2024-04-14
-* 딩카 문제화면 - 코드 부분
-* 각 위젯마다 시작, 끝 주석으로 표기하기
-* 속성에 대한 간략한 설명 주석으로 넣기
-* 한글 작성시 항상 자간 -2 (letterSpacing: -2)
-* 다음 속성이 없더라도 무조건 반점 찍기
-* icon 종류는 https://www.fluttericon.com/ 에서 마우스 올려보기
-* */
+ * edit: 2024-06-08
+ * 딩카 문제 화면 - 코드
+ */
 
 
 import 'package:coding_cow_app/widgets/problem_answer_input_popup.dart';
@@ -28,7 +23,7 @@ class Problem_Code_Part extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(20),
           child: Text.rich(
-            TextSpan(
+            TextSpan( // inline으로 text를 배치할 수 있게 해주고, textspan마다 다른 설정 가능
               children: <InlineSpan> [
                 TextSpan(
                   text: '''#include <stdio.h>
@@ -36,7 +31,7 @@ void main() {
   int n=3;
   if(''',
                 ),
-                WidgetSpan(
+                WidgetSpan( // inline으로 widget을 배치할 수 있게 해줌
                   alignment: PlaceholderAlignment.middle,
                   child: TextButton(
                     onPressed: () {

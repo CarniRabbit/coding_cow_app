@@ -1,14 +1,7 @@
 /*
-* Edit date: 2024-06-05
-* 딩카 문제화면 - 결과 화면
-* 각 위젯마다 시작, 끝 주석으로 표기하기
-* 속성에 대한 간략한 설명 주석으로 넣기
-* 한글 작성시 항상 자간 -2 (letterSpacing: -2)
-* 다음 속성이 없더라도 무조건 반점 찍기
-* icon 종류는 https://www.fluttericon.com/ 에서 마우스 올려보기
-* 조건에 따라 화면이 바뀌는 경우 삼항연산자 사용할 것. 오히려 if, switch-case가 더 어려움.
-* */
-
+ * Edit date: 2024-06-22
+ * 딩카 결과 화면 - 정답/힌트정답/오답
+*/
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,19 +22,23 @@ class Result_Status extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              status == 0 ? Image(
+
+              // battery icon
+              status == 0 ? Image( // 힌트를 보지 않고 정답
                 image: AssetImage('icon/full-battery.png'),
               ):
-              status == 1 ? Image(
+              status == 1 ? Image( // 힌트를 보고 정답
                 image: AssetImage('icon/battery.png'),
               ):
-              Image(
+              Image( // 오답
                 image: AssetImage('icon/low-battery.png'),
               ),
-              SizedBox(
+              SizedBox( // 아이콘<->글자 공백
                 height: 20,
               ),
-              status == 0 ? Text(
+
+              // result text
+              status == 0 ? Text( // 힌트를 보지 않고 정답
                   'Congrats!',
                   style: TextStyle(
                     fontSize: 30,
@@ -49,7 +46,7 @@ class Result_Status extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   )
               ):
-              status == 1 ? Text(
+              status == 1 ? Text( // 힌트를 보고 정답
                   'Nice one!',
                   style: TextStyle(
                     fontSize: 30,
@@ -57,7 +54,7 @@ class Result_Status extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   )
               ):
-              Text(
+              Text( // 오답
                   'Keep it up!',
                   style: TextStyle(
                     fontSize: 30,
@@ -67,13 +64,15 @@ class Result_Status extends StatelessWidget {
               ),
             ],
           ),
-          decoration: status == 0 ? BoxDecoration(
+
+          // background color
+          decoration: status == 0 ? BoxDecoration( // 힌트를 보지 않고 정답
             color: Color(0xffc3fded),
           ):
-          status == 1 ? BoxDecoration(
+          status == 1 ? BoxDecoration( // 힌트를 보고 정답
             color: Color(0xfff7deb6),
           ):
-          BoxDecoration(
+          BoxDecoration( // 오답
             color: Color(0xfffdc3c3),
           ),
         ),

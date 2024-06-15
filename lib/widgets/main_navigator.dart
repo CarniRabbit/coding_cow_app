@@ -1,3 +1,8 @@
+/*
+ * edit: 2024-04-01
+ * 딩카 메인 화면 - 하단 메뉴 버튼(오답노트)
+ */
+
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/main_setting_popup.dart';
 
@@ -8,7 +13,7 @@ class Main_Navigator extends StatelessWidget {
         color: Color(0xffE8E8E8), // navigator 바탕색
         child: SizedBox( // navigator bar height
           height: 100,
-          child: Row( // navigator element
+          child: Row( // navigator element, // align(→)
             mainAxisAlignment: MainAxisAlignment.spaceEvenly, // 자동으로 균등하게 배치
             children: [
               // Expanded를 2개 배치해두면 자동으로 너비가 1:1로 맞춰짐 (3개면 33.33, 4개면 25...)
@@ -25,7 +30,7 @@ class Main_Navigator extends StatelessWidget {
                     padding: EdgeInsets.all(5),
                     // 버튼 내부에 padding 5px
                   ),
-                  child: Row(
+                  child: Row( // align(→)
                     mainAxisAlignment: MainAxisAlignment.center,
                     //  Row의 모든 요소를 가운데 모아 정렬
                     children: [
@@ -69,18 +74,18 @@ class Main_Navigator extends StatelessWidget {
                     padding: EdgeInsets.all(5),
                     // 상화좌우 padding 5px
                   ),
-                  child: Row(
+                  child: Row( // align(→)
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image(
+                      Image( // icon
                         image: AssetImage('icon/settings.png'),
                         width: 50,
                         height: 50,
                       ),
-                      SizedBox(
+                      SizedBox( // 공백
                         width: 20,
                       ),
-                      Text(
+                      Text( // text
                         '설정',
                         style: TextStyle(
                           color: Colors.black,

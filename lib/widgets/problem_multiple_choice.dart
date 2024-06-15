@@ -1,3 +1,8 @@
+/*
+ * edit: 2024-05-22
+ * 딩카 문제 화면 - 객관식 문제 화면
+ */
+
 import 'package:coding_cow_app/widgets/problem_bottom_menu.dart';
 import 'package:coding_cow_app/widgets/topbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +15,7 @@ class Problem_Multiple_Choice extends StatelessWidget {
     return Scaffold( // problem body
       body:SafeArea(
         bottom:false,
-        child:Column(
+        child:Column( // align(↓)
           children: [
             TopBar(),
             Row( // problem title

@@ -1,3 +1,8 @@
+/*
+ * edit: 2024-05-01
+ * 딩카 문제 화면 - 중앙
+ */
+
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_code_part.dart';
 
@@ -9,6 +14,7 @@ class Problem_Body extends StatelessWidget {
       flex: 4,
       child: Container( // background of problem body
         child: Stack(
+          // stack과 fractionalOffset을 이용하여 각기 다른 너비의 화면에서도 안꺠지게 배치
           children: [
             Container(
               alignment: FractionalOffset(0.2, 0.01),
@@ -32,7 +38,7 @@ class Problem_Body extends StatelessWidget {
                 ),
               ),
             ), // end of problem type
-            Problem_Code_Part(),
+            Problem_Code_Part(), // 문제(code)가 출력되는 부분
           ],
         ),
         decoration: BoxDecoration(

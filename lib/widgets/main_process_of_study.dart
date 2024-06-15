@@ -1,3 +1,8 @@
+/*
+ * edit: 2024-04-01
+ * 딩카 메인 화면 - 오늘의 공부 현황(%)
+ */
+
 import 'package:flutter/material.dart';
 
 class Main_Process_Of_Study extends StatelessWidget {
@@ -14,7 +19,7 @@ class Main_Process_Of_Study extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         height: 200,
-        child: Row(
+        child: Row( // align(→)
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

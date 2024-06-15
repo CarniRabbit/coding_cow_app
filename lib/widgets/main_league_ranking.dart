@@ -1,3 +1,8 @@
+/*
+ * edit: 2024-04-01
+ * 딩카 메인 화면 - 하단 메뉴 버튼(리그랭킹)
+ */
+
 import 'package:flutter/material.dart';
 
 class Main_League_Ranking extends StatelessWidget {
@@ -16,7 +21,7 @@ class Main_League_Ranking extends StatelessWidget {
           ),
           padding: EdgeInsets.all(10),
         ),
-        child: Row(
+        child: Row( // align(→)
           children: [
             Image(
               image: AssetImage('icon/free-icon-trophy.png'),

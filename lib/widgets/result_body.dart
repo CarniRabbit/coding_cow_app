@@ -1,3 +1,8 @@
+/*
+ * edit: 2024-05-22
+ * 딩카 결과 화면 - 중앙
+ */
+
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/result_status.dart';
 
@@ -25,6 +30,7 @@ class Result_Body extends StatelessWidget {
                     ),
                   ), // end of period
                   padding: EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 5),
+                  // 상하 10px, 좌우 5px
                   decoration: BoxDecoration(
                     color: Color(0xff2355DA),
                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -54,7 +60,7 @@ class Result_Body extends StatelessWidget {
                 ),
               ),
             ), // end of problem type
-            Result_Status(status),
+            Result_Status(status), // status에 따라 다른 결과 화면 출력
           ],
         ),
         decoration: BoxDecoration(

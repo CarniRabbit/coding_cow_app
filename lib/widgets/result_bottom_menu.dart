@@ -1,3 +1,8 @@
+/*
+ * edit: 2024-05-22
+ * 딩카 결과 화면 - 하단 메뉴
+ */
+
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_hint_popup.dart';
 
@@ -6,7 +11,7 @@ class Result_Bottom_Menu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 1,
-      child: Column(
+      child: Column( // align(↓)
         children: <Widget>[
           SizedBox( // top margin
             height: 20,
@@ -61,7 +66,7 @@ class Result_Bottom_Menu extends StatelessWidget {
                   flex: 1,
                   child: SizedBox(
                     height: 50,
-                    child: TextButton(
+                    child: TextButton( // next problem
                       onPressed: () {
 
                       },
@@ -76,7 +81,7 @@ class Result_Bottom_Menu extends StatelessWidget {
                             width: 30,
                           ),
                           Text(
-                            '메모',
+                            '다음문제',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -93,7 +98,7 @@ class Result_Bottom_Menu extends StatelessWidget {
                         padding: EdgeInsets.only(top: 10, left: 20, bottom: 10, right: 20),
                         // 상화좌우 padding 5px
                       ),
-                    ),
+                    ), // end of next problem
                   ),
                 ),
               ],
