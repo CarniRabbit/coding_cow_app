@@ -24,17 +24,20 @@ var problems = [
     4,
     2,
     '짝수/홀수 판별 프로그램',
-    '''#include <stdio.h>
-int main() {
-   int n = 3;
-   if (n%2==0) {
-      printf("짝수입니다.");
-   }
-   else {
-      printf("홀수입니다.");
-   }
-   return 0;
-}''',
+    """
+    <span class='blue'>#include</span> &lt;<span class='red'>stdio.h</span>&gt;<br/>
+    int main() {<br/>
+    <div class='first'>
+    <span class='blue'>int</span> n = 3;<br/>
+    <span class='blue'>if</span> (<span class="answer">정답 입력</span>) {<br/>
+    <div class='second'>printf(<span class='red'>"짝수입니다."</span>);</div>
+    }<br/>
+    <span class='blue'>else</span> {<br/>
+    <div class='second'>printf(<span class='red'>"홀수입니다."</span>);</div><br/>
+    }
+    <span class='blue'>return</span> 0;<br/>
+    </div><br/>
+}""",
     '주관식 문제',
     'n%2==0',
     '''* 짝수와 홀수의 정의에 대해서 생각해봅시다.
@@ -49,13 +52,14 @@ int main() {
     5,
     2,
     '십의 자리수 구하는 프로그램',
-    '''#include <stdio.h>
-int main() {
-   int n = 0;
-   printf("숫자를 입력해주세요:");
-   scanf("%d", &n);
-   printf("십의 자리수: %d\\n", n%100);
-   return 0;
+    '''<span>#include</span> &lt;stdio.h&gt;<br/>
+int main() {<br/>
+   int n = 0;<br/>
+   printf("숫자를 입력해주세요:");<br/>
+   scanf("%d", &n);<br/><br/>
+
+   printf("십의 자리수: %d\\n", n%100);<br/>
+   return 0;<br/>
 }''',
     '주관식 문제',
     'n%100',
@@ -67,17 +71,17 @@ int main() {
     7,
     2,
     '삼각형 출력 프로그램(1)',
-    '''#include <stdio.h>
-int main() {
-   int n = 4;
-   
-   for (int i = 1; i<=n; i++) {
-      for (int j = 1; j<=i; j++) {
-         printf("*");
-      }
-      printf("\\n");
-   }
-   return 0;  
+    '''<span>#include</span> &lt;stdio.h&gt;<br/>
+int main() {<br/>
+   int n = 4;<br/><br/>
+
+   for (int i = 1; i<=n; i++) {<br/>
+      for (int j = 1; j<=i; j++) {<br/>
+         printf("*");<br/>
+      }<br/>
+      printf("\\n");<br/>
+   }<br/>
+   return 0;<br/>
 }''',
     '주관식 문제',
     'i<=j',
