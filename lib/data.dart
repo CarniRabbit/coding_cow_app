@@ -52,15 +52,19 @@ var problems = [
     5,
     2,
     '십의 자리수 구하는 프로그램',
-    '''<span>#include</span> &lt;stdio.h&gt;<br/>
-int main() {<br/>
-   int n = 0;<br/>
-   printf("숫자를 입력해주세요:");<br/>
-   scanf("%d", &n);<br/><br/>
+    """
+    <span class='blue'>#include</span> &lt;<span class='red'>stdio.h</span>&gt;<br/>
+<span class='blue'>int</span> main() {<br/>
+    <div class='first'>
+        <span class='blue'>int</span> n = 0;<br/>
+        printf(<span class='red'>"숫자를 입력해주세요:"</span>);<br/>
+        scanf(<span class='red'>"%d"</span>, &n);<br/><br/>
 
-   printf("십의 자리수: %d\\n", n%100);<br/>
-   return 0;<br/>
-}''',
+        printf(<span class='red'>"십의 자리수: %d\\n"</span>, <span class="answer">정답 입력</span>);<br/>
+        <span class='blue'>return</span> 0;<br/>
+    </div>
+}
+    """,
     '주관식 문제',
     'n%100',
     '''adsfasdfasdf''',
@@ -71,18 +75,24 @@ int main() {<br/>
     7,
     2,
     '삼각형 출력 프로그램(1)',
-    '''<span>#include</span> &lt;stdio.h&gt;<br/>
-int main() {<br/>
-   int n = 4;<br/><br/>
-
-   for (int i = 1; i<=n; i++) {<br/>
-      for (int j = 1; j<=i; j++) {<br/>
-         printf("*");<br/>
-      }<br/>
-      printf("\\n");<br/>
-   }<br/>
-   return 0;<br/>
-}''',
+    """
+    <span class='blue'>#include</span> &lt;<span class='red'>stdio.h</span>&gt;<br/>
+    <span class='blue'>int</span> main() {<br/>
+        <div class='first'>
+            <span class='blue'>int</span> n = 4;<br/><br/>
+    
+            <span class='blue'>for</span> (<span class='blue'>int</span> i = 1; i &lt;= n; i++) {<br/>
+                <div class='second'>
+                    <span class='blue'>for</span> (<span class='blue'>int</span> j = 1;<span class="answer">정답 입력</span>; j++) {<br/>
+                        <div class='third'>printf(<span class='red'>"*"</span>);</div>
+                    }<br/>
+                    printf(<span class='red'>"\\n"</span>);<br/>
+                </div>
+            }<br/>
+            <span class='blue'>return</span> 0;<br/>
+        </div>
+    }
+    """,
     '주관식 문제',
     'i<=j',
     '''adfasdfdfsddd''',

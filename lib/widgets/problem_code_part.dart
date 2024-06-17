@@ -27,22 +27,22 @@ class Problem_Code_Part extends StatelessWidget {
               answer_input_dialog(context);
             },
             child: Html(
-              data: problems[problem_no][4].toString(),
+              data: problems[problem_no][4].toString(), // 코드 가져오기
               style: {
-                ".blue": Style(
+                ".blue": Style( // 예약어
                   color: Colors.blueAccent,
                 ),
-                ".red": Style(
+                ".red": Style( // string
                   color: Colors.red,
                 ),
-                ".answer": Style(
+                ".answer": Style( // blank
                   backgroundColor: Color(0xff2355DA),
                   color: Colors.white,
                 ),
-                "div.first": Style(
+                "div.first": Style( // intent 1
                   margin: Margins.only(left: 20),
                 ),
-                "div.second": Style(
+                "div.second": Style( // intent 2
                   margin: Margins.only(left: 40),
                 ),
               },
