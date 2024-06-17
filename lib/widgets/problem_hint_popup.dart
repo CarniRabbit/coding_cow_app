@@ -3,6 +3,7 @@
  * 딩카 문제 화면 - 힌트 팝업
  */
 
+import 'package:coding_cow_app/data.dart';
 import 'package:flutter/material.dart';
 
 void hint_dialog(context) { // hint popup
@@ -20,66 +21,11 @@ void hint_dialog(context) { // hint popup
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "* 짝수와 홀수의 정의에 대해서 생각해봅시다",
+                problems[problem_no][7].toString(),
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
                   fontSize: 20,
                   letterSpacing: -3,
                   color: Colors.black,
-                ),
-              ),
-              SizedBox( // 제목과 본문 사이 공백
-                height: 20,
-              ),
-              RichText( // TextSpan을 통해 중간에 다른 글자색 설정, 추후 DB의 hint 속성에서 가져오는 방식으로 구현
-                text: TextSpan(
-                  text: '어떤 수를 짝수라고 하고, 어떤 수를 홀수라고 할까요? 짝수는 ',
-                  style: TextStyle(
-                    fontSize: 20,
-                    letterSpacing: -2,
-                    color: Colors.black,
-                    height: 1.5,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '2의 배수',
-                      style: TextStyle(
-                        fontSize: 20,
-                        letterSpacing: -2,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff1f8e22),
-                        height: 1.5,
-                      ),
-                    ),
-                    TextSpan(
-                      text: '이기도 합니다. 어떻게 하면 if문에서 2의 배수를 찾아낼 수 있을까요? ',
-                      style: TextStyle(
-                        height: 1.5,
-                      ),
-                    ),
-                    TextSpan(
-                      text: '어떤 ',
-                      style: TextStyle(
-                        height: 1.5,
-                      ),
-                    ),
-                    TextSpan(
-                      text: '산술 연산자',
-                      style: TextStyle(
-                        fontSize: 20,
-                        letterSpacing: -2,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff1f8e22),
-                        height: 1.5,
-                      ),
-                    ),
-                    TextSpan(
-                      text: '를 사용할지 고민해봅시다',
-                      style: TextStyle(
-                        height: 1.5,
-                      ),
-                    ),
-                  ],
                 ),
               ),
               SizedBox(

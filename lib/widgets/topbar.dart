@@ -22,6 +22,7 @@ class TopBar extends StatelessWidget {
             child: TextButton(
               onPressed: () {
                 quit_dialog(context); // x버튼 눌렀을 때 종료
+                // Navigator.pop(context);
               },
               style: TextButton.styleFrom(
                 backgroundColor: Color(0xffCD4F2C),

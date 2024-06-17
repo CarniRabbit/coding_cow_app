@@ -3,6 +3,7 @@
  * 딩카 문제 화면 - 중앙
  */
 
+import 'package:coding_cow_app/data.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_code_part.dart';
 
@@ -20,7 +21,7 @@ class Problem_Body extends StatelessWidget {
               alignment: FractionalOffset(0.2, 0.01),
               child: FractionallySizedBox( // level
                 child: Text(
-                  "Lv.???",
+                  "Lv."+problems[problem_no][1].toString(),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -31,7 +32,7 @@ class Problem_Body extends StatelessWidget {
               alignment: FractionalOffset(0.84, 0.16),
               child: FractionallySizedBox(
                 child: Text(
-                  "단답형 문제",
+                  problems[problem_no][5].toString(),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),

@@ -4,6 +4,8 @@
  */
 
 
+import 'dart:math';
+import 'package:coding_cow_app/data.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/topbar.dart';
 import 'package:coding_cow_app/widgets/problem_title.dart';
@@ -11,15 +13,15 @@ import 'package:coding_cow_app/widgets/problem_body.dart';
 import 'package:coding_cow_app/widgets/problem_bottom_menu.dart';
 import 'package:flutter/services.dart';
 
-void main() {
-  runApp(Problem_Page());
-}
-
 class Problem_Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // hide navigation bar
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
+
+    hint = false;
+    problem_no = Random().nextInt(problems.length);
+    print(problem_no);
 
     return MaterialApp( // root widget
       theme: ThemeData( // font setting (나눔고딕코딩)

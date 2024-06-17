@@ -3,6 +3,7 @@
  * 딩카 문제 화면 - 프로그램 제목
  */
 
+import 'package:coding_cow_app/data.dart';
 import 'package:flutter/material.dart';
 
 class Problem_Title extends StatelessWidget {
@@ -20,7 +21,7 @@ class Problem_Title extends StatelessWidget {
         ),
         Container ( // text
           child: Text(
-            '짝수/홀수 판별 프로그램',
+            problems[problem_no][3].toString(),
             style: TextStyle(
               letterSpacing: -2,
               color: Colors.black,
