@@ -1,5 +1,5 @@
 /*
- * edit: 2024-06-08
+ * edit: 2024-06-18
  * 딩카 문제 화면 - 코드
  */
 
@@ -19,21 +19,22 @@ class Problem_Code_Part extends StatelessWidget {
         widthFactor: 0.75,
         heightFactor: 0.72,
         child: Container(
-          padding: EdgeInsets.all(20),
-          // problems[0][4]는 object형이므로 toString() 으로 String형으로 바꿔야함
-          // child: Text(problems[problem_no][4].toString()),
-          child: InkWell(
+          padding: EdgeInsets.all(10),
+          child: InkWell( // event를 넣을 수 없는 widget에 event를 부여해주는 widget
             onTap: () {
-              answer_input_dialog(context);
+              answer_input_dialog(context); // 코드 부분 터치시 정답 입력창 실행
             },
             child: Html(
               data: problems[problem_no][4].toString(), // 코드 가져오기
               style: {
-                ".blue": Style( // 예약어
+                ".blue": Style( // 파란 글자
                   color: Colors.blueAccent,
                 ),
-                ".red": Style( // string
+                ".red": Style( // 빨간 글자
                   color: Colors.red,
+                ),
+                ".hint": Style( // 힌트 highlight
+                  color: Color(0xff1f8e22),
                 ),
                 ".answer": Style( // blank
                   backgroundColor: Color(0xff2355DA),
@@ -44,6 +45,12 @@ class Problem_Code_Part extends StatelessWidget {
                 ),
                 "div.second": Style( // intent 2
                   margin: Margins.only(left: 40),
+                ),
+                "div.third": Style( // intent 3
+                  margin: Margins.only(left: 60),
+                ),
+                "div.fourth": Style( // intent 4
+                  margin: Margins.only(left: 80),
                 ),
               },
             ),
