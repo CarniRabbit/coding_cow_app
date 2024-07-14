@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "631284502927",
+    "project_id": "dingca-976c1",
+    "storage_bucket": "dingca-976c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631284502927:android:95fd3937288ae24fac7bfa",
+        "android_client_info": {
+          "package_name": "com.example.codingcow.coding_cow_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPGW5qOYnQD4sdag1OOYMtagIyFbMgq7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

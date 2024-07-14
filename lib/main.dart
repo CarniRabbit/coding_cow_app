@@ -10,8 +10,14 @@ import 'package:coding_cow_app/widgets/main_address_input.dart';
 import 'package:coding_cow_app/widgets/main_process_of_study.dart';
 import 'package:coding_cow_app/widgets/main_today_coding_button.dart';
 import 'package:coding_cow_app/widgets/main_bottom_menu.dart';
+import 'package:coding_cow_app/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(Main_Page());
 }
 

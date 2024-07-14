@@ -12,6 +12,7 @@ import 'package:flutter_html/flutter_html.dart';
 class Problem_Code_Part extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Future<List<Problems>> problem_db = fromFirestore("Problems");
 
     return Container( // code part
       alignment: FractionalOffset(0.5, 0.85),

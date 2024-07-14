@@ -18,7 +18,76 @@
  */
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+class Problems {
+  final String ID;
+  final int level;
+  final int language;
+  final String title;
+  final String description;
+  final String code;
+  final String category;
+  final String answer;
+  final String hint;
+  final String source;
+
+  Problems({
+    required this.ID,
+    required this.level,
+    required this.language,
+    required this.title,
+    required this.description,
+    required this.code,
+    required this.category,
+    required this.answer,
+    required this.hint,
+    required this.source,
+  });
+
+  factory Problems.fromJson(Map<String, dynamic> json) {
+    return Problems(
+      ID: json["ID"],
+      level: json["level"],
+      language: json["language"],
+      title: json["title"],
+      description: json["description"],
+      code: json["code"],
+      category: json["answer"],
+      answer: json["answer"],
+      hint: json["hint"],
+      source: json["source"],
+    );
+  }
+  // Map<String, dynamic> toJson() {
+  //   return {
+  //     'ID': ID,
+  //     'level': level,
+  //     'language': language,
+  //     'title': title,
+  //     'description': description,
+  //     'code': code,
+  //     'category': category,
+  //     'answer': answer,
+  //     'hint': hint,
+  //     'source': 'Baekjoon Online Judge(https://www.acmicpc.net/)'
+  //   };
+  // }
+}
+
+Future<List<Problems>> fromFirestore(String collection) async {
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  QuerySnapshot<Map<String, dynamic>> _snapshot =
+  await _firestore.collection(collection).get();
+
+  List<Problems> _result =
+  _snapshot.docs.map((e) => Problems.fromJson(e.data())).toList();
+
+  // print(_result[0].ID);
+
+  return _result;
+}
 
 // 문제ID, 레벨, 언어(1: 파이썬, 2: C언어), 프로그램 제목, 문제 유형, 정답, 힌트, 출처
 var problems = [
@@ -27,7 +96,7 @@ var problems = [
     4, // 1
     2, // 2
     '짝수/홀수 판별 프로그램', // 3
-    """ // 4
+    """ 
     <span class='blue'>#include</span> &lt;<span class='red'>stdio.h</span>&gt;<br/>
     int main() {<br/>
     <div class='first'>
@@ -40,7 +109,7 @@ var problems = [
     }
     <span class='blue'>return</span> 0;<br/>
     </div><br/>
-}""",
+}""", // 4
     '주관식 문제', // 5
     'n%2==0', // 6
     '''* 짝수와 홀수의 정의에 대해서 생각해봅시다.
@@ -55,7 +124,7 @@ var problems = [
     5, // 1
     2, // 2
     '십의 자리수 구하는 프로그램', // 3
-    """ // 4
+    """
     <span class='blue'>#include</span> &lt;<span class='red'>stdio.h</span>&gt;<br/>
 <span class='blue'>int</span> main() {<br/>
     <div class='first'>
@@ -67,7 +136,7 @@ var problems = [
         <span class='blue'>return</span> 0;<br/>
     </div>
 }
-    """,
+    """, // 4
     '주관식 문제', // 5
     'n%100', // 6
     '''adsfasdfasdf''', // 7
@@ -78,7 +147,7 @@ var problems = [
     7, // 1
     2, // 2
     '삼각형 출력 프로그램(1)', // 3
-    """ // 4
+    """
     <span class='blue'>#include</span> &lt;<span class='red'>stdio.h</span>&gt;<br/>
     <span class='blue'>int</span> main() {<br/>
         <div class='first'>
@@ -95,7 +164,7 @@ var problems = [
             <span class='blue'>return</span> 0;<br/>
         </div>
     }
-    """,
+    """, // 4
     '주관식 문제', // 5
     'j<=i', // 6
     '''adfasdfdfsddd''', // 7
