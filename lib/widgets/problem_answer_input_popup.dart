@@ -32,11 +32,11 @@ void answer_input_dialog(context) {
                     int status = 0;
                     
                     // hint를 보지 않고 정답을 맞췄을 때
-                    if (text.replaceAll(RegExp('\\s'), "") == problems[problem_no][6] && !hint)
+                    if (text.replaceAll(RegExp('\\s'), "") == get_problems[0].answer && !hint)
                       status = 0;
 
                     // hint를 보고 정답을 맞췄을 때
-                    else if (text.replaceAll(RegExp('\\s'), "") == problems[problem_no][6])
+                    else if (text.replaceAll(RegExp('\\s'), "") == get_problems[0].answer)
                       status = 1;
 
                     // 답을 틀렸을 때

@@ -20,8 +20,6 @@ class Problem_Page extends StatelessWidget {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
 
     hint = false;
-    problem_no = Random().nextInt(problems.length);
-    print(problem_no);
 
     return MaterialApp( // root widget
       theme: ThemeData( // font setting (나눔고딕코딩)
@@ -29,17 +27,23 @@ class Problem_Page extends StatelessWidget {
       ),
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: SafeArea( // 앱이 상태창 아래부터 표시되도록 함
-          bottom: false,
-          child: Column(
-            children: [
-              TopBar(),
-              Problem_Title(),
-              Problem_Body(),
-              Problem_Bottom_Menu(),
-            ],
-          ),
-        ), // end of middle
+        body: FutureBuilder(
+          future: fromFirestore("Problems"),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            print(snapshot.data[0]);
+            return SafeArea( // 앱이 상태창 아래부터 표시되도록 함
+              bottom: false,
+              child: Column(
+                children: [
+                  TopBar(),
+                  Problem_Title(),
+                  Problem_Body(),
+                  Problem_Bottom_Menu(),
+                ],
+              ),
+            ); // end of middle
+          },
+        ),
       ),
     );
   }

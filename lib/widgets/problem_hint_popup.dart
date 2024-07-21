@@ -21,7 +21,7 @@ void hint_dialog(context) { // hint popup
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                problems[problem_no][7].toString(),
+                get_problems[0].hint,
                 style: TextStyle(
                   fontSize: 20,
                   letterSpacing: -3,

@@ -4,6 +4,8 @@
  */
 
 
+import 'dart:math';
+
 import 'package:coding_cow_app/data.dart';
 import 'package:coding_cow_app/widgets/problem_answer_input_popup.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,8 @@ import 'package:flutter_html/flutter_html.dart';
 class Problem_Code_Part extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Future<List<Problems>> problem_db = fromFirestore("Problems");
+    problem_no = Random().nextInt(get_problems.length);
+    print(problem_no);
 
     return Container( // code part
       alignment: FractionalOffset(0.5, 0.85),
@@ -26,7 +29,7 @@ class Problem_Code_Part extends StatelessWidget {
               answer_input_dialog(context); // 코드 부분 터치시 정답 입력창 실행
             },
             child: Html(
-              data: problems[problem_no][4].toString(), // 코드 가져오기
+              data: get_problems[0].code, // 코드 가져오기
               style: {
                 ".blue": Style( // 파란 글자
                   color: Colors.blueAccent,
@@ -42,16 +45,16 @@ class Problem_Code_Part extends StatelessWidget {
                   color: Colors.white,
                 ),
                 "div.first": Style( // intent 1
-                  margin: Margins.only(left: 20),
+                  margin: Margins.only(left: 10),
                 ),
                 "div.second": Style( // intent 2
-                  margin: Margins.only(left: 40),
+                  margin: Margins.only(left: 10),
                 ),
                 "div.third": Style( // intent 3
-                  margin: Margins.only(left: 60),
+                  margin: Margins.only(left: 10),
                 ),
                 "div.fourth": Style( // intent 4
-                  margin: Margins.only(left: 80),
+                  margin: Margins.only(left: 10),
                 ),
               },
             ),

@@ -21,9 +21,9 @@ class Problem_Title extends StatelessWidget {
         ),
         Container ( // text
           child: Text(
-            problems[problem_no][3].toString(),
+            get_problems[0].title,
             style: TextStyle(
-              letterSpacing: -2,
+              // letterSpacing: -2,
               color: Colors.black,
               fontSize: 20,
               fontWeight: FontWeight.bold,
