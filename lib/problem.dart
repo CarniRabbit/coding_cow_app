@@ -30,7 +30,7 @@ class Problem_Page extends StatelessWidget {
         body: FutureBuilder(
           future: fromFirestore("Problems"),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            print(snapshot.data[0]);
+            problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
             return SafeArea( // 앱이 상태창 아래부터 표시되도록 함
               bottom: false,
               child: Column(

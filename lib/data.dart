@@ -56,7 +56,7 @@ class Problems {
       title: json["title"],
       description: json["description"],
       code: json["code"],
-      category: json["answer"],
+      category: json["category"],
       answer: json["answer"],
       hint: json["hint"],
       source: json["source"],
@@ -88,89 +88,6 @@ Future<List<Problems>> fromFirestore(String collection) async {
 
   return get_problems;
 }
-
-// 문제ID, 레벨, 언어(1: 파이썬, 2: C언어), 프로그램 제목, 문제 유형, 정답, 힌트, 출처
-// var problems = [
-//   [
-//     'ex0001-1', // 0
-//     4, // 1
-//     2, // 2
-//     '짝수/홀수 판별 프로그램', // 3
-//     """
-//     <span class='blue'>#include</span> &lt;<span class='red'>stdio.h</span>&gt;<br/>
-//     int main() {<br/>
-//     <div class='first'>
-//     <span class='blue'>int</span> n = 3;<br/>
-//     <span class='blue'>if</span> (<span class="answer">정답 입력</span>) {<br/>
-//     <div class='second'>printf(<span class='red'>"짝수입니다."</span>);</div>
-//     }<br/>
-//     <span class='blue'>else</span> {<br/>
-//     <div class='second'>printf(<span class='red'>"홀수입니다."</span>);</div><br/>
-//     }
-//     <span class='blue'>return</span> 0;<br/>
-//     </div><br/>
-// }""", // 4
-//     '주관식 문제', // 5
-//     'n%2==0', // 6
-//     '''* 짝수와 홀수의 정의에 대해서 생각해봅시다.
-//
-// 어떤 수를 짝수라고 하고, 어떤 수를 홀수라고 할까요?
-// 짝수는 2의 배수이기도 합니다. 어떻게 하면 if문에서 2의 배수를 찾아낼 수 있을까요?
-// 어떤 산술 연산자를 사용할지 고민해봅시다.''', // 7
-//     '프로그래머스(programmers)' // 8
-//   ],
-//   [
-//     'ex0002-1', // 0
-//     5, // 1
-//     2, // 2
-//     '십의 자리수 구하는 프로그램', // 3
-//     """
-//     <span class='blue'>#include</span> &lt;<span class='red'>stdio.h</span>&gt;<br/>
-// <span class='blue'>int</span> main() {<br/>
-//     <div class='first'>
-//         <span class='blue'>int</span> n = 0;<br/>
-//         printf(<span class='red'>"숫자를 입력해주세요:"</span>);<br/>
-//         scanf(<span class='red'>"%d"</span>, &n);<br/><br/>
-//
-//         printf(<span class='red'>"십의 자리수: %d\\n"</span>, <span class="answer">정답 입력</span>);<br/>
-//         <span class='blue'>return</span> 0;<br/>
-//     </div>
-// }
-//     """, // 4
-//     '주관식 문제', // 5
-//     'n%100', // 6
-//     '''adsfasdfasdf''', // 7
-//     '프로그래머스(programmers)' // 8
-//   ],
-//   [
-//     'ex0003-1', // 0
-//     7, // 1
-//     2, // 2
-//     '삼각형 출력 프로그램(1)', // 3
-//     """
-//     <span class='blue'>#include</span> &lt;<span class='red'>stdio.h</span>&gt;<br/>
-//     <span class='blue'>int</span> main() {<br/>
-//         <div class='first'>
-//             <span class='blue'>int</span> n = 4;<br/><br/>
-//
-//             <span class='blue'>for</span> (<span class='blue'>int</span> i = 1; i &lt;= n; i++) {<br/>
-//                 <div class='second'>
-//                     <span class='blue'>for</span> (<span class='blue'>int</span> j = 1;<span class="answer">정답 입력</span>; j++) {<br/>
-//                         <div class='third'>printf(<span class='red'>"*"</span>);</div>
-//                     }<br/>
-//                     printf(<span class='red'>"\\n"</span>);<br/>
-//                 </div>
-//             }<br/>
-//             <span class='blue'>return</span> 0;<br/>
-//         </div>
-//     }
-//     """, // 4
-//     '주관식 문제', // 5
-//     'j<=i', // 6
-//     '''adfasdfdfsddd''', // 7
-//     '프로그래머스(programmers)' // 8
-//   ],
-// ];
 
 var hint = false; // hint 열람 여부
 var problem_no = 0; // 문제 번호

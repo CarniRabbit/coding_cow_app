@@ -3,6 +3,10 @@
  * 딩카 결과 화면 - 하단 메뉴
  */
 
+import 'dart:math';
+
+import 'package:coding_cow_app/data.dart';
+import 'package:coding_cow_app/problem.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_hint_popup.dart';
 
@@ -68,7 +72,12 @@ class Result_Bottom_Menu extends StatelessWidget {
                     height: 50,
                     child: TextButton( // next problem
                       onPressed: () {
+                        problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
 
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Problem_Page()), // 문제 화면으로 이동
+                        );
                       },
                       child: Row(
                         children: [
@@ -78,7 +87,7 @@ class Result_Bottom_Menu extends StatelessWidget {
                             height: 30,
                           ),
                           SizedBox(
-                            width: 30,
+                            width: 20,
                           ),
                           Text(
                             '다음문제',

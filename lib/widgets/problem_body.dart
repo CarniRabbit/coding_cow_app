@@ -21,7 +21,7 @@ class Problem_Body extends StatelessWidget {
               alignment: FractionalOffset(0.2, 0.01),
               child: FractionallySizedBox( // level
                 child: Text(
-                  "Lv."+get_problems[0].level.toString(),
+                  "Lv."+get_problems[problem_no].level.toString(),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -32,7 +32,7 @@ class Problem_Body extends StatelessWidget {
               alignment: FractionalOffset(0.84, 0.16),
               child: FractionallySizedBox(
                 child: Text(
-                  get_problems[0].category,
+                  get_problems[problem_no].category,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),

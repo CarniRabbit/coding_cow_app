@@ -21,10 +21,10 @@ void hint_dialog(context) { // hint popup
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                get_problems[0].hint,
+                get_problems[problem_no].hint,
                 style: TextStyle(
                   fontSize: 20,
-                  letterSpacing: -3,
+                  // letterSpacing: -3,
                   color: Colors.black,
                 ),
               ),

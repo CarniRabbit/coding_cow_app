@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 class Problem_Title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("title - 문제번호: "+problem_no.toString());
+
     return Row( // align(→), problem title
       children: [
         Container( // icon
@@ -21,7 +23,7 @@ class Problem_Title extends StatelessWidget {
         ),
         Container ( // text
           child: Text(
-            get_problems[0].title,
+            get_problems[problem_no].title,
             style: TextStyle(
               // letterSpacing: -2,
               color: Colors.black,
