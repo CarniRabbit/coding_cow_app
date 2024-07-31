@@ -25,7 +25,7 @@ void answer_input_dialog(context) {
                 ),
               ),
               TextButton(
-                  onPressed: () { // press event
+                  onPressed: () async { // press event
                     // 입력한 값 == Problem DB의 현재 문제의 정답 여부 판별
                     
                     var text = _answerEditController.text; // 입력한 값
@@ -43,8 +43,10 @@ void answer_input_dialog(context) {
                       status = 1;
 
                     // 답을 틀렸을 때
-                    else
+                    else {
                       status = 2;
+                      await addIncorrectProblem(get_problems[problem_no].ID);
+                    }
                     
                     // 결과 화면으로 이동
                     Navigator.push(
