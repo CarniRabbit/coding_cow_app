@@ -91,3 +91,29 @@ Future<List<Problems>> fromFirestore(String collection) async {
 
 var hint = false; // hint 열람 여부
 var problem_no = 0; // 문제 번호
+
+Future<void> addIncorrectProblem(String problemId) async {
+  const String tempUserId = "user1";//사용자 ID 임시 설정
+  String docId = '${tempUserId}_${problemId}';
+  DocumentReference docRef = FirebaseFirestore.instance
+      .collection('incorrectProblems')
+      .doc(docId);
+
+  await FirebaseFirestore.instance.runTransaction((transaction) async {
+    DocumentSnapshot docSnapshot = await transaction.get(docRef);
+
+    if (docSnapshot.exists) {
+      int currentCount = docSnapshot.get('count');
+      // doc가 존재하면 틀린 횟수 증가
+      transaction.update(docRef, {'count': currentCount + 1});
+    } else {
+      // doc가 존재하지 않으면 새로 생성하고 count를 1로 설정
+      transaction.set(docRef, {
+        'userId': tempUserId,
+        'problemId': problemId,
+        'count': 1,
+        'timestamp': Timestamp.now(),
+      });
+    }
+  });
+}
