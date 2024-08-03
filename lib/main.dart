@@ -3,6 +3,7 @@
  * 딩카 메인화면
  */
 
+import 'package:coding_cow_app/data.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/topbar.dart';
 import 'package:coding_cow_app/widgets/main_navigator.dart';
@@ -24,6 +25,7 @@ Future<void> main() async {
 class Main_Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    memo = ""; // 메모 리셋
     return MaterialApp( // root widget
       theme: ThemeData( // font setting (나눔고딕코딩)
         fontFamily: 'NanumCoding',

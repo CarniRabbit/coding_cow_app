@@ -72,7 +72,8 @@ class Result_Bottom_Menu extends StatelessWidget {
                       child: TextButton( // next problem
                         onPressed: () {
                           problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
-
+                          memo = ""; // 메모 리셋
+                          
                           Navigator.pushAndRemoveUntil(context,
                               MaterialPageRoute(
                                   builder: (context) => Problem_Page()

@@ -3,6 +3,7 @@
  * 딩카 문제 화면 - 하단 메뉴
  */
 
+import 'package:coding_cow_app/widgets/problem_memo_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_hint_popup.dart';
 import 'package:coding_cow_app/data.dart';
@@ -76,11 +77,7 @@ class Problem_Bottom_Menu extends StatelessWidget {
                   height: 80,
                   child: TextButton(
                     onPressed: () {
-                      // int status = Random().nextInt(3);
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => Result_Page(status)),
-                      // );
+                      memo_dialog(context);
                     },
                     child: Row(
                       children: [

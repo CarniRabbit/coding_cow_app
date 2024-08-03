@@ -91,3 +91,4 @@ Future<List<Problems>> fromFirestore(String collection) async {
 
 var hint = false; // hint 열람 여부
 var problem_no = 0; // 문제 번호
+var memo = "";
