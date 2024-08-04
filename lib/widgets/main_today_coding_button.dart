@@ -3,6 +3,7 @@
  * 딩카 메인 화면 - 오늘의 코딩문제 버튼
  */
 
+import 'package:coding_cow_app/problem_notice.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/problem.dart';
 
@@ -17,7 +18,7 @@ class Main_Today_Coding_Button extends StatelessWidget {
           onPressed: () { // press event
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Problem_Page()), // 문제 화면으로 이동
+              MaterialPageRoute(builder: (context) => Problem_Notice_Page()), // 문제 화면으로 이동
             );
           },
           style: TextButton.styleFrom(

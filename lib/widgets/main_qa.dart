@@ -3,6 +3,7 @@
  * 딩카 메인 화면 - 하단 메뉴 버튼(질의응답)
  */
 
+import 'package:coding_cow_app/problem_notice.dart';
 import 'package:flutter/material.dart';
 
 class Main_QA extends StatelessWidget {
@@ -12,7 +13,10 @@ class Main_QA extends StatelessWidget {
       flex: 4,
       child: TextButton(
         onPressed: () {
-
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Problem_Notice_Page()), // 문제 화면으로 이동
+          );
         },
         style: TextButton.styleFrom(
           backgroundColor: Color(0xfff8d34b),

@@ -18,19 +18,18 @@ class Problem_Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // hide navigation bar
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
 
     hint = false;
 
-    return WillPopScope(
-        onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) {
         Navigator.pushAndRemoveUntil(context,
             MaterialPageRoute(
                 builder: (context) => Main_Page()
             ),(route) => false
         );
-
-        return true;
       },
       child: MaterialApp( // root widget
         theme: ThemeData( // font setting (나눔고딕코딩)
@@ -41,18 +40,28 @@ class Problem_Page extends StatelessWidget {
           body: FutureBuilder(
             future: fromFirestore("Problems"),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
-              return SafeArea( // 앱이 상태창 아래부터 표시되도록 함
-                bottom: false,
-                child: Column(
-                  children: [
-                    TopBar(),
-                    Problem_Title(),
-                    Problem_Body(),
-                    Problem_Bottom_Menu(),
-                  ],
+              // problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
+              if (snapshot.hasData) {
+                return SafeArea( // 앱이 상태창 아래부터 표시되도록 함
+                  bottom: false,
+                  child: Column(
+                    children: [
+                      TopBar(),
+                      Problem_Title(),
+                      Problem_Body(),
+                      Problem_Bottom_Menu(),
+                    ],
+                  ),
+                );
+              }
+
+              return Center(
+                child: Text(
+                  "문제 로딩중",
+                  textAlign: TextAlign.center,
                 ),
-              ); // end of middle
+              );
+               // end of middle
             },
           ),
         ),

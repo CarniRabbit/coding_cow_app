@@ -34,6 +34,8 @@ class Problems {
   final String answer;
   final String hint;
   final String source;
+  final String input;
+  final String output;
 
   Problems({
     required this.ID,
@@ -46,6 +48,8 @@ class Problems {
     required this.answer,
     required this.hint,
     required this.source,
+    required this.input,
+    required this.output,
   });
 
   factory Problems.fromJson(Map<String, dynamic> json) {
@@ -60,6 +64,8 @@ class Problems {
       answer: json["answer"],
       hint: json["hint"],
       source: json["source"],
+      input: json["input"],
+      output: json["output"],
     );
   }
   // Map<String, dynamic> toJson() {
@@ -84,7 +90,9 @@ Future<List<Problems>> fromFirestore(String collection) async {
   await _firestore.collection(collection).get();
 
   get_problems =
-  _snapshot.docs.map((e) => Problems.fromJson(e.data())).toList();
+  await _snapshot.docs.map((e) => Problems.fromJson(e.data())).toList();
+
+  // print(get_problems);
 
   return get_problems;
 }
