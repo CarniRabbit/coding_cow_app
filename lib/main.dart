@@ -13,13 +13,26 @@ import 'package:coding_cow_app/widgets/main_today_coding_button.dart';
 import 'package:coding_cow_app/widgets/main_bottom_menu.dart';
 import 'package:coding_cow_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:coding_cow_app/login.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(Main_Page());
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'NanumCoding',
+      ),
+      home: Login_Page(),
+    );
+  }
 }
 
 class Main_Page extends StatelessWidget {
