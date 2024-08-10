@@ -22,8 +22,6 @@ class Problem_Notice_Page extends StatelessWidget {
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
 
     hint = false;
-    // var input = get_problems[problem_no].input;
-    // var output = get_problems[problem_no].output;
 
     return PopScope(
       canPop: false,
@@ -43,7 +41,7 @@ class Problem_Notice_Page extends StatelessWidget {
           body: FutureBuilder(
             future: fromFirestore("Problems"),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.hasData) { // 데이터가 다 로드 되었을 때
                 problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
                 return SafeArea( // 앱이 상태창 아래부터 표시되도록 함
                   bottom: false,
@@ -61,15 +59,18 @@ class Problem_Notice_Page extends StatelessWidget {
                           color: Color(0x40aeaeae),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                      ),
+                      ), // end of problem description
                       Container(
-                        child: IntrinsicHeight(
+                        child: IntrinsicHeight( // input, output 높이를 긴 쪽에 맞춘다.
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Expanded(
                                 child: Container(
-                                  margin: EdgeInsets.only(left: 20, right: 10),
+                                  margin: EdgeInsets.only(
+                                    left: 20,
+                                    right: 10,
+                                  ),
                                   padding: EdgeInsets.all(20),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,13 +82,15 @@ class Problem_Notice_Page extends StatelessWidget {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      Container(
-                                        margin: EdgeInsets.only(top: 10),
+                                      Container( // input 내용
+                                        margin: EdgeInsets.only(
+                                          top: 10,
+                                        ),
                                         child: Text(get_problems[problem_no].input),
                                         decoration: BoxDecoration(
                                           color: Colors.transparent,
                                         ),
-                                      ),
+                                      ), // end of input 내용
                                     ],
                                   ),
                                   decoration: BoxDecoration(
@@ -98,7 +101,10 @@ class Problem_Notice_Page extends StatelessWidget {
                               ),
                               Expanded(
                                 child: Container(
-                                  margin: EdgeInsets.only(left: 10, right: 20),
+                                  margin: EdgeInsets.only(
+                                    left: 10,
+                                    right: 20,
+                                  ),
                                   padding: EdgeInsets.all(20),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,13 +116,15 @@ class Problem_Notice_Page extends StatelessWidget {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      Container(
-                                        margin: EdgeInsets.only(top: 10),
+                                      Container( // output 내용
+                                        margin: EdgeInsets.only(
+                                          top: 10,
+                                        ),
                                         child: Text(get_problems[problem_no].output),
                                         decoration: BoxDecoration(
                                           color: Colors.transparent,
                                         ),
-                                      ),
+                                      ), // end of output 내용
                                     ],
                                   ),
                                   decoration: BoxDecoration(
@@ -131,7 +139,7 @@ class Problem_Notice_Page extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.all(20),
-                        child: TextButton(
+                        child: TextButton( // Go to problem page Button
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -153,20 +161,19 @@ class Problem_Notice_Page extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                        ),
+                        ), // end of Go to problem page Button
                       )
                     ],
                   ),
                 );
               }
 
-              return Center(
+              return Center( // 데이터가 모두 로드될 때까지 로딩중 화면
                 child: Text(
                   "문제 로딩중",
                   textAlign: TextAlign.center,
                 ),
               );
-               // end of middle
             },
           ),
         ),

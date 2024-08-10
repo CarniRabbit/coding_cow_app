@@ -22,45 +22,55 @@ class Login_Page extends StatelessWidget{
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(
+                height: 20,
+              ),
               Container(
                 width:350,
-                child: TextField(
+                child: TextField( // Email input
                   decoration: InputDecoration(
                     hintText: 'Email',
                     focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xff2355DA))
+                      borderSide: BorderSide(
+                        color: Color(0xff2355DA)
+                      ),
                     ),
                     prefixIcon: Icon(Icons.email),
                   ),
                 keyboardType: TextInputType.emailAddress,
-                ),
+                ), // end of Email input
               ),
-              SizedBox(height: 16.0),
+              SizedBox( // margin-bottom: 16px
+                height: 20,
+              ),
               Container(
                 width: 350,
-                child: TextField(
+                child: TextField( // Password input
                   decoration: InputDecoration(
                     hintText: 'Password',
                     focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xff2355DA))
+                      borderSide: BorderSide(
+                        color: Color(0xff2355DA),
+                      ),
                     ),
                     prefixIcon: Icon(Icons.lock),
                   ),
                 obscureText: true,
-                ),
+                ), // end of Password input
               ),
-              SizedBox(height: 20),
+              SizedBox( // margin-bottom: 20px
+                height: 20,
+              ),
               Container(
                 width: 350,
                 height: 50,
-                child: ElevatedButton(
-                  onPressed: (){
+                child: ElevatedButton( // Login button (submit)
+                  onPressed: () {
                     Navigator.pushReplacement(
-                        context, 
-                        MaterialPageRoute(builder: (context) => Main_Page()),
+                      context,
+                      MaterialPageRoute(builder: (context) => Main_Page()),
                     );
-                    },
+                  },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Color(0xff2355DA),
@@ -70,27 +80,35 @@ class Login_Page extends StatelessWidget{
                   ),
                   child: Text(
                     'Login',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
+                ), // end of Login button
               ),
+              SizedBox( // margin-bottom: 20px
+                height: 20,
               ),
-              SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextButton(
+                  TextButton( // Sign up Button
                       onPressed: (){
                         //회원가입 logic
                       },
                       child: Text('Sign Up'),
+                  ), // end of Sign up Button
+                  SizedBox( // margin-right: 110px
+                    width: 110,
                   ),
-                  SizedBox(width: 110),
-                  TextButton(
-                      onPressed: (){
-                        //비밀번호 찾기 logic
-                      },
-                      child: Text('Forgot password?'),
-                  ),
+                  TextButton( // Find Password Button
+                    onPressed: (){
+                      //비밀번호 찾기 logic
+                    },
+                    child: Text(
+                      'Forgot password?',
+                    ),
+                  ), // end of Find Password Button
                 ],
               ),
             ],

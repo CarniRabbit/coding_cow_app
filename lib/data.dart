@@ -84,7 +84,7 @@ class Problems {
   // }
 }
 
-Future<List<Problems>> fromFirestore(String collection) async {
+Future<List<Problems>> fromFirestore(String collection) async { // 매개변수에 맞는 collection의 내용 조회
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   QuerySnapshot<Map<String, dynamic>> _snapshot =
   await _firestore.collection(collection).get();
@@ -99,9 +99,9 @@ Future<List<Problems>> fromFirestore(String collection) async {
 
 var hint = false; // hint 열람 여부
 var problem_no = 0; // 문제 번호
-var memo = "";
+var memo = ""; // 문제 풀이를 위한 메모
 
-Future<void> addIncorrectProblem(String problemId) async {
+Future<void> addIncorrectProblem(String problemId) async { // Keep it up 일 경우 Incorrects DB에 추가
   const String tempUserId = "user1";//사용자 ID 임시 설정
   String docId = '${tempUserId}_${problemId}';
   DocumentReference docRef = FirebaseFirestore.instance
