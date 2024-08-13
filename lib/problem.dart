@@ -41,7 +41,7 @@ class Problem_Page extends StatelessWidget {
             future: fromFirestore("Problems"),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               // problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
-              if (snapshot.hasData) {
+              if (snapshot.hasData) { // 데이터가 전부 로드되었을 때
                 return SafeArea( // 앱이 상태창 아래부터 표시되도록 함
                   bottom: false,
                   child: Column(
@@ -55,7 +55,7 @@ class Problem_Page extends StatelessWidget {
                 );
               }
 
-              return Center(
+              return Center( // 데이터가 로드되지 않았을 때
                 child: Text(
                   "문제 로딩중",
                   textAlign: TextAlign.center,

@@ -3,6 +3,7 @@
  * 딩카 메인 화면 - 오늘의 공부 현황(%)
  */
 
+import 'package:coding_cow_app/data.dart';
 import 'package:flutter/material.dart';
 
 class Main_Process_Of_Study extends StatelessWidget {
@@ -28,10 +29,32 @@ class Main_Process_Of_Study extends StatelessWidget {
               width: 120,
               height: 120,
             ),
-            Image( // today process percentage
-              image: AssetImage('icon/percentage.png'),
-              width: 150,
-              height: 150,
+            Stack(
+              children: [
+                SizedBox(
+                  width: 120,
+                  height: 120,
+                  child: CircularProgressIndicator(
+                    color: Color(0xff2355DA),
+                    backgroundColor: Color(0xffd1dbf7),
+                    strokeWidth: 20,
+                    value: today_progress,
+                  ),
+                ),
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      (today_progress*100).toString()+"%",
+                      style: TextStyle(
+                        color: Color(0xff2355DA),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

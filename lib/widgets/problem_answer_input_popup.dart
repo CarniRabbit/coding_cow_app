@@ -31,21 +31,26 @@ void answer_input_dialog(context) {
                     var text = _answerEditController.text; // 입력한 값
                     int status = 0;
 
-                    print("!!!"+text);
-                    print("???"+get_problems[problem_no].answer);
-                    
-                    // hint를 보지 않고 정답을 맞췄을 때
-                    if (text == get_problems[problem_no].answer && !hint)
-                      status = 0;
+                    // print("!!!"+text);
+                    // print("???"+get_problems[problem_no].answer);
 
-                    // hint를 보고 정답을 맞췄을 때
-                    else if (text == get_problems[problem_no].answer)
-                      status = 1;
+                    if (text == get_problems[problem_no].answer) {
+                      // hint를 보지 않고 정답을 맞췄을 때
+                      if (!hint)
+                        status = 0;
+
+                      // hint를 보고 정답을 맞췄을 때
+                      else
+                        status = 1;
+
+                      today_solved++;
+                      today_progress = today_solved / 10;
+                    }
 
                     // 답을 틀렸을 때
                     else {
                       status = 2;
-                      await addIncorrectProblem(get_problems[problem_no].ID);
+                      await addIncorrectProblem(get_problems[problem_no].ID); // 답을 틀렸을 때 Incorrect DB에 저장
                     }
                     
                     // 결과 화면으로 이동

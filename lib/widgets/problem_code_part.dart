@@ -14,7 +14,7 @@ import 'package:flutter_html/flutter_html.dart';
 class Problem_Code_Part extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("문제번호: "+problem_no.toString());
+    // print("문제번호: "+problem_no.toString());
 
     return Container( // code part
       alignment: FractionalOffset(0.5, 0.85),

@@ -100,6 +100,8 @@ Future<List<Problems>> fromFirestore(String collection) async { // 매개변수�
 var hint = false; // hint 열람 여부
 var problem_no = 0; // 문제 번호
 var memo = ""; // 문제 풀이를 위한 메모
+var today_solved = 0; // 오늘의 푼 문제 수
+var today_progress = 0.0; // 오늘의 푼 문제 비율 (푼 문제 수/10)
 
 Future<void> addIncorrectProblem(String problemId) async { // Keep it up 일 경우 Incorrects DB에 추가
   const String tempUserId = "user1";//사용자 ID 임시 설정

@@ -20,15 +20,14 @@ class Result_Page extends StatelessWidget {
     // hide navigation bar
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) {
         Navigator.pushAndRemoveUntil(context,
             MaterialPageRoute(
                 builder: (context) => Main_Page()
             ),(route) => false
         );
-
-        return true;
       },
       child: MaterialApp( // root widget
         theme: ThemeData( // font setting (나눔고딕코딩)
