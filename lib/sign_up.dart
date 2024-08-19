@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coding_cow_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'data.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -9,6 +12,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -16,9 +20,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> _signUpWithEmailAndPassword() async {
     try {
-      await _auth.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim());
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+        'email': _emailController.text.trim(),
+        'createdAt': Timestamp.now(),
+        'lastLoginAt': Timestamp.now(),
+        'isAttend':false,
+      });
+      await handleDailyAttendance(userCredential.user!.uid);
+
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => Main_Page()),
       );

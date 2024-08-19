@@ -7,6 +7,8 @@ import 'package:coding_cow_app/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'data.dart';
+
 class Login_Page extends StatefulWidget{
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -21,10 +23,12 @@ class _LoginPageState extends State<Login_Page> {
 
   Future<void> _signInwithEmailAndPassword() async {
     try {
-      await _auth.signInWithEmailAndPassword(
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+      await handleDailyAttendance(userCredential.user!.uid);
+
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => Main_Page()),
       );
