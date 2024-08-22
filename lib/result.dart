@@ -4,6 +4,7 @@
  */
 
 
+import 'package:coding_cow_app/widgets/main_measure.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/main.dart';
 import 'package:coding_cow_app/widgets/topbar.dart';
@@ -14,7 +15,9 @@ import 'package:flutter/services.dart';
 
 class Result_Page extends StatelessWidget {
   final int status;
-  Result_Page(this.status);
+  final String uid;
+
+  Result_Page(this.status, {required this.uid});
   @override
   Widget build(BuildContext context) {
     // hide navigation bar
@@ -29,24 +32,19 @@ class Result_Page extends StatelessWidget {
             ),(route) => false
         );
       },
-      child: MaterialApp( // root widget
-        theme: ThemeData( // font setting (나눔고딕코딩)
-          fontFamily: 'NanumCoding',
-        ),
-        home: Scaffold(
+      child: Scaffold(
           body: SafeArea( // 앱이 상태창 아래부터 표시되도록 함
             bottom: false,
             child: Column(
               children: [
                 TopBar(),
                 Problem_Title(),
-                Result_Body(this.status),
+                Result_Body(this.status, uid: uid),
                 Result_Bottom_Menu(),
               ],
             ),
           ), // end of middle
         ),
-      ),
     );
   }
 }

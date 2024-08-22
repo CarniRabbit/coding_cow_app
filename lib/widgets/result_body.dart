@@ -4,14 +4,20 @@
  */
 
 import 'package:coding_cow_app/data.dart';
+import 'package:coding_cow_app/widgets/main_measure.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/result_status.dart';
 
 class Result_Body extends StatelessWidget {
   final int status;
-  Result_Body(this.status);
+  final String uid;
+
+  Result_Body(this.status, {required this.uid});
   @override
   Widget build(BuildContext context) {
+    //User? user = FirebaseAuth.instance.currentUser;
+    //String uid = user?.uid ?? '';
     return Expanded( // problem body
       flex: 4,
       child: Container( // background of problem body
@@ -61,7 +67,7 @@ class Result_Body extends StatelessWidget {
                 ),
               ),
             ), // end of problem type
-            Result_Status(status), // status에 따라 다른 결과 화면 출력
+            Result_Status(status, uid: uid), // status에 따라 다른 결과 화면 출력
           ],
         ),
         decoration: BoxDecoration(

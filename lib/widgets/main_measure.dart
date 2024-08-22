@@ -3,7 +3,14 @@
  * 딩카 메인 화면 - 하단 메뉴 버튼(실력측정)
  */
 
+import 'package:coding_cow_app/statistics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+String getCurrentUserId() {
+  User? user = FirebaseAuth.instance.currentUser;
+  return user?.uid ?? '';
+}
 
 class Main_Measure extends StatelessWidget {
   @override
@@ -12,7 +19,12 @@ class Main_Measure extends StatelessWidget {
       flex: 4,
       child: TextButton(
         onPressed: () {
-
+          String uid = FirebaseAuth.instance.currentUser!.uid;
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Stat_Page(uid: uid))
+          );
         },
         style: TextButton.styleFrom(
           backgroundColor: Color(0xff5585bd),
