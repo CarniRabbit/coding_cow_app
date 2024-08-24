@@ -131,3 +131,69 @@ Future<void> addIncorrectProblem(String problemId) async { // Keep it up 일 경
     }
   });
 }
+
+class UserData {
+  final String uid;
+  final String email;
+  final Timestamp createdAt;
+  final Timestamp lastLoginAt;
+  final bool isAttend;
+
+  UserData({
+    required this.uid,
+    required this.email,
+    required this.createdAt,
+    required this.lastLoginAt,
+    this.isAttend = false,
+  });
+
+  factory UserData.fromJson(Map<String, dynamic> json) {
+    return UserData(
+      uid: json['uid'],
+      email: json['email'],
+      createdAt: json['createdAt'],
+      lastLoginAt: json['lastLoginAt'],
+      isAttend: json['isAttend'] ?? false,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'uid': uid,
+      'email': email,
+      'createdAt': createdAt,
+      'lastLoginAt': lastLoginAt,
+      'isAttend': isAttend,
+    };
+  }
+}
+
+Future<void> checkAttendance(String uid) async {
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  DocumentReference<Map<String, dynamic>> docRef =
+  _firestore.collection('users').doc(uid);
+
+  DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
+
+  if (docSnapshot.exists) {
+    bool isAttend = docSnapshot.data()?['isAttend'] ?? false;
+
+    if (!isAttend) {
+      await docRef.update({
+        'todaySolved': 0,
+        'isAttend': true,
+        'lastLoginAt': Timestamp.now(),});
+    }
+  } else {
+    print('Document does not exist');
+  }
+}
+
+
+Future<void> handleDailyAttendance(String uid) async {
+  await checkAttendance(uid);
+}
+
+void onAppStart(String uid) async {
+  await handleDailyAttendance(uid);
+}

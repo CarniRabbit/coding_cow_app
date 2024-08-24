@@ -4,6 +4,7 @@
  */
 
 import 'package:coding_cow_app/data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/topbar.dart';
 import 'package:coding_cow_app/widgets/main_navigator.dart';
@@ -20,6 +21,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  String? uid = FirebaseAuth.instance.currentUser?.uid;
+  if(uid != null){
+    onAppStart(uid);
+  }
   runApp(MyApp());
 }
 
