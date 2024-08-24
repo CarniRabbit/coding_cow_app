@@ -4,9 +4,7 @@
  */
 
 import 'package:coding_cow_app/main.dart';
-import 'package:coding_cow_app/result.dart';
 import 'package:flutter/material.dart';
-import 'package:coding_cow_app/data.dart';
 
 void complete_dialog(context) {
   showDialog(

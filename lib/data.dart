@@ -36,6 +36,7 @@ class Problems {
   final String source;
   final String input;
   final String output;
+  final String solution;
 
   Problems({
     required this.ID,
@@ -50,6 +51,7 @@ class Problems {
     required this.source,
     required this.input,
     required this.output,
+    required this.solution,
   });
 
   factory Problems.fromJson(Map<String, dynamic> json) {
@@ -66,6 +68,7 @@ class Problems {
       source: json["source"],
       input: json["input"],
       output: json["output"],
+      solution: json["solution"],
     );
   }
   // Map<String, dynamic> toJson() {

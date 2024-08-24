@@ -6,6 +6,7 @@
 import 'dart:math';
 import 'package:coding_cow_app/data.dart';
 import 'package:coding_cow_app/problem.dart';
+import 'package:coding_cow_app/result_solution.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_hint_popup.dart';
 
@@ -30,7 +31,12 @@ class Result_Bottom_Menu extends StatelessWidget {
                         height: 50,
                         child: TextButton( // Hint Button
                           onPressed: () {
-                            hint_dialog(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Result_Solution()
+                              ), // 문제 화면으로 이동
+                            );
                           },
                           child: Row(
                             children: [
