@@ -4,6 +4,7 @@
  */
 
 import 'package:coding_cow_app/result.dart';
+import 'package:coding_cow_app/widgets/main_measure.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/data.dart';
 
@@ -54,9 +55,10 @@ void answer_input_dialog(context) {
                     }
                     
                     // 결과 화면으로 이동
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => Result_Page(status)),
+                      MaterialPageRoute(
+                          builder: (context) => Result_Page(status, uid: getCurrentUserId())),
                     );
                   }, 
                   child: Text(
