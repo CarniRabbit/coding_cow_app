@@ -5,16 +5,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coding_cow_app/widgets/main_address_input.dart';
 import 'package:coding_cow_app/widgets/main_navigator.dart';
+import 'package:coding_cow_app/widgets/statistics_chart.dart';
 import 'package:coding_cow_app/widgets/topbar.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'data.dart';
 
 Future<UserStats?> fetchUserStats(String uid) async {
+  //사용자 통계 가져오기
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   DocumentSnapshot<Map<String, dynamic>> snapshot =
-  await firestore.collection('UserStats').doc(uid).get();
+      await firestore.collection('UserStats').doc(uid).get();
 
   if (snapshot.exists) {
     return UserStats.fromJson(snapshot.data()!);
@@ -22,16 +22,28 @@ Future<UserStats?> fetchUserStats(String uid) async {
   return null;
 }
 
-class Stat_Page extends StatelessWidget {
+class Stat_Page extends StatefulWidget {
   final String uid;
+  Stat_Page({Key? key, required this.uid}) : super(key: key);
 
-  Stat_Page({required this.uid});
+  @override
+  State<StatefulWidget> createState() => StatPageState();
+}
+
+class StatPageState extends State<Stat_Page> {
+  late Future<UserStats?> _userStatsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _userStatsFuture = fetchUserStats(widget.uid);
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        fontFamily: 'NanumCoding',
+        fontFamily: 'Nanumcoding',
       ),
       home: Scaffold(
         body: SafeArea(
@@ -40,9 +52,20 @@ class Stat_Page extends StatelessWidget {
               TopBar(),
               Main_Navigator(),
               Main_Adress_Input(),
+              SizedBox(height: 20),
+              Container(
+                child: Text(
+                  '나의 실력',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
               Expanded(
                 child: FutureBuilder<UserStats?>(
-                  future: fetchUserStats(uid),
+                  future: _userStatsFuture,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());
@@ -52,59 +75,20 @@ class Stat_Page extends StatelessWidget {
                       return Center(child: Text('No data'));
                     } else {
                       UserStats userStats = snapshot.data!;
-                      return Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: LineChart(
-                          LineChartData(
-                            gridData: FlGridData(show: false),
-                            titlesData: FlTitlesData(
-                              bottomTitles: SideTitles(
-                                showTitles: true,
-                                getTitles: (value) {
-                                  switch (value.toInt()) {
-                                    case 0:
-                                      return 'Solved';
-                                    case 1:
-                                      return 'Correct';
-                                    case 2:
-                                      return 'Incorrect';
-                                    default:
-                                      return '';
-                                  }
-                                },
-                              ),
-                              leftTitles: SideTitles(
-                                showTitles: true,
-                              ),
+                      return Column(
+                        children: [
+                          Text(
+                            'Total Problems: ${userStats.totalProblemsSolved}',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
                             ),
-                            borderData: FlBorderData(
-                              show: true,
-                              border: Border.all(
-                                color: const Color(0xff37434d),
-                                width: 1,
-                              ),
-                            ),
-                            minX: 0,
-                            maxX: 2,
-                            minY: 0,
-                            maxY: userStats.totalProblemsSolved.toDouble(),
-                            lineBarsData: [
-                              LineChartBarData(
-                                spots: [
-                                  FlSpot(0, userStats.totalProblemsSolved.toDouble()),
-                                  FlSpot(1, userStats.correctProblemsCount.toDouble()),
-                                  FlSpot(2, userStats.incorrectProblemsCount.toDouble()),
-                                ],
-                                isCurved: true,
-                                colors: [Colors.blue],
-                                barWidth: 4,
-                                isStrokeCapRound: true,
-                                dotData: FlDotData(show: true),
-                                belowBarData: BarAreaData(show: false),
-                              ),
-                            ],
                           ),
-                        ),
+                          SizedBox(height: 20),
+                          Expanded(
+                            child: StatisticsChart(userStats: userStats),
+                          ),
+                        ],
                       );
                     }
                   },

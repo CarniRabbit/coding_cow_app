@@ -23,7 +23,7 @@ class _Result_StatusState extends State<Result_Status> {
   @override
   void initState() {
     super.initState();
-    print('initState called');
+    //print('initState called');
     _updateStatsBasedOnResult();
   }
 
