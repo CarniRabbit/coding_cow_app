@@ -24,10 +24,33 @@ class Main_Process_Of_Study extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image( // dingca character
-              image: AssetImage('character/codingcow.png'),
-              width: 120,
-              height: 120,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image( // dingca character
+                  image: AssetImage('character/codingcow.png'),
+                  width: 100,
+                  height: 100,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Lv.'+get_level.toString(),
+                  style: TextStyle(
+                    color: Color(0xff2355DA),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  '다음 레벨까지 '+get_restEXP.toString()+'문제',
+                  style: TextStyle(
+                    color: Color(0xff2355DA),
+                    fontSize: 10,
+                  ),
+                ),
+              ],
             ),
             Stack(
               children: [

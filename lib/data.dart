@@ -24,6 +24,8 @@ import 'package:flutter/material.dart';
 
 List<Problems> get_problems = [];
 String get_nickname = '';
+int get_level = 0;
+int get_restEXP = 0;
 String current_email = '';
 final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -177,15 +179,17 @@ class UserData {
   }
 }
 
-Future<String> getNickname(String? email) async {
+Future<(String, int, int)> getUserInfo(String? email) async {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   DocumentReference<Map<String, dynamic>> docRef =
   _firestore.collection('users').doc(email);
 
   DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
   get_nickname = docSnapshot.data()?['nickname'];
+  get_level = docSnapshot.data()?['level'];
+  get_restEXP = docSnapshot.data()?['restEXP'];
 
-  return get_nickname;
+  return (get_nickname, get_level, get_restEXP);
 }
 
 class UserStats {
