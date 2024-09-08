@@ -3,6 +3,7 @@
  * 딩카 메인 화면 - 주소창(닉네임 표시)
  */
 
+import 'package:coding_cow_app/data.dart';
 import 'package:flutter/material.dart';
 
 class Main_Adress_Input extends StatelessWidget {
@@ -27,7 +28,7 @@ class Main_Adress_Input extends StatelessWidget {
               margin: EdgeInsets.only(left: 15),
               // nickname 왼쪽에 여백
               child: Text(
-                'nickname.com',
+                get_nickname+'.com',
                 style: TextStyle(
                   fontSize: 20,
                 ),

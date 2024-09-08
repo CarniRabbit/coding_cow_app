@@ -31,7 +31,7 @@ class Result_Solution extends StatelessWidget {
         ),
         home: Scaffold(
           body: FutureBuilder( // 앱이 상태창 아래부터 표시되도록 함
-            future: fromFirestore("Problems"),
+            future: problemsFromFirestore(),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               if (snapshot.hasData) {
                 return SafeArea(

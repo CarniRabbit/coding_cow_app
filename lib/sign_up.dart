@@ -24,13 +24,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
-      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+      await _firestore.collection('users').doc(_emailController.text.trim()).set({
         'email': _emailController.text.trim(),
         'createdAt': Timestamp.now(),
         'lastLoginAt': Timestamp.now(),
         'isAttend':false,
+        'level': 1,
+        'problemsSolved': 0,
+        'languageSetting': 2,
+        'bracketSetting': 1,
+        'attendanceDays': 1,
+        'restEXP': 10,
+        'nickname': '익명',
       });
-      await handleDailyAttendance(userCredential.user!.uid);
+      await handleDailyAttendance(_emailController.text.trim());
 
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => Main_Page()),

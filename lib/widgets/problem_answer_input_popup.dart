@@ -19,6 +19,22 @@ void answer_input_dialog(context) {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              IconButton(
+                icon: Icon(Icons.help_outline),
+                color: Color(0xff2355DA),
+                iconSize: 50,
+                tooltip: "연산자와 피연산자는 띄어쓰기가 불가합니다.\n아래 예시를 참고하여 정답을 작성해주세요.\nex)\nresult = a * b / c (X)\nresult=a*b/c (O)",
+                onPressed: () {
+
+                },
+              ),
+              Text(
+                '답안 작성 예시',
+                style: TextStyle(
+                  color: Color(0xff2355DA),
+                  letterSpacing: -2,
+                ),
+              ),
               TextField( // input
                 controller: _answerEditController,
                 decoration: InputDecoration(
@@ -63,6 +79,10 @@ void answer_input_dialog(context) {
                   }, 
                   child: Text(
                     '입력',
+                    style: TextStyle(
+                      color: Color(0xff2355DA),
+                      fontWeight: FontWeight.bold,
+                    ),
                   )
               ),
             ],

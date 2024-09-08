@@ -38,7 +38,7 @@ class Problem_Page extends StatelessWidget {
         home: Scaffold(
           resizeToAvoidBottomInset: false,
           body: FutureBuilder(
-            future: fromFirestore("Problems"),
+            future: problemsFromFirestore(),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               // problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
               if (snapshot.hasData) { // 데이터가 전부 로드되었을 때

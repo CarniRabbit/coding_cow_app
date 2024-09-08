@@ -15,7 +15,6 @@ class Login_Page extends StatefulWidget{
 }
 
 class _LoginPageState extends State<Login_Page> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -23,10 +22,11 @@ class _LoginPageState extends State<Login_Page> {
 
   Future<void> _signInwithEmailAndPassword() async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+
       await handleDailyAttendance(userCredential.user!.uid);
 
       Navigator.of(context).pushReplacement(

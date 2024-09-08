@@ -49,24 +49,38 @@ class Main_Page extends StatelessWidget {
         fontFamily: 'NanumCoding',
       ),
       home: Scaffold(
-        body: SafeArea( // 앱이 상태창 아래부터 표시되도록 함
-          child: Column(
-            children: [
-              TopBar(),
-              Main_Navigator(),
-              Main_Adress_Input(),
-              Container( // middle part (today status ~ 4 bottom menu)
-                padding: EdgeInsets.all(20),
+        body: FutureBuilder(
+          future: getNickname(auth.currentUser?.email),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if(snapshot.hasData) {
+              return SafeArea( // 앱이 상태창 아래부터 표시되도록 함
                 child: Column(
                   children: [
-                    Main_Process_Of_Study(),
-                    Main_Today_Coding_Button(),
-                    Main_BottomMenu(),
+                    TopBar(),
+                    Main_Navigator(),
+                    Main_Adress_Input(),
+                    Container( // middle part (today status ~ 4 bottom menu)
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          Main_Process_Of_Study(),
+                          Main_Today_Coding_Button(),
+                          Main_BottomMenu(),
+                        ],
+                      ),
+                    ), // end of middle
                   ],
                 ),
-              ), // end of middle
-            ],
-          ),
+              );
+            }
+
+            return Center( // 데이터가 모두 로드될 때까지 로딩중 화면
+              child: Text(
+                "문제 로딩중",
+                textAlign: TextAlign.center,
+              ),
+            );
+          },
         ),
       ),
     );

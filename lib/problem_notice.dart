@@ -39,131 +39,133 @@ class Problem_Notice_Page extends StatelessWidget {
         home: Scaffold(
           resizeToAvoidBottomInset: false,
           body: FutureBuilder(
-            future: fromFirestore("Problems"),
+            future: problemsFromFirestore(),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               if (snapshot.hasData) { // 데이터가 다 로드 되었을 때
                 problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
                 return SafeArea( // 앱이 상태창 아래부터 표시되도록 함
                   bottom: false,
-                  child: Column(
-                    children: [
-                      TopBar(),
-                      Problem_Title(),
-                      Container( // problem description
-                        padding: EdgeInsets.all(20),
-                        margin: EdgeInsets.all(20),
-                        child: Text(
-                          get_problems[problem_no].description,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Color(0x40aeaeae),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ), // end of problem description
-                      Container(
-                        child: IntrinsicHeight( // input, output 높이를 긴 쪽에 맞춘다.
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.only(
-                                    left: 20,
-                                    right: 10,
-                                  ),
-                                  padding: EdgeInsets.all(20),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "입력",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Container( // input 내용
-                                        margin: EdgeInsets.only(
-                                          top: 10,
-                                        ),
-                                        child: Text(get_problems[problem_no].input),
-                                        decoration: BoxDecoration(
-                                          color: Colors.transparent,
-                                        ),
-                                      ), // end of input 내용
-                                    ],
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffd1dbf7),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.only(
-                                    left: 10,
-                                    right: 20,
-                                  ),
-                                  padding: EdgeInsets.all(20),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "출력",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Container( // output 내용
-                                        margin: EdgeInsets.only(
-                                          top: 10,
-                                        ),
-                                        child: Text(get_problems[problem_no].output),
-                                        decoration: BoxDecoration(
-                                          color: Colors.transparent,
-                                        ),
-                                      ), // end of output 내용
-                                    ],
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffd1dbf7),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(20),
-                        child: TextButton( // Go to problem page Button
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Problem_Page()), // 문제 화면으로 이동
-                            );
-                          },
-                          style: TextButton.styleFrom(
-                            minimumSize: Size(double.infinity, 30),
-                            backgroundColor: Color(0xff2355DA),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                          ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        TopBar(),
+                        Problem_Title(),
+                        Container( // problem description
+                          padding: EdgeInsets.all(20),
+                          margin: EdgeInsets.all(20),
                           child: Text(
-                            "문제 풀기",
-                            style: TextStyle(
-                              color: Colors.white,
+                            get_problems[problem_no].description,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color(0x40aeaeae),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ), // end of problem description
+                        Container(
+                          child: IntrinsicHeight( // input, output 높이를 긴 쪽에 맞춘다.
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    margin: EdgeInsets.only(
+                                      left: 20,
+                                      right: 10,
+                                    ),
+                                    padding: EdgeInsets.all(20),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "입력",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Container( // input 내용
+                                          margin: EdgeInsets.only(
+                                            top: 10,
+                                          ),
+                                          child: Text(get_problems[problem_no].input),
+                                          decoration: BoxDecoration(
+                                            color: Colors.transparent,
+                                          ),
+                                        ), // end of input 내용
+                                      ],
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffd1dbf7),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    margin: EdgeInsets.only(
+                                      left: 10,
+                                      right: 20,
+                                    ),
+                                    padding: EdgeInsets.all(20),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "출력",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Container( // output 내용
+                                          margin: EdgeInsets.only(
+                                            top: 10,
+                                          ),
+                                          child: Text(get_problems[problem_no].output),
+                                          decoration: BoxDecoration(
+                                            color: Colors.transparent,
+                                          ),
+                                        ), // end of output 내용
+                                      ],
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffd1dbf7),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ), // end of Go to problem page Button
-                      )
-                    ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(20),
+                          child: TextButton( // Go to problem page Button
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Problem_Page()), // 문제 화면으로 이동
+                              );
+                            },
+                            style: TextButton.styleFrom(
+                              minimumSize: Size(double.infinity, 30),
+                              backgroundColor: Color(0xff2355DA),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              "문제 풀기",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ), // end of Go to problem page Button
+                        )
+                      ],
+                    ),
                   ),
                 );
               }

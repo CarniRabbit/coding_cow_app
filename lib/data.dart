@@ -23,6 +23,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 List<Problems> get_problems = [];
+String get_nickname = '';
+String current_email = '';
+final FirebaseAuth auth = FirebaseAuth.instance;
 
 class Problems {
   final String ID;
@@ -88,10 +91,10 @@ class Problems {
   // }
 }
 
-Future<List<Problems>> fromFirestore(String collection) async { // 매개변수에 맞는 collection의 내용 조회
+Future<List<Problems>> problemsFromFirestore() async { // Problems DB의 전체 문서 조회
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   QuerySnapshot<Map<String, dynamic>> _snapshot =
-  await _firestore.collection(collection).get();
+  await _firestore.collection('Problems').get();
 
   get_problems =
   await _snapshot.docs.map((e) => Problems.fromJson(e.data())).toList();
@@ -107,8 +110,6 @@ var memo = ""; // 문제 풀이를 위한 메모
 var today_solved = 0; // 오늘의 푼 문제 수
 var today_progress = 0.0; // 오늘의 푼 문제 비율 (푼 문제 수/10)
 
-
-
 class UserData {
   final String uid;
   final String email;
@@ -121,6 +122,8 @@ class UserData {
   final int languageSetting;
   final int bracketSetting;
   final int attendanceDays;
+  final int restEXP;
+  final String nickname;
 
   UserData({
     required this.uid,
@@ -134,6 +137,8 @@ class UserData {
     this.languageSetting = 1,
     this.bracketSetting = 1,
     this.attendanceDays = 0,
+    required this.restEXP,
+    required this.nickname,
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) {
@@ -146,15 +151,16 @@ class UserData {
       isAttend: json['isAttend'] ?? false,
       level: json['level'] ?? 1,
       problemsSolved: json['problemsSolved'] ?? 0,
-      languageSetting: json['languageSetting'] ?? 1,
+      languageSetting: json['languageSetting'] ?? 2,
       bracketSetting: json['bracketSetting'] ?? 1,
       attendanceDays: json['attendanceDays'] ?? 0,
+      restEXP: json['restEXP'],
+      nickname: json['nickname'] ?? '익명',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'uid': uid,
       'email': email,
       'createdAt': createdAt,
       'lastLoginAt': lastLoginAt,
@@ -165,8 +171,21 @@ class UserData {
       'bracketSetting': bracketSetting,
       'attendanceDays': attendanceDays,
       'league': league,
+      'restEXP': restEXP,
+      'nickname': nickname,
     };
   }
+}
+
+Future<String> getNickname(String? email) async {
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  DocumentReference<Map<String, dynamic>> docRef =
+  _firestore.collection('users').doc(email);
+
+  DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
+  get_nickname = docSnapshot.data()?['nickname'];
+
+  return get_nickname;
 }
 
 class UserStats {
