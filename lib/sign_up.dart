@@ -15,6 +15,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nicknameController = TextEditingController();
 
   String _errorMessage = '';
 
@@ -35,7 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         'bracketSetting': 1,
         'attendanceDays': 1,
         'restEXP': 10,
-        'nickname': '익명',
+        'nickname': _nicknameController.text.trim(),
       });
       await handleDailyAttendance(_emailController.text.trim());
 
@@ -100,6 +101,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     prefixIcon: Icon(Icons.lock),
                   ),
                   obscureText: true,
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                width: 350,
+                child: TextField(
+                  controller: _nicknameController,
+                  decoration: InputDecoration(
+                    hintText: 'Nickname',
+                    border: UnderlineInputBorder(),
+                    prefixIcon: Icon(Icons.person),
+                  ),
                 ),
               ),
               SizedBox(height: 20),

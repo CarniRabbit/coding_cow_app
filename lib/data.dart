@@ -366,3 +366,18 @@ Future<void> addIncorrectProblem(String problemId) async { // Keep it up 일 경
     }
   });
 }
+
+Future<void> addProblemToTodayProblem(String email, Problems problem) async {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  DocumentReference userDoc = firestore.collection('users').doc(email);
+  CollectionReference problemsSubcollection = userDoc.collection('todayProblems');
+
+  await problemsSubcollection.add({
+    'ID': problem.ID,
+    'level': problem.level,
+    'title': problem.title,
+    'correct': false,
+    'hintUsed': false,
+  });
+}
