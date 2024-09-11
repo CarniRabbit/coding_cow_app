@@ -57,13 +57,13 @@ class Problem_Code_Part extends StatelessWidget {
                     margin: Margins.only(left: 40),
                   ),
                   "div.fifth": Style( // intent 5
-                    margin: Margins.only(left: 40),
+                    margin: Margins.only(left: 50),
                   ),
                   "div.sixth": Style( // intent 6
-                    margin: Margins.only(left: 40),
+                    margin: Margins.only(left: 60),
                   ),
                   "div.seventh": Style( // intent 7
-                    margin: Margins.only(left: 40),
+                    margin: Margins.only(left: 70),
                   ),
                 },
               ),
