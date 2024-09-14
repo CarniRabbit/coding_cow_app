@@ -3,6 +3,7 @@
  * 딩카 메인 화면 - 하단 메뉴 버튼(오답노트)
  */
 
+import 'package:coding_cow_app/Incorrects.dart';
 import 'package:coding_cow_app/widgets/problem_multiple_choice.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class Main_Incorrects extends StatelessWidget {
         onPressed: () { // press event
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Problem_Multiple_Choice()), // 장면 이동
+            MaterialPageRoute(builder: (context) => Incorrects_Page()), // 장면 이동
           );
         },
         style: TextButton.styleFrom( // theme

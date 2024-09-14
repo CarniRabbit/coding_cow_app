@@ -23,6 +23,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 List<Problems> get_problems = [];
+// List<Problems> get_incorrects = [];
+List<String> get_incorrects_ID = [];
 String get_nickname = '';
 int get_level = 0;
 int get_restEXP = 0;
@@ -342,15 +344,13 @@ Future<void> addIncorrectProblem(String problemId) async { // Keep it up 일 경
     throw Exception("No user is currently logged in.");
   }
 
-  String uid = currentUser.uid; // 현재 로그인한 유저의 UID
-  String docId = '${uid}_${problemId}';
+  String docId = '${auth.currentUser?.email}_${problemId}'; // 문서 제목
   DocumentReference docRef = FirebaseFirestore.instance
       .collection('incorrectProblems')
       .doc(docId);
 
   await FirebaseFirestore.instance.runTransaction((transaction) async {
     DocumentSnapshot docSnapshot = await transaction.get(docRef);
-
     if (docSnapshot.exists) {
       int currentCount = docSnapshot.get('count');
       // doc가 존재하면 틀린 횟수 증가
@@ -358,13 +358,55 @@ Future<void> addIncorrectProblem(String problemId) async { // Keep it up 일 경
     } else {
       // doc가 존재하지 않으면 새로 생성하고 count를 1로 설정
       transaction.set(docRef, {
-        'uid': uid,
+        'userId': auth.currentUser?.email,
         'problemId': problemId,
         'count': 1,
         'timestamp': Timestamp.now(),
       });
     }
   });
+}
+
+Future<List<Problems>> incorrectsFromFirestore(String? email) async {
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  String problemID = "";
+  problem_no = 0;
+
+  for(int i = 1; i <= 138; i++) { // 나중에 조건 변경하기
+    if (i < 10) {
+      problemID = 'ex000${i}-1';
+    } else if (i < 100) {
+      problemID = 'ex00${i}-1';
+    } else if (i < 1000) {
+      problemID = 'ex0${i}-1';
+    } else {
+      problemID = 'ex${i}-1';
+    }
+
+    DocumentReference<Map<String, dynamic>> docRef =
+    await _firestore.collection('incorrectProblems').doc('${email}_${problemID}');
+    DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
+
+    if (docSnapshot.data() != null) { // 해당 계정에 오답이 존재할 때
+      // print(problemID);
+      get_incorrects_ID.add(problemID); // 해당 계정의 오답 문제ID를 저장함
+    }
+  }
+
+  for (int i = 0; i < get_incorrects_ID.length; i++) {
+    // print(get_incorrects_ID[i]);
+    DocumentReference<Map<String, dynamic>> docRef =
+    await _firestore.collection('Problems').doc(get_incorrects_ID[i]);
+    DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
+
+    // Problems incorrect = Problems.fromJson(docSnapshot.data()!);
+    get_problems.add(Problems.fromJson(docSnapshot.data()!));
+  }
+  
+  print("길이");
+  print(get_problems.length);
+
+  return get_problems;
 }
 
 Future<void> addProblemToTodayProblem(String email, Problems problem) async {

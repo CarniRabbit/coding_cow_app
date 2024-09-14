@@ -163,7 +163,7 @@ class Problem_Notice_Page extends StatelessWidget {
                               ),
                             ),
                           ), // end of Go to problem page Button
-                        )
+                        ),
                       ],
                     ),
                   ),
