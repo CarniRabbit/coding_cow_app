@@ -79,7 +79,15 @@ class Result_Bottom_Menu extends StatelessWidget {
                         height: 50,
                         child: TextButton( // next problem
                           onPressed: () {
-                            problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
+                            if (mode == 0) { // 오늘의 문제 (현재 무작위 문제, 추후 유저 레벨 기준 오늘의 문제 배열로 대체)
+                              problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
+                            } else { // 오답 문제 (0부터 순차적으로 증가)
+                              if (problem_no <= get_problems.length-1) {
+                                problem_no++;
+                              } else {
+                                problem_no = 0;
+                              }
+                            }
                             memo = ""; // 메모 리셋
 
                             Navigator.pushAndRemoveUntil(context,

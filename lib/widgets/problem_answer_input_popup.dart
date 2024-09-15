@@ -48,9 +48,6 @@ void answer_input_dialog(context) {
                     var text = _answerEditController.text; // 입력한 값
                     int status = 0;
 
-                    // print("!!!"+text);
-                    // print("???"+get_problems[problem_no].answer);
-
                     if (text == get_problems[problem_no].answer) {
                       // hint를 보지 않고 정답을 맞췄을 때
                       if (!hint)
@@ -59,6 +56,12 @@ void answer_input_dialog(context) {
                       // hint를 보고 정답을 맞췄을 때
                       else
                         status = 1;
+
+                      if (mode == 1) { // 오답노트일 때
+                        deleteIncorrectProblem(auth.currentUser?.email, get_problems[problem_no].ID);
+                        get_problems.removeAt(problem_no);
+                        get_incorrects_ID.removeAt(problem_no);
+                      }
 
                       today_solved++;
                       today_progress = today_solved / 10;

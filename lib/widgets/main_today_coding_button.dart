@@ -3,6 +3,7 @@
  * 딩카 메인 화면 - 오늘의 코딩문제 버튼
  */
 
+import 'package:coding_cow_app/data.dart';
 import 'package:coding_cow_app/problem_notice.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/problem.dart';
@@ -10,6 +11,8 @@ import 'package:coding_cow_app/problem.dart';
 class Main_Today_Coding_Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    mode = 0;
+
     return Container( // today coding button
       margin: EdgeInsets.only(bottom: 20),
       child: SizedBox(

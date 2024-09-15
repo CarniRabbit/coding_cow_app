@@ -23,7 +23,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 List<Problems> get_problems = [];
-// List<Problems> get_incorrects = [];
 List<String> get_incorrects_ID = [];
 String get_nickname = '';
 int get_level = 0;
@@ -108,6 +107,7 @@ Future<List<Problems>> problemsFromFirestore() async { // Problems DB의 전체 
   return get_problems;
 }
 
+int mode = 0; // 0: 오늘의 문제, 1: 오답 문제
 var hint = false; // hint 열람 여부
 var problem_no = 0; // 문제 번호
 var memo = ""; // 문제 풀이를 위한 메모
@@ -182,6 +182,7 @@ class UserData {
 }
 
 Future<(String, int, int)> getUserInfo(String? email) async {
+  problem_no = 0;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   DocumentReference<Map<String, dynamic>> docRef =
   _firestore.collection('users').doc(email);
@@ -369,8 +370,10 @@ Future<void> addIncorrectProblem(String problemId) async { // Keep it up 일 경
 
 Future<List<Problems>> incorrectsFromFirestore(String? email) async {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  get_incorrects_ID = [];
+  get_problems = [];
   String problemID = "";
-  problem_no = 0;
+  // problem_no = 0;
 
   for(int i = 1; i <= 138; i++) { // 나중에 조건 변경하기
     if (i < 10) {
@@ -407,6 +410,14 @@ Future<List<Problems>> incorrectsFromFirestore(String? email) async {
   print(get_problems.length);
 
   return get_problems;
+}
+
+Future<void> deleteIncorrectProblem(String? email, String problemID) async {
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  DocumentReference<Map<String, dynamic>> docRef =
+  await _firestore.collection('incorrectProblems').doc('${email}_${problemID}');
+
+  docRef.delete();
 }
 
 Future<void> addProblemToTodayProblem(String email, Problems problem) async {
