@@ -370,12 +370,14 @@ Future<void> addIncorrectProblem(String problemId) async { // Keep it up 일 경
 
 Future<List<Problems>> incorrectsFromFirestore(String? email) async {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // 여러번 업데이트 되어 list의 요소가 중복되는 것을 방지하기 위해 전부 초기화
   get_incorrects_ID = [];
   get_problems = [];
   String problemID = "";
-  // problem_no = 0;
 
-  for(int i = 1; i <= 138; i++) { // 나중에 조건 변경하기
+  // 문제 1~136번까지 모두 Incorrects에 있는지 순차적으로 탐색하는 for문
+  for(int i = 1; i <= 136; i++) { // 나중에 조건 변경하기
+    // 문제 ID 생성 조건문
     if (i < 10) {
       problemID = 'ex000${i}-1';
     } else if (i < 100) {
@@ -386,37 +388,38 @@ Future<List<Problems>> incorrectsFromFirestore(String? email) async {
       problemID = 'ex${i}-1';
     }
 
+    // 현재 계정과 문제 번호를 기본키로서 사용
     DocumentReference<Map<String, dynamic>> docRef =
     await _firestore.collection('incorrectProblems').doc('${email}_${problemID}');
     DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
 
-    if (docSnapshot.data() != null) { // 해당 계정에 오답이 존재할 때
-      // print(problemID);
+    if (docSnapshot.data() != null) { // 해당 계정에 현재 문제ID와 일치하는 오답이 존재할 때
       get_incorrects_ID.add(problemID); // 해당 계정의 오답 문제ID를 저장함
     }
   }
 
   for (int i = 0; i < get_incorrects_ID.length; i++) {
-    // print(get_incorrects_ID[i]);
+    // 해당 계정의 오답 문제ID를 통해 Problems DB에서 문제 정보 조회
     DocumentReference<Map<String, dynamic>> docRef =
     await _firestore.collection('Problems').doc(get_incorrects_ID[i]);
     DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
 
     // Problems incorrect = Problems.fromJson(docSnapshot.data()!);
+    // get_problems에 해당 계정의 오답 문제 정보 저장
     get_problems.add(Problems.fromJson(docSnapshot.data()!));
   }
-  
-  print("길이");
-  print(get_problems.length);
 
   return get_problems;
 }
 
+// 문제 삭제 함수
 Future<void> deleteIncorrectProblem(String? email, String problemID) async {
+  // 오답 노트에서 문제를 맞췄을 경우, 매개변수로 받은 이메일과 문제ID로 삭제할 문제 지정
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   DocumentReference<Map<String, dynamic>> docRef =
   await _firestore.collection('incorrectProblems').doc('${email}_${problemID}');
 
+  // 해당 오답 문제 삭제
   docRef.delete();
 }
 

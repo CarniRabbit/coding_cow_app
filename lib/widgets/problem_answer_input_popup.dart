@@ -58,7 +58,9 @@ void answer_input_dialog(context) {
                         status = 1;
 
                       if (mode == 1) { // 오답노트일 때
+                        // 맞춘 문제를 Incorrects DB에서 삭제
                         deleteIncorrectProblem(auth.currentUser?.email, get_problems[problem_no].ID);
+                        // 프론트엔드의 오답ID, 문제 배열에서 삭제
                         get_problems.removeAt(problem_no);
                         get_incorrects_ID.removeAt(problem_no);
                       }
