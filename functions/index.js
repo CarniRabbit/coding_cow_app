@@ -20,10 +20,11 @@
 
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-const serviceAccount = require(
-    "./dingca-976c1-firebase-adminsdk-aicqn-bf23eb77a1.json");
+const path = require("path");
+const serviceAccountPath = path.resolve(__dirname, "credentials",
+    "dingca-976c1-firebase-adminsdk-aicqn-bf23eb77a1.json");
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(require(serviceAccountPath)),
 });
 
 exports.resetAttendStatus = functions.pubsub.schedule(
