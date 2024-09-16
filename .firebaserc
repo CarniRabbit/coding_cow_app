@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "default": "dingca-976c1"
+  },
+  "targets": {},
+  "etags": {
+    "dingca-976c1": {
+      "extensionInstances": {}
+    }
+  },
+  "dataconnectEmulatorConfig": {}
+}
