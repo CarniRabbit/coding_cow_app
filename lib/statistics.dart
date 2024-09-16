@@ -19,7 +19,9 @@ Future<UserStats?> fetchUserStats(String uid) async {
   if (snapshot.exists) {
     return UserStats.fromJson(snapshot.data()!);
   }
-  return null;
+  return UserStats(
+      uid: uid,
+      lastUpdated: Timestamp.now());
 }
 
 class Stat_Page extends StatefulWidget {
@@ -82,6 +84,13 @@ class StatPageState extends State<Stat_Page> {
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            'Total Score: ${userStats.totalScore}',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight:  FontWeight.bold,
                             ),
                           ),
                           SizedBox(height: 20),

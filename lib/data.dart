@@ -203,6 +203,7 @@ class UserStats {
   final int hintUsedProblemsCount;
   final double averageProblemLevel;
   final Timestamp lastUpdated;
+  final int totalScore;
 
   UserStats({
     required this.uid,
@@ -212,6 +213,7 @@ class UserStats {
     this.hintUsedProblemsCount = 0,
     this.averageProblemLevel = 0.0,
     required this.lastUpdated,
+    this.totalScore = 0,
   });
 
   factory UserStats.fromJson(Map<String, dynamic> json) {
@@ -223,6 +225,7 @@ class UserStats {
       hintUsedProblemsCount: json['hintUsedProblemsCount'] ?? 0,
       averageProblemLevel: json['averageProblemLevel']?.toDouble() ?? 0.0,
       lastUpdated: json['lastUpdated'],
+      totalScore: json['totalScore'] ?? 0,
     );
   }
 
@@ -235,6 +238,47 @@ class UserStats {
       'hintUsedProblemsCount': hintUsedProblemsCount,
       'averageProblemLevel': averageProblemLevel,
       'lastUpdated': lastUpdated,
+      'totalScore': totalScore,
+    };
+  }
+}
+
+class TodayProblem {
+  final String uid;
+  final String problemId;
+  final bool isCorrect;
+  final bool hintUsed;
+  final int level;
+  final Timestamp timestamp;
+
+  TodayProblem({
+    required this.uid,
+    required this.problemId,
+    required this.isCorrect,
+    required this.hintUsed,
+    required this.level,
+    required this.timestamp,
+  });
+
+  factory TodayProblem.fromJson(Map<String, dynamic> json) {
+    return TodayProblem(
+      uid: json['uid'],
+      problemId: json['problemId'],
+      isCorrect: json['isCorrect'],
+      hintUsed: json['hintUsed'],
+      level: json['level'],
+      timestamp: json['timestamp'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'uid': uid,
+      'problemId': problemId,
+      'isCorrect': isCorrect,
+      'hintUsed': hintUsed,
+      'level': level,
+      'timestamp': timestamp,
     };
   }
 }
@@ -423,17 +467,37 @@ Future<void> deleteIncorrectProblem(String? email, String problemID) async {
   docRef.delete();
 }
 
-Future<void> addProblemToTodayProblem(String email, Problems problem) async {
+Future<void> addTodayProblem(TodayProblem todayProblem) async {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  DocumentReference userDoc = firestore.collection('users').doc(email);
-  CollectionReference problemsSubcollection = userDoc.collection('todayProblems');
+  await firestore.collection('todayProblems').doc('${todayProblem.uid}_${todayProblem.problemId}').set(todayProblem.toJson());
+}
 
-  await problemsSubcollection.add({
-    'ID': problem.ID,
-    'level': problem.level,
-    'title': problem.title,
-    'correct': false,
-    'hintUsed': false,
-  });
+Future<void> updateUserTotalScore(String uid) async {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  DocumentReference docRef = firestore.collection('UserStats').doc(uid);
+
+  try {
+    await firestore.runTransaction((transaction) async {
+      DocumentSnapshot snapshot = await transaction.get(docRef);
+
+      if (snapshot.exists) {
+        UserStats currentStats = UserStats.fromJson(
+            snapshot.data() as Map<String, dynamic>);
+
+        int totalScore = (currentStats.averageProblemLevel / 16 * 10).floor() *
+            (currentStats.correctProblemsCount +
+                currentStats.hintUsedProblemsCount) ~/ 2;
+
+        transaction.update(docRef, {
+          'totalScore': totalScore,
+          'lastUpdated': Timestamp.now(),
+        });
+      } else {
+        print('UserStats document does not exist.');
+      }
+    });
+  } catch (e) {
+    print('Error updating total score: $e');
+  }
 }

@@ -3,6 +3,7 @@
  * 딩카 문제 화면 - 정답 입력창
  */
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coding_cow_app/result.dart';
 import 'package:coding_cow_app/widgets/main_measure.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ void answer_input_dialog(context) {
     builder: (context) {
       final _answerEditController = TextEditingController();
 
-      return Dialog( // answer input dialong
+      return Dialog( // answer input dialogue
         child: Container(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -44,18 +45,27 @@ void answer_input_dialog(context) {
               TextButton(
                   onPressed: () async { // press event
                     // 입력한 값 == Problem DB의 현재 문제의 정답 여부 판별
-                    
+                    bool isCorrect = false;
+                    bool hintUsed = false;
+                    int level = get_problems[problem_no].level;
+                    String problemId = get_problems[problem_no].ID;
+
                     var text = _answerEditController.text; // 입력한 값
                     int status = 0;
 
                     if (text == get_problems[problem_no].answer) {
                       // hint를 보지 않고 정답을 맞췄을 때
-                      if (!hint)
+                      if (!hint) {
                         status = 0;
-
+                        isCorrect = true;
+                        hintUsed = false;
+                      }
                       // hint를 보고 정답을 맞췄을 때
-                      else
+                      else {
                         status = 1;
+                        isCorrect = true;
+                        hintUsed = true;
+                      }
 
                       if (mode == 1) { // 오답노트일 때
                         // 맞춘 문제를 Incorrects DB에서 삭제
@@ -74,7 +84,17 @@ void answer_input_dialog(context) {
                       status = 2;
                       await addIncorrectProblem(get_problems[problem_no].ID); // 답을 틀렸을 때 Incorrect DB에 저장
                     }
-                    
+                    String uid = getCurrentUserId();
+                    TodayProblem todayProblem = TodayProblem(
+                      uid: uid,
+                      problemId: problemId,
+                      isCorrect: isCorrect,
+                      hintUsed: hintUsed,
+                      level: level,
+                      timestamp: Timestamp.now(),
+                    );
+                    await addTodayProblem(todayProblem);
+
                     // 결과 화면으로 이동
                     Navigator.pushReplacement(
                       context,
