@@ -284,12 +284,13 @@ class TodayProblem {
   }
 }
 
-Future<void> checkAttendance(String uid) async {
+Future<void> checkAttendance(String? email) async {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   DocumentReference<Map<String, dynamic>> docRef =
-  _firestore.collection('users').doc(uid);
+  _firestore.collection('users').doc(email);
 
   DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
+  print(docSnapshot.data()?['email']);
 
   if (docSnapshot.exists) {
     bool isAttend = docSnapshot.data()?['isAttend'] ?? false;
@@ -298,19 +299,20 @@ Future<void> checkAttendance(String uid) async {
       await docRef.update({
         'todaySolved': 0,
         'isAttend': true,
-        'lastLoginAt': Timestamp.now(),});
+        'lastLoginAt': Timestamp.now(),
+      });
     }
   } else {
     print('Document does not exist');
   }
 }
 
-Future<void> handleDailyAttendance(String uid) async {
-  await checkAttendance(uid);
+Future<void> handleDailyAttendance(String? email) async {
+  await checkAttendance(email);
 }
 
 void onAppStart(String uid) async {
-  await handleDailyAttendance(uid);
+  // await handleDailyAttendance(uid);
 }
 
 Future<void> saveUserStats(UserStats userStats) async {

@@ -19,7 +19,6 @@ class _LoginPageState extends State<Login_Page> {
   final TextEditingController _passwordController = TextEditingController();
 
   String _errorMessage = '';
-
   Future<void> _signInwithEmailAndPassword() async {
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
@@ -27,7 +26,7 @@ class _LoginPageState extends State<Login_Page> {
         password: _passwordController.text.trim(),
       );
 
-      await handleDailyAttendance(userCredential.user!.uid);
+      await handleDailyAttendance(auth.currentUser?.email);
 
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => Main_Page()),
