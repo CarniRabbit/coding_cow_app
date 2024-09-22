@@ -316,9 +316,9 @@ void onAppStart(String uid) async {
 }
 
 Future<void> saveUserStats(UserStats userStats) async {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  await firestore.collection('UserStats').doc(userStats.uid).set(
+  await _firestore.collection('UserStats').doc(userStats.uid).set(
     userStats.toJson(),
     SetOptions(merge: true),
   );
@@ -408,52 +408,6 @@ Future<void> addIncorrectProblem(String problemId) async {
 
       // doc가 존재하면 틀린 횟수 증가
       transaction.update(docRef, {'count': currentCount + 1});
-
-      // 처음엔 count = 1 -> 1일 뒤에 복습 -> cycle = 1일때 3일 뒤에 복습 -> cycle = 3일때 5일 뒤...
-      // reviewDate 속성은 lastSolved+복습주기
-      // count가 2 이상인 문제를 틀리면 다시 1일 뒤에 복습으로 변경
-      switch(cycle) {
-        case 1:
-          new_cycle = 3;
-          break;
-        case 3:
-          new_cycle = 5;
-          break;
-        case 5:
-          new_cycle = 7;
-          break;
-        case 7:
-          new_cycle = 14;
-          break;
-        case 14:
-          new_cycle = 21;
-          break;
-        case 21:
-          new_cycle = 30;
-          break;
-        case 30:
-          new_cycle = 60;
-          break;
-        case 60:
-          new_cycle = 90;
-          break;
-        case 90:
-          new_cycle = 120;
-          break;
-        case 120:
-          new_cycle = 150;
-          break;
-        case 150:
-          new_cycle = 180;
-      }
-
-      transaction.update(docRef, {
-        'cycle': new_cycle,
-        'lastSolved': DateTime.now(),
-        'reviewDate': DateTime.now().add(
-          Duration(days: new_cycle)
-        ),
-      });
     } else {
       // doc가 존재하지 않는다면(처음 틀린 문제) 새로 생성하고 count를 1로 설정
       transaction.set(docRef, {
@@ -461,11 +415,14 @@ Future<void> addIncorrectProblem(String problemId) async {
         'problemId': problemId,
         'count': 1,
         'timestamp': DateTime.now(),
-        'lastSolved': DateTime.now(),
-        'reviewDate': DateTime.now().add(Duration(days: 1)),
-        'cycle': 1,
       });
     }
+
+    transaction.update(docRef, {
+      'cycle': 1,
+      'lastSolved': DateTime.now(),
+      'reviewDate': DateTime.now().add(Duration(days: 1)),
+    });
   });
 }
 
@@ -516,9 +473,9 @@ Future<List<Problems>> incorrectsFromFirestore(String? email) async {
 // 오답 문제 삭제 함수
 Future<void> deleteIncorrectProblem(String? email, String problemID) async {
   // 오답 노트에서 문제를 맞췄을 경우, 매개변수로 받은 이메일과 문제ID로 삭제할 문제 지정
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   DocumentReference<Map<String, dynamic>> docRef =
-  await _firestore.collection('incorrectProblems').doc('${email}_${problemID}');
+  await firestore.collection('incorrectProblems').doc('${email}_${problemID}');
 
   // 해당 오답 문제 삭제
   docRef.delete();

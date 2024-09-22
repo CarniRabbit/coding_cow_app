@@ -54,7 +54,7 @@ void answer_input_dialog(context) {
                     var text = _answerEditController.text; // 입력한 값
                     int status = 0;
 
-                    if (text == get_problems[problem_no].answer) {
+                    if (text == get_problems[problem_no].answer.replaceAll(RegExp('\\s'), "")) {
                       // hint를 보지 않고 정답을 맞췄을 때
                       if (!hint) {
                         status = 0;
@@ -74,6 +74,112 @@ void answer_input_dialog(context) {
                         // 프론트엔드의 오답ID, 문제 배열에서 삭제
                         get_problems.removeAt(problem_no);
                         get_incorrects_ID.removeAt(problem_no);
+                      } else { // 오늘의 문제일 때
+                        String problemID = '';
+                        FirebaseFirestore _firestore = FirebaseFirestore.instance;
+                        get_incorrects_ID = [];
+
+                        // 문제 1~136번까지 모두 Incorrects에 있는지 순차적으로 탐색하는 for문 (여기만 함수로 묶어야할듯)
+                        for(int i = 1; i <= 136; i++) { // 나중에 조건 변경하기
+                          // 문제 ID 생성 조건문
+                          if (i < 10) {
+                            problemID = 'ex000${i}-1';
+                          } else if (i < 100) {
+                            problemID = 'ex00${i}-1';
+                          } else if (i < 1000) {
+                            problemID = 'ex0${i}-1';
+                          } else {
+                            problemID = 'ex${i}-1';
+                          }
+
+                          // 현재 계정과 문제 번호를 기본키로서 사용
+                          DocumentReference<Map<String, dynamic>> docRef =
+                          await _firestore.collection('incorrectProblems').doc('${auth.currentUser?.email}_${problemID}');
+                          DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
+
+                          if (docSnapshot.data() != null) { // 해당 계정에 현재 문제ID와 일치하는 오답이 존재할 때
+                            get_incorrects_ID.add(problemID); // 해당 계정의 오답 문제ID를 저장함
+                          }
+                        }
+                        // 오답노트에 같은 문제가 존재할 경우 (현재 문제 ID == 오답노트의 문제 ID 순차탐색)
+                        print(get_incorrects_ID);
+
+                        get_incorrects_ID.forEach((incorrect) {
+                          if (get_problems[problem_no].ID == incorrect) {
+                            String docId = '${auth.currentUser?.email}_${incorrect}';// 문서 제목
+                            DocumentReference docRef = FirebaseFirestore.instance
+                                .collection('incorrectProblems')
+                                .doc(docId);
+                            // cycle = 1일때 3일 뒤에 복습 -> cycle = 3일때 5일 뒤...
+                            FirebaseFirestore.instance.runTransaction((transaction) async {
+                              DocumentSnapshot docSnapshot = await transaction.get(docRef);
+                              if (docSnapshot.exists) {
+                                int cycle = docSnapshot.get('cycle');
+                                new_cycle = 0;
+
+                                switch(cycle) {
+                                  case 1:
+                                    new_cycle = 3;
+                                    break;
+                                  case 3:
+                                    new_cycle = 5;
+                                    break;
+                                  case 5:
+                                    new_cycle = 7;
+                                    break;
+                                  case 7:
+                                    new_cycle = 14;
+                                    break;
+                                  case 14:
+                                    new_cycle = 21;
+                                    break;
+                                  case 21:
+                                    new_cycle = 30;
+                                    break;
+                                  case 30:
+                                    new_cycle = 60;
+                                    break;
+                                  case 60:
+                                    new_cycle = 90;
+                                    break;
+                                  case 90:
+                                    new_cycle = 120;
+                                    break;
+                                  case 120:
+                                    new_cycle = 150;
+                                    break;
+                                  case 150:
+                                    new_cycle = 180;
+                                }
+
+                                // reviewDate 속성은 lastSolved+복습주기
+                                // count가 2 이상인 문제를 틀리면 다시 1일 뒤에 복습으로 변경
+                                transaction.update(docRef, {
+                                  'cycle': new_cycle,
+                                  'lastSolved': DateTime.now(),
+                                  'reviewDate': DateTime.now().add(
+                                      Duration(days: new_cycle)
+                                  ),
+                                });
+                              } else {
+                                // doc가 존재하지 않는다면(처음 틀린 문제) 새로 생성하고 count를 1로 설정
+                                transaction.set(docRef, {
+                                  'userId': auth.currentUser?.email,
+                                  'problemId': problemId,
+                                  'count': 1,
+                                  'timestamp': DateTime.now(),
+                                  'lastSolved': DateTime.now(),
+                                  'reviewDate': DateTime.now().add(Duration(days: 1)),
+                                  'cycle': 1,
+                                });
+                              }
+                            });
+                          }
+                        });
+
+
+                        // reviewDate 속성은 lastSolved+복습주기
+                        // count가 2 이상인 문제를 틀리면 다시 1일 뒤에 복습으로 변경
                       }
 
                       today_solved++;
