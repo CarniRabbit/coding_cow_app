@@ -29,7 +29,7 @@ class Result_Body extends StatelessWidget {
                 // widthFactor: 0.25,
                 child: Container(
                   child: Text( // period
-                    "6개월 뒤 복습",
+                    new_cycle.toString()+"일 뒤 복습",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

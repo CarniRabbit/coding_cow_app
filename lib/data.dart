@@ -28,6 +28,7 @@ String get_nickname = '';
 int get_level = 0;
 int get_restEXP = 0;
 String current_email = '';
+int new_cycle = 0;
 final FirebaseAuth auth = FirebaseAuth.instance;
 
 class Problems {
@@ -356,7 +357,7 @@ Future<void> addIncorrectProblem(String problemId) async {
     if (docSnapshot.exists) {
       int currentCount = docSnapshot.get('count');
       int cycle = docSnapshot.get('cycle');
-      int new_cycle = 0;
+      new_cycle = 0;
       // DateTime lastSolved = docSnapshot.get('lastSolved');
 
       // doc가 존재하면 틀린 횟수 증가
