@@ -41,12 +41,7 @@ class Problem_Page extends StatelessWidget {
             future: mode == 0 ? problemsFromFirestore() // 0: 오늘의 문제, 1: 오답 문제
                 : incorrectsFromFirestore(auth.currentUser?.email),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              // problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
               if (snapshot.hasData) { // 데이터가 전부 로드되었을 때
-                if (mode == 0) { // 오늘의 문제 (현재 무작위 문제, 추후 유저 레벨 기준 오늘의 문제 배열로 대체)
-                  problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
-                }
-
                 return SafeArea( // 앱이 상태창 아래부터 표시되도록 함
                   bottom: false,
                   child: Column(

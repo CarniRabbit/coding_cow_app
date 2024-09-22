@@ -42,9 +42,10 @@ void answer_input_dialog(context) {
                 ),
               ),
               TextButton(
-                  onPressed: () async { // press event
+                  onPressed: () async { // press event (확인)
                     // 입력한 값 == Problem DB의 현재 문제의 정답 여부 판별
-                    
+                    // mode 0 (오늘의 문제)
+
                     var text = _answerEditController.text; // 입력한 값
                     int status = 0;
 
