@@ -43,8 +43,8 @@ class Problem_Notice_Page extends StatelessWidget {
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               if (snapshot.hasData) { // 데이터가 다 로드 되었을 때
                 if (mode == 0) { // 오늘의 문제 (현재 무작위 문제, 추후 유저 레벨 기준 오늘의 문제 배열로 대체)
-                  // problem_no = Random().nextInt(get_problems.length); // 문제 랜덤 선정
-                  problem_no = 64;
+                  // print(get_problems);
+                  problem_no = 0;
                 }
 
                 return SafeArea( // 앱이 상태창 아래부터 표시되도록 함

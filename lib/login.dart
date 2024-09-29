@@ -26,7 +26,7 @@ class _LoginPageState extends State<Login_Page> {
         password: _passwordController.text.trim(),
       );
 
-      await handleDailyAttendance(auth.currentUser?.email);
+      // await handleDailyAttendance(auth.currentUser?.email);
 
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => Main_Page()),
