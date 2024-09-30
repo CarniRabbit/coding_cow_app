@@ -269,6 +269,7 @@ Future<void> createTodayProblem(int userLevel, String? email) async {
       firestore.collection('todayProblems').doc(
           '${auth.currentUser?.email}_${current_level_problems[i].ID}').set({
         'ID': current_level_problems[i].ID,
+        'email': auth.currentUser?.email,
       });
 
       today_current_level++;
@@ -287,6 +288,7 @@ Future<void> createTodayProblem(int userLevel, String? email) async {
       firestore.collection('todayProblems').doc(
           '${auth.currentUser?.email}_${next_level_problems[i].ID}').set({
         'ID': next_level_problems[i].ID,
+        'email': auth.currentUser?.email,
       });
 
       today_next_level++;
@@ -306,9 +308,9 @@ Future<void> createTodayProblem(int userLevel, String? email) async {
 
     // 하루에 풀어야할 문제수(현재 10)에서 오늘 복습해야할 문제수를 뺀만큼 반복한다.
     for (int i = 0; i < today_problem_count - today_review; i++) {
-      firestore.collection('todayProblems').doc(
-          '${auth.currentUser?.email}_${current_level_problems[i].ID}').set({
+      firestore.collection('todayProblems').doc('${auth.currentUser?.email}_${current_level_problems[i].ID}').set({
         'ID': current_level_problems[i].ID,
+        'email': auth.currentUser?.email,
       });
 
       today_current_level++;
@@ -327,6 +329,7 @@ Future<void> createTodayProblem(int userLevel, String? email) async {
       firestore.collection('todayProblems').doc(
           '${auth.currentUser?.email}_${prev_level_problems[i].ID}').set({
         'ID': prev_level_problems[i].ID,
+        'email': auth.currentUser?.email,
       });
 
       today_prev_level++;
@@ -345,6 +348,7 @@ Future<void> createTodayProblem(int userLevel, String? email) async {
       firestore.collection('todayProblems').doc(
           '${auth.currentUser?.email}_${next_level_problems[i].ID}').set({
         'ID': next_level_problems[i].ID,
+        'email': auth.currentUser?.email,
       });
 
       today_next_level++;
@@ -543,7 +547,6 @@ Future<void> addIncorrectProblem(String problemId) async {
     if (docSnapshot.exists) {
       int currentCount = docSnapshot.get('count');
       int cycle = docSnapshot.get('cycle');
-      new_cycle = 0;
       // DateTime lastSolved = docSnapshot.get('lastSolved');
 
       // doc가 존재하면 틀린 횟수 증가

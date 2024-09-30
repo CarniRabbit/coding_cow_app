@@ -115,8 +115,6 @@ void answer_input_dialog(context) {
                               DocumentSnapshot docSnapshot = await transaction.get(docRef);
                               if (docSnapshot.exists) {
                                 int cycle = docSnapshot.get('cycle');
-                                new_cycle = 0;
-
                                 switch(cycle) {
                                   case 1:
                                     new_cycle = 3;
