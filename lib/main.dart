@@ -21,10 +21,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  String? uid = FirebaseAuth.instance.currentUser?.uid;
-  if(uid != null){
-    onAppStart(uid);
-  }
+
   runApp(MyApp());
 }
 
@@ -35,7 +32,7 @@ class MyApp extends StatelessWidget{
       theme: ThemeData(
         fontFamily: 'NanumCoding',
       ),
-      home: Login_Page(),
+      home: FirebaseAuth.instance.currentUser != null ? Main_Page() : Login_Page(),
     );
   }
 }
