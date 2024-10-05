@@ -17,11 +17,13 @@
  * HTML 태그를 포함한 코드, 힌트는 챗GPT를 통해 빠르게 생성할 수 있음.
  */
 
+import 'dart:core';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-List<Problems> get_problems = [];
+List<Problems> get_problems = []; // 오늘의 문제, 오답
 List<String> get_incorrects_ID = [];
 List<String> get_today_problems_ID = [];
 int today_review = 0;
@@ -101,6 +103,52 @@ class Problems {
   // }
 }
 
+class IncorrectProblems {
+  final String ID;
+  final String email;
+  final int count;
+  final Timestamp lastSolved;
+  final Timestamp reviewDate;
+  final Timestamp timestamp;
+  final int cycle;
+
+  IncorrectProblems({
+    required this.ID,
+    required this.email,
+    required this.count,
+    required this.lastSolved,
+    required this.reviewDate,
+    required this.timestamp,
+    required this.cycle,
+  });
+
+  factory IncorrectProblems.fromJson(Map<String, dynamic> json) {
+    return IncorrectProblems(
+      ID: json["problemId"],
+      email: json["email"],
+      count: json["count"],
+      lastSolved: json["lastSolved"],
+      reviewDate: json["reviewDate"],
+      timestamp: json["timestamp"],
+      cycle: json["cycle"],
+    );
+  }
+  // Map<String, dynamic> toJson() {
+  //   return {
+  //     'ID': ID,
+  //     'level': level,
+  //     'language': language,
+  //     'title': title,
+  //     'description': description,
+  //     'code': code,
+  //     'category': category,
+  //     'answer': answer,
+  //     'hint': hint,
+  //     'source': 'Baekjoon Online Judge(https://www.acmicpc.net/)'
+  //   };
+  // }
+}
+
 Future<List<Problems>> problemsFromFirestore() async { // Problems DB에서 오늘의 문제 조회
   get_today_problems_ID = [];
   get_problems = [];
@@ -127,6 +175,42 @@ Future<List<Problems>> problemsFromFirestore() async { // Problems DB에서 오�
   }
 
   get_problems.shuffle();
+
+  return get_problems;
+}
+
+Future<List<Problems>> incorrectsFromFirestore(String? email) async {
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // 여러번 업데이트 되어 list의 요소가 중복되는 것을 방지하기 위해 전부 초기화
+  get_incorrects_ID = [];
+  get_incorrects_date = [];
+  get_problems = [];
+
+  // 문제 1~136번까지 모두 Incorrects에 있는지 순차적으로 탐색하는 for문
+  QuerySnapshot<Map<String, dynamic>> _snapshot =
+  await _firestore.collection('incorrectProblems').where('email', isEqualTo: auth.currentUser?.email).get();
+
+  List<IncorrectProblems> get_incorrects =
+  await _snapshot.docs.map((e) => IncorrectProblems.fromJson(e.data())).toList();
+
+  get_incorrects.forEach((incorrect) {
+    get_incorrects_ID.add(incorrect.ID);
+    get_incorrects_date.add(incorrect.reviewDate.toDate());
+  });
+
+  // print(get_incorrects_ID);
+  // print(get_incorrects_date);
+
+  for (int i = 0; i < get_incorrects_ID.length; i++) {
+    // 해당 계정의 오답 문제ID를 통해 Problems DB에서 문제 정보 조회
+    DocumentReference<Map<String, dynamic>> docRef =
+    await _firestore.collection('Problems').doc(get_incorrects_ID[i]);
+    DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
+
+    // Problems incorrect = Problems.fromJson(docSnapshot.data()!);
+    // get_problems에 해당 계정의 오답 문제 정보 저장
+    get_problems.add(Problems.fromJson(docSnapshot.data()!));
+  }
 
   return get_problems;
 }
@@ -220,8 +304,6 @@ Future<(String, int, int)> getUserInfo(String? email) async {
   if (!docSnapshot.data()?['isAttend']) { // 오늘 처음 접속할 경우
     createTodayProblem(get_level, email);
   }
-
-
 
   await handleDailyAttendance(email);
 
@@ -567,52 +649,6 @@ Future<void> addIncorrectProblem(String problemId) async {
       'reviewDate': DateTime.now().add(Duration(days: 1)),
     });
   });
-}
-
-Future<List<Problems>> incorrectsFromFirestore(String? email) async {
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  // 여러번 업데이트 되어 list의 요소가 중복되는 것을 방지하기 위해 전부 초기화
-  get_incorrects_ID = [];
-  get_incorrects_date = [];
-  get_problems = [];
-  String problemID = "";
-
-  // 문제 1~136번까지 모두 Incorrects에 있는지 순차적으로 탐색하는 for문
-  for(int i = 1; i <= 136; i++) { // 나중에 조건 변경하기
-    // 문제 ID 생성 조건문
-    if (i < 10) {
-      problemID = 'ex000${i}-1';
-    } else if (i < 100) {
-      problemID = 'ex00${i}-1';
-    } else if (i < 1000) {
-      problemID = 'ex0${i}-1';
-    } else {
-      problemID = 'ex${i}-1';
-    }
-
-    // 현재 계정과 문제 번호를 기본키로서 사용
-    DocumentReference<Map<String, dynamic>> docRef =
-    await _firestore.collection('incorrectProblems').doc('${email}_${problemID}');
-    DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
-
-    if (docSnapshot.data() != null) { // 해당 계정에 현재 문제ID와 일치하는 오답이 존재할 때
-      get_incorrects_ID.add(problemID); // 해당 계정의 오답 문제ID를 저장함
-      get_incorrects_date.add(docSnapshot.data()?['reviewDate'].toDate());
-    }
-  }
-
-  for (int i = 0; i < get_incorrects_ID.length; i++) {
-    // 해당 계정의 오답 문제ID를 통해 Problems DB에서 문제 정보 조회
-    DocumentReference<Map<String, dynamic>> docRef =
-    await _firestore.collection('Problems').doc(get_incorrects_ID[i]);
-    DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
-
-    // Problems incorrect = Problems.fromJson(docSnapshot.data()!);
-    // get_problems에 해당 계정의 오답 문제 정보 저장
-    get_problems.add(Problems.fromJson(docSnapshot.data()!));
-  }
-
-  return get_problems;
 }
 
 // 오답 문제 삭제 함수

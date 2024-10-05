@@ -54,7 +54,7 @@ void answer_input_dialog(context) {
                     var text = _answerEditController.text; // 입력한 값
                     int status = 0;
 
-                    if (text == get_problems[problem_no].answer.replaceAll(RegExp('\\s'), "")) {
+                    if (text.replaceAll(RegExp('\\s'), "") == get_problems[problem_no].answer.replaceAll(RegExp('\\s'), "")) {
                       // hint를 보지 않고 정답을 맞췄을 때
                       if (!hint) {
                         status = 0;
@@ -150,6 +150,8 @@ void answer_input_dialog(context) {
                                     new_cycle = 180;
                                 }
 
+                                print(new_cycle);
+
                                 // reviewDate 속성은 lastSolved+복습주기
                                 // count가 2 이상인 문제를 틀리면 다시 1일 뒤에 복습으로 변경
                                 transaction.update(docRef, {
@@ -162,7 +164,7 @@ void answer_input_dialog(context) {
                               } else {
                                 // doc가 존재하지 않는다면(처음 틀린 문제) 새로 생성하고 count를 1로 설정
                                 transaction.set(docRef, {
-                                  'userId': auth.currentUser?.email,
+                                  'email': auth.currentUser?.email,
                                   'problemId': problemId,
                                   'count': 1,
                                   'timestamp': DateTime.now(),
