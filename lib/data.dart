@@ -181,6 +181,7 @@ Future<List<Problems>> problemsFromFirestore() async { // Problems DB에서 오�
 
 Future<List<Problems>> incorrectsFromFirestore(String? email) async {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   // 여러번 업데이트 되어 list의 요소가 중복되는 것을 방지하기 위해 전부 초기화
   get_incorrects_ID = [];
   get_incorrects_date = [];
@@ -628,15 +629,15 @@ Future<void> addIncorrectProblem(String problemId) async {
     DocumentSnapshot docSnapshot = await transaction.get(docRef);
     if (docSnapshot.exists) {
       int currentCount = docSnapshot.get('count');
-      int cycle = docSnapshot.get('cycle');
       // DateTime lastSolved = docSnapshot.get('lastSolved');
 
       // doc가 존재하면 틀린 횟수 증가
+      // count가 2 이상인 문제를 틀리면 다시 1일 뒤에 복습으로 변경
       transaction.update(docRef, {'count': currentCount + 1});
     } else {
       // doc가 존재하지 않는다면(처음 틀린 문제) 새로 생성하고 count를 1로 설정
       transaction.set(docRef, {
-        'userId': auth.currentUser?.email,
+        'email': auth.currentUser?.email,
         'problemId': problemId,
         'count': 1,
         'timestamp': DateTime.now(),
@@ -648,6 +649,8 @@ Future<void> addIncorrectProblem(String problemId) async {
       'lastSolved': DateTime.now(),
       'reviewDate': DateTime.now().add(Duration(days: 1)),
     });
+
+    new_cycle = 1;
   });
 }
 

@@ -75,36 +75,12 @@ void answer_input_dialog(context) {
                         get_problems.removeAt(problem_no);
                         get_incorrects_ID.removeAt(problem_no);
                       } else { // 오늘의 문제일 때
-                        String problemID = '';
-                        FirebaseFirestore _firestore = FirebaseFirestore.instance;
-                        get_incorrects_ID = [];
+                        await incorrectsFromFirestore(auth.currentUser?.email);
 
-                        // 문제 1~136번까지 모두 Incorrects에 있는지 순차적으로 탐색하는 for문 (여기만 함수로 묶어야할듯)
-                        for(int i = 1; i <= 136; i++) { // 나중에 조건 변경하기
-                          // 문제 ID 생성 조건문
-                          if (i < 10) {
-                            problemID = 'ex000${i}-1';
-                          } else if (i < 100) {
-                            problemID = 'ex00${i}-1';
-                          } else if (i < 1000) {
-                            problemID = 'ex0${i}-1';
-                          } else {
-                            problemID = 'ex${i}-1';
-                          }
-
-                          // 현재 계정과 문제 번호를 기본키로서 사용
-                          DocumentReference<Map<String, dynamic>> docRef =
-                          await _firestore.collection('incorrectProblems').doc('${auth.currentUser?.email}_${problemID}');
-                          DocumentSnapshot<Map<String, dynamic>> docSnapshot = await docRef.get();
-
-                          if (docSnapshot.data() != null) { // 해당 계정에 현재 문제ID와 일치하는 오답이 존재할 때
-                            get_incorrects_ID.add(problemID); // 해당 계정의 오답 문제ID를 저장함
-                          }
-                        }
-                        // 오답노트에 같은 문제가 존재할 경우 (현재 문제 ID == 오답노트의 문제 ID 순차탐색)
                         print(get_incorrects_ID);
 
                         get_incorrects_ID.forEach((incorrect) {
+                          // 오답노트에 같은 문제가 존재할 경우 (현재 문제 ID == 오답노트의 문제 ID 순차탐색)
                           if (get_problems[problem_no].ID == incorrect) {
                             String docId = '${auth.currentUser?.email}_${incorrect}';// 문서 제목
                             DocumentReference docRef = FirebaseFirestore.instance
@@ -150,8 +126,6 @@ void answer_input_dialog(context) {
                                     new_cycle = 180;
                                 }
 
-                                print(new_cycle);
-
                                 // reviewDate 속성은 lastSolved+복습주기
                                 // count가 2 이상인 문제를 틀리면 다시 1일 뒤에 복습으로 변경
                                 transaction.update(docRef, {
@@ -177,9 +151,7 @@ void answer_input_dialog(context) {
                           }
                         });
 
-
                         // reviewDate 속성은 lastSolved+복습주기
-                        // count가 2 이상인 문제를 틀리면 다시 1일 뒤에 복습으로 변경
                       }
 
                       today_solved++;
