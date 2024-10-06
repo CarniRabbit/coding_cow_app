@@ -3,7 +3,8 @@
  * 딩카 메인화면
  */
 
-import 'package:coding_cow_app/data.dart';
+import 'package:coding_cow_app/data_problems.dart';
+import 'package:coding_cow_app/data_account.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/topbar.dart';

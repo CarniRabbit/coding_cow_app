@@ -3,7 +3,7 @@
  * 딩카 문제 화면 - 프로그램 제목
  */
 
-import 'package:coding_cow_app/data.dart';
+import 'package:coding_cow_app/data_problems.dart';
 import 'package:flutter/material.dart';
 
 class Problem_Title extends StatelessWidget {

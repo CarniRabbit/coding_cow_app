@@ -3,9 +3,7 @@
  * 딩카 결과 화면 - 중앙
  */
 
-import 'package:coding_cow_app/data.dart';
-import 'package:coding_cow_app/widgets/main_measure.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:coding_cow_app/data_problems.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/result_status.dart';
 

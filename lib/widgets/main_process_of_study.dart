@@ -3,7 +3,7 @@
  * 딩카 메인 화면 - 오늘의 공부 현황(%)
  */
 
-import 'package:coding_cow_app/data.dart';
+import 'package:coding_cow_app/data_problems.dart';
 import 'package:flutter/material.dart';
 
 class Main_Process_Of_Study extends StatelessWidget {

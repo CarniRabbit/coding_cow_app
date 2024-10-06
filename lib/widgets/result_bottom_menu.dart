@@ -3,13 +3,10 @@
  * 딩카 결과 화면 - 하단 메뉴
  */
 
-import 'dart:math';
-import 'package:coding_cow_app/data.dart';
-import 'package:coding_cow_app/problem.dart';
+import 'package:coding_cow_app/data_problems.dart';
 import 'package:coding_cow_app/problem_notice.dart';
 import 'package:coding_cow_app/result_solution.dart';
 import 'package:flutter/material.dart';
-import 'package:coding_cow_app/widgets/problem_hint_popup.dart';
 
 class Result_Bottom_Menu extends StatelessWidget {
   @override

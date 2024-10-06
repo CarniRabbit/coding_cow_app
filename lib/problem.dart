@@ -6,7 +6,7 @@
 
 import 'dart:math';
 import 'package:coding_cow_app/main.dart';
-import 'package:coding_cow_app/data.dart';
+import 'package:coding_cow_app/data_problems.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/topbar.dart';
 import 'package:coding_cow_app/widgets/problem_title.dart';

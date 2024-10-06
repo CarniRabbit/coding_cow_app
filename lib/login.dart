@@ -6,8 +6,7 @@ import 'package:coding_cow_app/main.dart';
 import 'package:coding_cow_app/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'data.dart';
+import 'package:coding_cow_app/data_problems.dart';
 
 class Login_Page extends StatefulWidget{
   @override

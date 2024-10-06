@@ -3,7 +3,7 @@
  * 딩카 메인 화면 - 하단 메뉴 버튼(오답노트)
  */
 
-import 'package:coding_cow_app/data.dart';
+import 'package:coding_cow_app/data_problems.dart';
 import 'package:coding_cow_app/problem_notice.dart';
 import 'package:flutter/material.dart';
 

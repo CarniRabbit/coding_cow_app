@@ -3,7 +3,7 @@
  * 딩카 문제 화면 - 힌트 팝업
  */
 
-import 'package:coding_cow_app/data.dart';
+import 'package:coding_cow_app/data_problems.dart';
 import 'package:flutter/material.dart';
 
 void hint_dialog(context) { // hint popup

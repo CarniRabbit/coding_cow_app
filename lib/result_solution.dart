@@ -3,12 +3,11 @@
  * 딩카 결과 화면 - 문제 해설
 */
 
-import 'package:coding_cow_app/data.dart';
+import 'package:coding_cow_app/data_problems.dart';
 import 'package:coding_cow_app/main.dart';
 import 'package:coding_cow_app/widgets/problem_title.dart';
 import 'package:coding_cow_app/widgets/topbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
