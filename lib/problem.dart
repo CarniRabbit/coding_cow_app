@@ -4,7 +4,7 @@
  */
 
 
-import 'dart:math';
+import 'data_global.dart';
 import 'package:coding_cow_app/main.dart';
 import 'package:coding_cow_app/data_problems.dart';
 import 'package:coding_cow_app/data_incorrects.dart';

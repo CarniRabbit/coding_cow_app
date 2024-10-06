@@ -3,8 +3,7 @@
  * 딩카 결과 화면 - 정답/힌트정답/오답
 */
 
-import 'package:coding_cow_app/data_problems.dart';
-import 'package:coding_cow_app/data_account.dart';
+import 'package:coding_cow_app/data_problems.dart';import 'package:coding_cow_app/data_global.dart';import 'package:coding_cow_app/data_account.dart';
 import 'package:coding_cow_app/widgets/result_complete_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

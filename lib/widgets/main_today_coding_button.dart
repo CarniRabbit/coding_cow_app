@@ -3,7 +3,7 @@
  * 딩카 메인 화면 - 오늘의 코딩문제 버튼
  */
 
-import 'package:coding_cow_app/data_problems.dart';
+import 'package:coding_cow_app/data_global.dart';
 import 'package:coding_cow_app/problem_notice.dart';
 import 'package:flutter/material.dart';
 

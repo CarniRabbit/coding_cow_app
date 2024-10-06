@@ -3,7 +3,7 @@
  * 딩카 결과 화면 - 하단 메뉴
  */
 
-import 'package:coding_cow_app/data_problems.dart';
+import 'package:coding_cow_app/data_global.dart';
 import 'package:coding_cow_app/problem_notice.dart';
 import 'package:coding_cow_app/result_solution.dart';
 import 'package:flutter/material.dart';

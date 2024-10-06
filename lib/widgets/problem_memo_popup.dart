@@ -3,7 +3,7 @@
  * 딩카 문제 화면 - 메모 팝업
  */
 
-import 'package:coding_cow_app/data_problems.dart';
+import 'package:coding_cow_app/data_global.dart';
 import 'package:flutter/material.dart';
 
 void memo_dialog(context) {

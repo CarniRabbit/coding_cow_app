@@ -3,7 +3,7 @@
  * 딩카 문제 화면 - 중앙
  */
 
-import 'package:coding_cow_app/data_problems.dart';
+import 'package:coding_cow_app/data_global.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_code_part.dart';
 

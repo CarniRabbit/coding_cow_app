@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coding_cow_app/result.dart';
 import 'package:coding_cow_app/widgets/main_measure.dart';
 import 'package:flutter/material.dart';
-import 'package:coding_cow_app/data_problems.dart';
+import 'package:coding_cow_app/data_global.dart';
 import 'package:coding_cow_app/data_incorrects.dart';
 
 void answer_input_dialog(context) {

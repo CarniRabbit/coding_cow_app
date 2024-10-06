@@ -6,6 +6,7 @@
 
 import 'package:coding_cow_app/main.dart';
 import 'package:coding_cow_app/data_problems.dart';
+import 'package:coding_cow_app/data_global.dart';
 import 'package:coding_cow_app/data_incorrects.dart';
 import 'package:coding_cow_app/problem.dart';
 import 'package:flutter/material.dart';

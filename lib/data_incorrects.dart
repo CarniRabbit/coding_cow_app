@@ -2,8 +2,8 @@ import 'dart:core';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'data_problems.dart';
+import 'data_global.dart';
 
 class IncorrectProblems {
   final String ID;

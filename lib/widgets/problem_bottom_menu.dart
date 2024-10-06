@@ -6,7 +6,7 @@
 import 'package:coding_cow_app/widgets/problem_memo_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_hint_popup.dart';
-import 'package:coding_cow_app/data_problems.dart';
+import 'package:coding_cow_app/data_global.dart';
 
 class Problem_Bottom_Menu extends StatelessWidget {
   @override

@@ -3,7 +3,7 @@
  * 딩카 메인 화면 - 주소창(닉네임 표시)
  */
 
-import 'package:coding_cow_app/data_problems.dart';
+import 'package:coding_cow_app/data_global.dart';
 import 'package:flutter/material.dart';
 
 class Main_Adress_Input extends StatelessWidget {
