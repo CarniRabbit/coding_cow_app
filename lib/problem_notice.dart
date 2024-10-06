@@ -4,10 +4,9 @@
  * 문제 화면이 나오기 전 문제에 대한 설명 및 입력/출력 형태를 사용자에게 보여줌.
  */
 
-
-import 'dart:math';
 import 'package:coding_cow_app/main.dart';
 import 'package:coding_cow_app/data_problems.dart';
+import 'package:coding_cow_app/data_incorrects.dart';
 import 'package:coding_cow_app/problem.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/topbar.dart';
