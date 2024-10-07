@@ -23,7 +23,7 @@ class Main_Measure extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => Stat_Page(uid: uid))
+                  builder: (context) => StatPage(uid: uid))
           );
         },
         style: TextButton.styleFrom(
