@@ -30,34 +30,20 @@ class Result_Solution extends StatelessWidget {
           fontFamily: 'NanumCoding',
         ),
         home: Scaffold(
-          body: FutureBuilder( // 앱이 상태창 아래부터 표시되도록 함
-            future: problemsFromFirestore(),
-            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              if (snapshot.hasData) {
-                return SafeArea(
-                  child: Column(
-                    children: [
-                      TopBar(),
-                      Problem_Title(),
-                      Expanded(
-                        child: Container(
-                          child: Markdown(
-                            data: get_problems[problem_no].solution,
-                          ),
-                        ),
-                      ),
-                    ],
+          body: SafeArea(
+            child: Column(
+              children: [
+                TopBar(),
+                Problem_Title(),
+                Expanded(
+                  child: Container(
+                    child: Markdown(
+                      data: get_problems[problem_no].solution,
+                    ),
                   ),
-                );
-              }
-
-              return Center( // 데이터가 로드되지 않았을 때
-                child: Text(
-                  "문제 로딩중",
-                  textAlign: TextAlign.center,
                 ),
-              );
-            },
+              ],
+            ),
           ), // end of middle
         ),
       ),
