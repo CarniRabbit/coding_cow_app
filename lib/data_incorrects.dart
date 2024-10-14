@@ -57,9 +57,6 @@ Future<List<Problems>> incorrectsFromFirestore(String? email) async {
     get_incorrects_date.add(incorrect.reviewDate.toDate());
   });
 
-  // print(get_incorrects_ID);
-  // print(get_incorrects_date);
-
   for (int i = 0; i < get_incorrects_ID.length; i++) {
     // 해당 계정의 오답 문제ID를 통해 Problems DB에서 문제 정보 조회
     DocumentReference<Map<String, dynamic>> docRef =

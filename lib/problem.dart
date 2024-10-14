@@ -38,32 +38,16 @@ class Problem_Page extends StatelessWidget {
         ),
         home: Scaffold(
           resizeToAvoidBottomInset: false,
-          body: FutureBuilder(
-            future: mode == 0 ? problemsFromFirestore() // 0: 오늘의 문제, 1: 오답 문제
-                : incorrectsFromFirestore(auth.currentUser?.email),
-            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              if (snapshot.hasData) { // 데이터가 전부 로드되었을 때
-                return SafeArea( // 앱이 상태창 아래부터 표시되도록 함
-                  bottom: false,
-                  child: Column(
-                    children: [
-                      TopBar(),
-                      Problem_Title(),
-                      Problem_Body(),
-                      Problem_Bottom_Menu(),
-                    ],
-                  ),
-                );
-              }
-
-              return Center( // 데이터가 로드되지 않았을 때
-                child: Text(
-                  "문제 로딩중",
-                  textAlign: TextAlign.center,
-                ),
-              );
-               // end of middle
-            },
+          body: SafeArea( // 앱이 상태창 아래부터 표시되도록 함
+            bottom: false,
+            child: Column(
+              children: [
+                TopBar(),
+                Problem_Title(),
+                Problem_Body(),
+                Problem_Bottom_Menu(),
+              ],
+            ),
           ),
         ),
       ),

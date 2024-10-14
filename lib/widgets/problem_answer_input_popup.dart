@@ -78,8 +78,6 @@ void answer_input_dialog(context) {
                       } else { // 오늘의 문제일 때
                         await incorrectsFromFirestore(auth.currentUser?.email);
 
-                        print(get_incorrects_ID);
-
                         get_incorrects_ID.forEach((incorrect) {
                           // 오답노트에 같은 문제가 존재할 경우 (현재 문제 ID == 오답노트의 문제 ID 순차탐색)
                           if (get_problems[problem_no].ID == incorrect) {
@@ -149,6 +147,32 @@ void answer_input_dialog(context) {
                                 });
                               }
                             });
+
+                            docRef = FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(auth.currentUser?.email);
+                            // cycle = 1일때 3일 뒤에 복습 -> cycle = 3일때 5일 뒤...
+                            FirebaseFirestore.instance.runTransaction((transaction) async {
+                              DocumentSnapshot docSnapshot = await transaction.get(docRef);
+                              if (docSnapshot.exists) {
+                                get_restEXP = docSnapshot.get('restEXP');
+
+                                transaction.update(docRef, {
+                                  'restEXP': today_problem_count - today_solved,
+                                });
+                              } else {
+                                // doc가 존재하지 않는다면(처음 틀린 문제) 새로 생성하고 count를 1로 설정
+                                transaction.set(docRef, {
+                                  'email': auth.currentUser?.email,
+                                  'problemId': problemId,
+                                  'count': 1,
+                                  'timestamp': DateTime.now(),
+                                  'lastSolved': DateTime.now(),
+                                  'reviewDate': DateTime.now().add(Duration(days: 1)),
+                                  'cycle': 1,
+                                });
+                              }
+                            });
                           }
                         });
 
@@ -156,7 +180,7 @@ void answer_input_dialog(context) {
                       }
 
                       today_solved++;
-                      today_progress = today_solved / 10;
+                      today_progress = today_solved / today_problem_count;
                     }
 
                     // 답을 틀렸을 때

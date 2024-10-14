@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class Problem_Title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("title - 문제번호: "+problem_no.toString());
+    print("title - 문제번호: "+get_problems[0].ID);
 
     return Row( // align(→), problem title
       children: [

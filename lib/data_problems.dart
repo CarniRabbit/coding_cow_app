@@ -76,28 +76,36 @@ Future<List<Problems>> problemsFromFirestore() async { // Problems DB에서 오�
   get_today_problems_ID = [];
   get_problems = [];
 
+  // 현재 계정에 맞는 오늘의 문제 조회
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   QuerySnapshot<Map<String, dynamic>> _snapshot =
   await _firestore.collection('todayProblems').where('email', isEqualTo: auth.currentUser?.email).get();
 
+  // 리스트로 변환 후 저장
   List<TodayProblems> get_today_problems =
   await _snapshot.docs.map((e) => TodayProblems.fromJson(e.data())).toList();
 
+  // 오늘의 문제의 ID를 따로 저장
   get_today_problems.forEach((today_problem) {
     get_today_problems_ID.add(today_problem.ID);
   });
 
   for (int i = 0; i<get_today_problems_ID.length; i++) {
+    // Problems DB에서 오늘의 문제의 ID와 일치하는 문제 조회
     QuerySnapshot<Map<String, dynamic>> docSnapshot =
     await _firestore.collection('Problems').where('ID', isEqualTo: get_today_problems_ID[i]).get();
 
     Problems problem =
     await docSnapshot.docs.map((e) => Problems.fromJson(e.data())).toList()[0];
 
+    // 오늘의 문제 리스트에 추가
     get_problems.add(problem);
   }
 
-  get_problems.shuffle();
+  if (!isShuffle) { // 문제가 섞여있지 않다면
+    get_problems.shuffle();
+    isShuffle = true;
+  }
 
   return get_problems;
 }
@@ -105,8 +113,6 @@ Future<List<Problems>> problemsFromFirestore() async { // Problems DB에서 오�
 Future<void> createTodayProblem(int userLevel, String? email) async {
   get_problems = [];
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  // DocumentReference<Map<String, dynamic>> docRef =
-  // firestore.collection('incorrectProblems').doc(email);
 
   // todayProblems에 10문제 쓰기
   await incorrectsFromFirestore(email);
@@ -136,7 +142,6 @@ Future<void> createTodayProblem(int userLevel, String? email) async {
     List<Problems> current_level_problems =
     await _snapshot.docs.map((e) => Problems.fromJson(e.data()))
         .toList(); // List로 변환
-    current_level_problems.shuffle(); // 문제 순서 셔플
 
     // 하루에 풀어야할 문제수(현재 10)에서 오늘 복습해야할 문제수를 뺀만큼 반복한다.
     for (int i = 0; i < today_problem_count - today_review; i++) {
@@ -155,7 +160,6 @@ Future<void> createTodayProblem(int userLevel, String? email) async {
 
     List<Problems> next_level_problems =
     await _snapshot.docs.map((e) => Problems.fromJson(e.data())).toList(); // List로 변환
-    next_level_problems.shuffle(); // 문제 순서 셔플
 
     // 만약 하루에 풀어야할 문제수-오늘 복습해야할 문제수가 0보다 크다면 반복문을 실행함. (= 레벨2 문제도 추가할 공간이 남았다는 의미)
     for (int i = 0; i < today_problem_count - today_review - today_current_level; i++) {
@@ -178,7 +182,6 @@ Future<void> createTodayProblem(int userLevel, String? email) async {
     List<Problems> current_level_problems =
     await _snapshot.docs.map((e) => Problems.fromJson(e.data()))
         .toList(); // List로 변환
-    current_level_problems.shuffle(); // 문제 순서 셔플
 
     // 하루에 풀어야할 문제수(현재 10)에서 오늘 복습해야할 문제수를 뺀만큼 반복한다.
     for (int i = 0; i < today_problem_count - today_review; i++) {
@@ -196,7 +199,6 @@ Future<void> createTodayProblem(int userLevel, String? email) async {
 
     List<Problems> prev_level_problems =
     await _snapshot.docs.map((e) => Problems.fromJson(e.data())).toList(); // List로 변환
-    prev_level_problems.shuffle(); // 문제 순서 셔플
 
     // 만약 하루에 풀어야할 문제수-오늘 복습해야할 문제수-현재 레벨의 문제수가 0보다 크다면 반복문을 실행함.
     for (int i = 0; i < today_problem_count - today_review - today_current_level; i++) {
@@ -215,7 +217,6 @@ Future<void> createTodayProblem(int userLevel, String? email) async {
 
     List<Problems> next_level_problems =
     await _snapshot.docs.map((e) => Problems.fromJson(e.data())).toList(); // List로 변환
-    next_level_problems.shuffle(); // 문제 순서 셔플
 
     // 만약 하루에 풀어야할 문제수-오늘 복습해야할 문제수-현재 레벨의 문제수-이전 레벨의 문제수가 0보다 크다면 반복문을 실행함.
     for (int i = 0; i < today_problem_count - today_review - today_current_level - today_prev_level; i++) {
