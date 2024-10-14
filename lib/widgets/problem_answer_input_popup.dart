@@ -4,6 +4,7 @@
  */
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coding_cow_app/data_account.dart';
 import 'package:coding_cow_app/result.dart';
 import 'package:coding_cow_app/widgets/main_measure.dart';
 import 'package:flutter/material.dart';
@@ -188,6 +189,8 @@ void answer_input_dialog(context) {
                       status = 2;
                       await addIncorrectProblem(get_problems[problem_no].ID); // 답을 틀렸을 때 Incorrect DB에 저장
                     }
+                    // totalScore 업데이트
+                    await updateUserTotalScore(getCurrentUserId());
 
                     // 결과 화면으로 이동
                     Navigator.pushReplacement(
