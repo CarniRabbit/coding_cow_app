@@ -60,7 +60,8 @@ class WeeklyProblemsChart extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 20),
                       child: LineChart(lineChartData(problemData)),
                     ),
                   ),
@@ -83,14 +84,16 @@ class WeeklyProblemsChart extends StatelessWidget {
         drawVerticalLine: true,
         horizontalInterval: 1,
         verticalInterval: 1,
-        getDrawingHorizontalLine: (double _) => FlLine(
-          color: Colors.white.withOpacity(0.2),
-          strokeWidth: 1,
-        ),
-        getDrawingVerticalLine: (double _) => FlLine(
-          color: Colors.white.withOpacity(0.2),
-          strokeWidth: 1,
-        ),
+        getDrawingHorizontalLine: (double _) =>
+            FlLine(
+              color: Colors.white.withOpacity(0.2),
+              strokeWidth: 1,
+            ),
+        getDrawingVerticalLine: (double _) =>
+            FlLine(
+              color: Colors.white.withOpacity(0.2),
+              strokeWidth: 1,
+            ),
       ),
       titlesData: FlTitlesData(
         bottomTitles: AxisTitles(
@@ -98,7 +101,15 @@ class WeeklyProblemsChart extends StatelessWidget {
             showTitles: true,
             reservedSize: 38,
             getTitlesWidget: (value, meta) {
-              const List<String> weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+              const List<String> weekdays = [
+                'Mon',
+                'Tue',
+                'Wed',
+                'Thu',
+                'Fri',
+                'Sat',
+                'Sun'
+              ];
               int index = value.toInt();
               if (index >= 0 && index < weekdays.length) {
                 return SideTitleWidget(
@@ -124,21 +135,29 @@ class WeeklyProblemsChart extends StatelessWidget {
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
+            interval: 1,
             getTitlesWidget: (value, meta) {
-              return Text(
-                value.toString(),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: Colors.black,
-                ),
-              );
+              int intValue = value.toInt();
+
+              if (intValue >= 0 && intValue <= 10) {
+                return Text(
+                  intValue.toString(),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
+                );
+              } else {
+                return const SizedBox.shrink();
+              }
             },
             showTitles: true,
+            reservedSize: 40,
           ),
         ),
         rightTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false), // 오른쪽 Y축 비표기
+          sideTitles: SideTitles(showTitles: false),
         ),
       ),
       borderData: FlBorderData(
@@ -156,7 +175,7 @@ class WeeklyProblemsChart extends StatelessWidget {
       minX: 0,
       maxX: 6,
       minY: 0,
-      maxY: problemData.map((e) => e.count).reduce((a, b) => a > b ? a : b) + 1,
+      maxY: 10,
       lineBarsData: [
         LineChartBarData(
           isCurved: true,
@@ -167,7 +186,8 @@ class WeeklyProblemsChart extends StatelessWidget {
           spots: problemData
               .asMap()
               .entries
-              .map((entry) => FlSpot(entry.key.toDouble(), entry.value.count.toDouble()))
+              .map((entry) =>
+              FlSpot(entry.key.toDouble(), entry.value.count.toDouble()))
               .toList(),
         ),
       ],
