@@ -3,6 +3,7 @@
  * 딩카 메인 화면 - 하단 메뉴 버튼(리그랭킹)
  */
 
+import 'package:coding_cow_app/ranking.dart';
 import 'package:flutter/material.dart';
 
 class Main_League_Ranking extends StatelessWidget {
@@ -12,7 +13,11 @@ class Main_League_Ranking extends StatelessWidget {
       flex: 4,
       child: TextButton(
         onPressed: () {
-
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+              builder: (context) => RankingPage())
+          );
         },
         style: TextButton.styleFrom(
           backgroundColor: Color(0xffd76834),
