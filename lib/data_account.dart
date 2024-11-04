@@ -232,26 +232,27 @@ Future<void> updateUserStats({
   try {
     await firestore.runTransaction((transaction) async {
       DocumentSnapshot snapshot = await transaction.get(docRef);
+      int updatedSolvedProblems, updatedCorrectProblems, updatedIncorrectProblems, updatedHintUsedProblems;
+      double updatedProblemLevel;
+      int updatedTotalScore;
 
       if (snapshot.exists) {
+        UserStats currentStats = UserStats.fromJson(snapshot.data() as Map<String, dynamic>);
+        updatedSolvedProblems = solvedProblems + currentStats.totalProblemsSolved;
+        updatedCorrectProblems = correctProblems + currentStats.correctProblemsCount;
+        updatedIncorrectProblems = incorrectProblems + currentStats.incorrectProblemsCount;
+        updatedHintUsedProblems = hintUsedProblems + currentStats.hintUsedProblemsCount;
 
-        UserStats currentStats = UserStats.fromJson(
-            snapshot.data() as Map<String, dynamic>);
-
-        int updatedSolvedProblems = solvedProblems +
-            currentStats.totalProblemsSolved;
-        int updatedCorrectProblems = correctProblems +
-            currentStats.correctProblemsCount;
-        int updatedIncorrectProblems = incorrectProblems +
-            currentStats.incorrectProblemsCount;
-        int updatedHintUsedProblems = hintUsedProblems +
-            currentStats.hintUsedProblemsCount;
-
-        double updatedProblemLevel = currentStats.averageProblemLevel;
+        updatedProblemLevel = currentStats.averageProblemLevel;
         if (solvedProblems > 0 && problemLevel != null) {
-          updatedProblemLevel = ((currentStats.averageProblemLevel *
-              currentStats.totalProblemsSolved) + problemLevel) /
-              updatedSolvedProblems;
+          updatedProblemLevel = ((currentStats.averageProblemLevel * currentStats.totalProblemsSolved) + problemLevel) / updatedSolvedProblems;
+        }
+
+        updatedTotalScore = ((updatedProblemLevel / 16) * 10).floor() * (updatedCorrectProblems + updatedHintUsedProblems) ~/ 2;
+
+        // 레벨이 16 이하인 경우 기본 점수 추가
+        if (updatedProblemLevel <= 16) {
+          updatedTotalScore += (updatedCorrectProblems + updatedHintUsedProblems) * 2; // 가중치 점수
         }
 
         transaction.update(docRef, {
@@ -260,51 +261,32 @@ Future<void> updateUserStats({
           'incorrectProblemsCount': updatedIncorrectProblems,
           'hintUsedProblemsCount': updatedHintUsedProblems,
           'averageProblemLevel': updatedProblemLevel,
+          'totalScore': updatedTotalScore,
           'lastUpdated': Timestamp.now(),
         });
       } else {
         // Document가 존재하지 않는 경우 새로 생성
+        updatedSolvedProblems = solvedProblems;
+        updatedCorrectProblems = correctProblems;
+        updatedIncorrectProblems = incorrectProblems;
+        updatedHintUsedProblems = hintUsedProblems;
+        updatedProblemLevel = problemLevel?.toDouble() ?? 0.0;
+        updatedTotalScore = (updatedCorrectProblems + updatedHintUsedProblems) * 2; // 기본 점수
+
         transaction.set(docRef, {
           'uid': uid,
-          'totalProblemsSolved': solvedProblems,
-          'correctProblemsCount': correctProblems,
-          'incorrectProblemsCount': incorrectProblems,
-          'hintUsedProblemsCount': hintUsedProblems,
-          'averageProblemLevel': problemLevel?.toDouble() ?? 0.0,
+          'totalProblemsSolved': updatedSolvedProblems,
+          'correctProblemsCount': updatedCorrectProblems,
+          'incorrectProblemsCount': updatedIncorrectProblems,
+          'hintUsedProblemsCount': updatedHintUsedProblems,
+          'averageProblemLevel': updatedProblemLevel,
+          'totalScore': updatedTotalScore,
           'lastUpdated': Timestamp.now(),
         });
       }
+      print('UserStats와 totalScore가 업데이트되었습니다.');
     });
   } catch (e) {
-    print('error updating user stats: $e');
-  }
-}
-
-Future<void> updateUserTotalScore(String uid) async {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-  DocumentReference docRef = firestore.collection('UserStats').doc(uid);
-
-  try {
-    await firestore.runTransaction((transaction) async {
-      DocumentSnapshot snapshot = await transaction.get(docRef);
-
-      if (snapshot.exists) {
-        UserStats currentStats = UserStats.fromJson(
-            snapshot.data() as Map<String, dynamic>);
-
-        int totalScore = (currentStats.averageProblemLevel / 16 * 10).floor() *
-            (currentStats.correctProblemsCount +
-                currentStats.hintUsedProblemsCount) ~/ 2;
-
-        transaction.update(docRef, {
-          'totalScore': totalScore,
-          'lastUpdated': Timestamp.now(),
-        });
-      } else {
-        print('UserStats document does not exist.');
-      }
-    });
-  } catch (e) {
-    print('Error updating total score: $e');
+    print('Error updating user stats and total score: $e');
   }
 }
