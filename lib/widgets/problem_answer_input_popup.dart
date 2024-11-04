@@ -189,8 +189,6 @@ void answer_input_dialog(context) {
                       status = 2;
                       await addIncorrectProblem(get_problems[problem_no].ID); // 답을 틀렸을 때 Incorrect DB에 저장
                     }
-                    // totalScore 업데이트
-                    await updateUserTotalScore(getCurrentUserId());
 
                     // 결과 화면으로 이동
                     Navigator.pushReplacement(
