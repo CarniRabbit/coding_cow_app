@@ -4,8 +4,11 @@
  */
 
 import 'package:coding_cow_app/data_global.dart';
-import 'package:coding_cow_app/problem_notice.dart';
+import 'package:coding_cow_app/widgets/transition_route_state.dart';
 import 'package:flutter/material.dart';
+
+import '../problem_notice.dart';
+import 'move_middle_to_circle_transition_route.dart';
 
 class Main_Today_Coding_Button extends StatelessWidget {
   @override
@@ -18,9 +21,15 @@ class Main_Today_Coding_Button extends StatelessWidget {
         width: double.infinity,
         child: TextButton( // today coding button
           onPressed: () { // press event
+
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Problem_Notice_Page()), // 문제 화면으로 이동
+              TransitionRouteState(
+                page: Problem_Notice_Page(),
+                transition: moveMiddleToCircleTransition,
+                duration: const Duration(seconds: 1),
+              ),
+              // MaterialPageRoute(builder: (context) => Problem_Notice_Page()), // 문제 화면으로 이동
             );
           },
           style: TextButton.styleFrom(

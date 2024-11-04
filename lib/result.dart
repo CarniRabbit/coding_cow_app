@@ -4,6 +4,7 @@
  */
 
 
+import 'package:coding_cow_app/data_global.dart';
 import 'package:coding_cow_app/widgets/main_measure.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/main.dart';
@@ -22,6 +23,12 @@ class Result_Page extends StatelessWidget {
   Widget build(BuildContext context) {
     // hide navigation bar
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
+
+    get_today_problems_ID = [];
+
+    get_problems.forEach((problem) {
+      get_today_problems_ID.add(problem.ID);
+    });
 
     return PopScope(
       canPop: false,

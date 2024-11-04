@@ -93,6 +93,9 @@ class UserData {
 
 Future<(String, int, int)> getUserInfo(String? email) async {
   problem_no = 0;
+  get_problems = [];
+  get_today_problems_ID = [];
+
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   DocumentReference<Map<String, dynamic>> docRef =
   _firestore.collection('users').doc(email);
@@ -104,8 +107,23 @@ Future<(String, int, int)> getUserInfo(String? email) async {
 
   // 오늘의 문제 DB 생성 및 로드 (isAttend가 false일 때)
   if (!docSnapshot.data()?['isAttend']) { // 오늘 처음 접속할 경우
-    createTodayProblem(get_level, email);
+    await createTodayProblem(get_level, email);
   }
+
+  // 현재 계정에 맞는 오늘의 문제 조회
+  QuerySnapshot<Map<String, dynamic>> _snapshot =
+  await _firestore.collection('todayProblems').where('email', isEqualTo: auth.currentUser?.email).get();
+
+  // 리스트로 변환 후 저장
+  List<TodayProblems> get_today_problems =
+  await _snapshot.docs.map((e) => TodayProblems.fromJson(e.data())).toList();
+
+  // 오늘의 문제의 ID를 따로 저장
+  get_today_problems.forEach((today_problem) {
+    get_today_problems_ID.add(today_problem.ID);
+  });
+
+  get_today_problems_ID.shuffle();
 
   await handleDailyAttendance(email);
 

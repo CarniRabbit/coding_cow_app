@@ -76,9 +76,17 @@ class Result_Bottom_Menu extends StatelessWidget {
                         height: 50,
                         child: TextButton( // next problem
                           onPressed: () {
-                            if (mode == 0) { // 오늘의 문제 (현재 무작위 문제, 추후 유저 레벨 기준 오늘의 문제 배열로 대체)
-                              problem_no++; // 문제 랜덤 선정
-                            } else { // 오답 문제 (0부터 순차적으로 증가)
+                            // TodayProblems에서 삭제
+                            get_problems.removeAt(0);
+                            get_today_problems_ID.removeAt(0);
+
+                            // print("---------result--------");
+                            // get_problems.forEach((element) {
+                            //   print(element.ID);
+                            // });
+                            // print("-----------------------");
+
+                            if (mode == 1) { // 오늘의 문제 (현재 무작위 문제, 추후 유저 레벨 기준 오늘의 문제 배열로 대체)
                               // 오답 list의 끝까지 왔을 경우 problem_no를 0으로 초기화
                               if (problem_no <= get_problems.length-1) {
                                 problem_no++;
@@ -93,11 +101,6 @@ class Result_Bottom_Menu extends StatelessWidget {
                                     builder: (context) => Problem_Notice_Page()
                                 ),(route) => false
                             );
-
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => Problem_Page()), // 문제 화면으로 이동
-                            // );
                           },
                           child: Row(
                             children: [

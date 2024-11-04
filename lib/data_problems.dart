@@ -22,6 +22,8 @@ import 'package:coding_cow_app/data_incorrects.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'data_global.dart';
 
+FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
 class Problems {
   final String ID;
   final int level;
@@ -73,22 +75,12 @@ class Problems {
 }
 
 Future<List<Problems>> problemsFromFirestore() async { // Problems DB에서 오늘의 문제 조회
-  get_today_problems_ID = [];
   get_problems = [];
+  print("------problemsFromFirestore------");
+  print(get_today_problems_ID);
 
   // 현재 계정에 맞는 오늘의 문제 조회
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  QuerySnapshot<Map<String, dynamic>> _snapshot =
-  await _firestore.collection('todayProblems').where('email', isEqualTo: auth.currentUser?.email).get();
-
-  // 리스트로 변환 후 저장
-  List<TodayProblems> get_today_problems =
-  await _snapshot.docs.map((e) => TodayProblems.fromJson(e.data())).toList();
-
-  // 오늘의 문제의 ID를 따로 저장
-  get_today_problems.forEach((today_problem) {
-    get_today_problems_ID.add(today_problem.ID);
-  });
+  // print(get_today_problems_ID);
 
   for (int i = 0; i<get_today_problems_ID.length; i++) {
     // Problems DB에서 오늘의 문제의 ID와 일치하는 문제 조회
@@ -102,15 +94,11 @@ Future<List<Problems>> problemsFromFirestore() async { // Problems DB에서 오�
     get_problems.add(problem);
   }
 
-  if (!isShuffle) { // 문제가 섞여있지 않다면
-    get_problems.shuffle();
-    isShuffle = true;
-  }
-
   return get_problems;
 }
 
 Future<void> createTodayProblem(int userLevel, String? email) async {
+  get_today_problems_ID = [];
   get_problems = [];
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 

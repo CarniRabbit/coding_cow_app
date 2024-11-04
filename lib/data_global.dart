@@ -13,9 +13,10 @@ int today_next_level = 0;
 String get_nickname = '';
 int get_level = 0;
 int get_restEXP = 0;
+int get_todaySolved = 0;
+int get_problemsSolved = 0;
 String current_email = '';
 int new_cycle = 0;
-var isShuffle = false;
 final FirebaseAuth auth = FirebaseAuth.instance;
 
 int mode = 0; // 0: 오늘의 문제, 1: 오답 문제

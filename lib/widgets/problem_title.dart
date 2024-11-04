@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class Problem_Title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("title - 문제번호: "+get_problems[0].ID);
+    // print("title - 문제번호: "+get_problems[problem_no].ID);
 
     return Row( // align(→), problem title
       children: [
@@ -24,12 +24,19 @@ class Problem_Title extends StatelessWidget {
         Container ( // text
           child: Text(
             get_problems[problem_no].title,
-            style: TextStyle(
-              // letterSpacing: -2,
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            style: get_problems[problem_no].title.length > 15 ?
+              TextStyle(
+                // letterSpacing: -2,
+                color: Colors.black,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ) :
+              TextStyle(
+                // letterSpacing: -2,
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
           ),
         ),
       ],

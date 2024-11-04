@@ -27,7 +27,9 @@ class Result_Body extends StatelessWidget {
                 // widthFactor: 0.25,
                 child: Container(
                   child: Text( // period
-                    new_cycle.toString()+"일 뒤 복습",
+                    new_cycle > 0 ? //
+                    new_cycle.toString()+"일 뒤 복습" :
+                    "당분간 복습 안함", // cycle이 0이라면 (처음부터 문제를 맞췄다면) 복습일수X
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

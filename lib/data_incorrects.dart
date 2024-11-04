@@ -65,6 +65,7 @@ Future<List<Problems>> incorrectsFromFirestore(String? email) async {
 
     // Problems incorrect = Problems.fromJson(docSnapshot.data()!);
     // get_problems에 해당 계정의 오답 문제 정보 저장
+    print("설마 여길 오는건 아니지?");
     get_problems.add(Problems.fromJson(docSnapshot.data()!));
   }
 

@@ -6,14 +6,11 @@
 
 import 'data_global.dart';
 import 'package:coding_cow_app/main.dart';
-import 'package:coding_cow_app/data_problems.dart';
-import 'package:coding_cow_app/data_incorrects.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/topbar.dart';
 import 'package:coding_cow_app/widgets/problem_title.dart';
 import 'package:coding_cow_app/widgets/problem_body.dart';
 import 'package:coding_cow_app/widgets/problem_bottom_menu.dart';
-import 'package:flutter/services.dart';
 
 class Problem_Page extends StatelessWidget {
   @override

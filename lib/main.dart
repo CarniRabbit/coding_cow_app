@@ -51,6 +51,9 @@ class Main_Page extends StatelessWidget {
           future: getUserInfo(auth.currentUser?.email),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if(snapshot.hasData) {
+              // get_today_problems_ID.shuffle();
+              problem_no = 0;
+
               return SafeArea( // 앱이 상태창 아래부터 표시되도록 함
                 child: Column(
                   children: [
@@ -74,7 +77,7 @@ class Main_Page extends StatelessWidget {
 
             return Center( // 데이터가 모두 로드될 때까지 로딩중 화면
               child: Text(
-                "사용자 정보 로딩중",
+                "୧(๑•̀ᗝ•́)૭",
                 textAlign: TextAlign.center,
               ),
             );
