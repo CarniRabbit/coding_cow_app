@@ -4,6 +4,8 @@
  */
 
 
+import 'package:coding_cow_app/problem_notice.dart';
+
 import 'data_global.dart';
 import 'package:coding_cow_app/main.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +25,10 @@ class Problem_Page extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (bool didPop) {
-        Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(
-                builder: (context) => Main_Page()
-            ),(route) => false
+        Navigator.push(context,
+          MaterialPageRoute(
+            builder: (context) => Problem_Notice_Page()
+          )
         );
       },
       child: MaterialApp( // root widget

@@ -21,7 +21,6 @@ class Main_Today_Coding_Button extends StatelessWidget {
         width: double.infinity,
         child: TextButton( // today coding button
           onPressed: () { // press event
-
             Navigator.push(
               context,
               TransitionRouteState(
@@ -32,20 +31,39 @@ class Main_Today_Coding_Button extends StatelessWidget {
               // MaterialPageRoute(builder: (context) => Problem_Notice_Page()), // 문제 화면으로 이동
             );
           },
-          style: TextButton.styleFrom(
-            backgroundColor: Color(0xff2355DA),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(
+                Color(0xff2355DA)
             ),
-            padding: EdgeInsets.all(15),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+            ),
+            padding: MaterialStateProperty.all(
+              EdgeInsets.all(15),
+            ),
+            textStyle: MaterialStateProperty.resolveWith(
+              (state) {
+                if(state.contains(MaterialState.pressed)) {
+                  return TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  );
+                }
+                return TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                );
+              },
+            ),
           ),
+
           child: Text(
             '오늘의 코딩',
             style: TextStyle(
               letterSpacing: -2,
               color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
             ),
           ),
         ),

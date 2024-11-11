@@ -16,12 +16,32 @@ class Main_QA extends StatelessWidget {
         onPressed: () {
           // 질의응답 버튼 터치시
         },
-        style: TextButton.styleFrom(
-          backgroundColor: Color(0xfff8d34b),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(
+            Color(0xfff8d34b),
           ),
-          padding: EdgeInsets.all(10),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+          ),
+          padding: MaterialStateProperty.all(
+            EdgeInsets.all(10),
+          ),
+          textStyle: MaterialStateProperty.resolveWith(
+                (state) {
+              if(state.contains(MaterialState.pressed)) {
+                return TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                );
+              }
+              return TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              );
+            },
+          ),
         ),
         child: Row( // align(→)
           children: [
@@ -37,8 +57,6 @@ class Main_QA extends StatelessWidget {
               style: TextStyle(
                 letterSpacing: -2,
                 color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ],

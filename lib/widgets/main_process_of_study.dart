@@ -19,7 +19,7 @@ class Main_Process_Of_Study extends StatelessWidget {
       ),
       child: SizedBox(
         width: double.infinity,
-        height: 250,
+        height: 200,
         child: Row( // align(→)
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -29,8 +29,8 @@ class Main_Process_Of_Study extends StatelessWidget {
               children: [
                 Image( // dingca character
                   image: AssetImage('character/codingcow.gif'),
-                  width: 120,
-                  height: 120,
+                  width: 110,
+                  height: 110,
                 ),
                 SizedBox(
                   height: 10,

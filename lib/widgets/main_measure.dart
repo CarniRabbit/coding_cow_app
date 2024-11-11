@@ -26,12 +26,33 @@ class Main_Measure extends StatelessWidget {
                   builder: (context) => StatPage(uid: uid))
           );
         },
-        style: TextButton.styleFrom(
-          backgroundColor: Color(0xff5585bd),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+        style:
+        ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(
+            Color(0xff5585bd),
           ),
-          padding: EdgeInsets.all(10),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+          ),
+          padding: MaterialStateProperty.all(
+            EdgeInsets.all(10),
+          ),
+          textStyle: MaterialStateProperty.resolveWith(
+                (state) {
+              if(state.contains(MaterialState.pressed)) {
+                return TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                );
+              }
+              return TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              );
+            },
+          ),
         ),
         child: Row( // align(→)
           children: [
@@ -47,8 +68,6 @@ class Main_Measure extends StatelessWidget {
               style: TextStyle(
                 letterSpacing: -2,
                 color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ],

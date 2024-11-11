@@ -150,13 +150,34 @@ class Problem_Notice_Page extends StatelessWidget {
                                 MaterialPageRoute(builder: (context) => Problem_Page()), // 문제 화면으로 이동
                               );
                             },
-                            style: TextButton.styleFrom(
-                              minimumSize: Size(double.infinity, 30),
-                              backgroundColor: Color(0xff2355DA),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
+                            style: ButtonStyle(
+                              minimumSize: MaterialStateProperty.all(
+                                Size(double.infinity, 30),
+                              ),
+                              backgroundColor: MaterialStateProperty.all(
+                                  Color(0xff2355DA)
+                              ),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(20)),
                                 ),
+                              ),
+                              padding: MaterialStateProperty.all(
+                                EdgeInsets.all(15),
+                              ),
+                              textStyle: MaterialStateProperty.resolveWith(
+                                    (state) {
+                                  if(state.contains(MaterialState.pressed)) {
+                                    return TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    );
+                                  }
+                                  return TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                  );
+                                },
                               ),
                             ),
                             child: Text(

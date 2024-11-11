@@ -20,12 +20,33 @@ class Main_Incorrects extends StatelessWidget {
             MaterialPageRoute(builder: (context) => Problem_Notice_Page()), // 장면 이동
           );
         },
-        style: TextButton.styleFrom( // theme
-          backgroundColor: Color(0xff9bbb49),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+        style:
+        ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(
+            Color(0xff9bbb49),
           ),
-          padding: EdgeInsets.all(10), // 상하좌우 10px
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+          ),
+          padding: MaterialStateProperty.all(
+            EdgeInsets.all(10),
+          ),
+          textStyle: MaterialStateProperty.resolveWith(
+                (state) {
+              if(state.contains(MaterialState.pressed)) {
+                return TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                );
+              }
+              return TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              );
+            },
+          ),
         ),
         child: Row( // align (→)
           children: [
@@ -41,8 +62,6 @@ class Main_Incorrects extends StatelessWidget {
               style: TextStyle(
                 letterSpacing: -2,
                 color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ],

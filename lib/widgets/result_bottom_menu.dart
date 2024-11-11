@@ -50,19 +50,36 @@ class Result_Bottom_Menu extends StatelessWidget {
                                 '문제해설',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
                           ),
-                          style: TextButton.styleFrom(
-                            backgroundColor: Color(0xff2355DA),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                              Color(0xff2355DA),
                             ),
-                            padding: EdgeInsets.only(top: 10, left: 15, bottom: 10, right: 15),
-                            // 상화좌우 padding 5px
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              ),
+                            ),
+                            padding: MaterialStateProperty.all(
+                              EdgeInsets.only(top: 10, left: 20, bottom: 10, right: 20),
+                            ),
+                            textStyle: MaterialStateProperty.resolveWith(
+                                  (state) {
+                                if(state.contains(MaterialState.pressed)) {
+                                  return TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  );
+                                }
+                                return TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                );
+                              },
+                            ),
                           ),
                         ), // end of Hint Button
                       ),
@@ -79,12 +96,6 @@ class Result_Bottom_Menu extends StatelessWidget {
                             // TodayProblems에서 삭제
                             get_problems.removeAt(0);
                             get_today_problems_ID.removeAt(0);
-
-                            // print("---------result--------");
-                            // get_problems.forEach((element) {
-                            //   print(element.ID);
-                            // });
-                            // print("-----------------------");
 
                             if (mode == 1) { // 오늘의 문제 (현재 무작위 문제, 추후 유저 레벨 기준 오늘의 문제 배열로 대체)
                               // 오답 list의 끝까지 왔을 경우 problem_no를 0으로 초기화
@@ -116,19 +127,36 @@ class Result_Bottom_Menu extends StatelessWidget {
                                 '다음문제',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
                           ),
-                          style: TextButton.styleFrom(
-                            backgroundColor: Color(0xff2355DA),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                              Color(0xff2355DA),
                             ),
-                            padding: EdgeInsets.only(top: 10, left: 20, bottom: 10, right: 20),
-                            // 상화좌우 padding 5px
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              ),
+                            ),
+                            padding: MaterialStateProperty.all(
+                              EdgeInsets.only(top: 10, left: 20, bottom: 10, right: 20),
+                            ),
+                            textStyle: MaterialStateProperty.resolveWith(
+                                  (state) {
+                                if(state.contains(MaterialState.pressed)) {
+                                  return TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  );
+                                }
+                                return TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                );
+                              },
+                            ),
                           ),
                         ), // end of next problem
                       ),

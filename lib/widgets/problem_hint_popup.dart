@@ -37,13 +37,32 @@ void hint_dialog(context) { // hint popup
                   onPressed: () {
                     Navigator.of(context, rootNavigator: true).pop('dialog');
                   },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Color(0xff1f8e22),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      Color(0xff1f8e22),
                     ),
-                    padding: EdgeInsets.all(10),
-                    // 상화좌우 padding 5px
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                    ),
+                    padding: MaterialStateProperty.all(
+                      EdgeInsets.all(10),
+                    ),
+                    textStyle: MaterialStateProperty.resolveWith(
+                          (state) {
+                        if(state.contains(MaterialState.pressed)) {
+                          return TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          );
+                        }
+                        return TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        );
+                      },
+                    ),
                   ),
                   child: Text(
                     '닫기',

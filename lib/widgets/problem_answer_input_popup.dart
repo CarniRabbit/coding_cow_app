@@ -31,9 +31,7 @@ void answer_input_dialog(context) {
                 color: Color(0xff2355DA),
                 iconSize: 50,
                 tooltip: "대소문자를 구분하여 입력해주세요. 연산자, 피연산자 간의 띄어쓰기는 정답과 무관합니다.",
-                onPressed: () {
-
-                },
+                onPressed: () { },
               ),
               Text(
                 '답안 작성 예시',
@@ -59,9 +57,6 @@ void answer_input_dialog(context) {
 
                     var text = _answerEditController.text; // 입력한 값
                     int status = 0;
-
-                    // print("---------problem1--------");
-                    // print(get_today_problems_ID);
 
                     if (text.replaceAll(RegExp('\\s'), "") == get_problems[problem_no].answer.replaceAll(RegExp('\\s'), "")) {
                       // hint를 보지 않고 정답을 맞췄을 때
@@ -234,7 +229,7 @@ void answer_input_dialog(context) {
                     }
 
                     // totalScore 업데이트
-                    await updateUserTotalScore(getCurrentUserId());
+                    // await updateUserTotalScore(getCurrentUserId());
 
                     // 결과 화면으로 이동
                     Navigator.pushReplacement(

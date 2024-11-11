@@ -19,12 +19,33 @@ class Main_League_Ranking extends StatelessWidget {
               builder: (context) => RankingPage())
           );
         },
-        style: TextButton.styleFrom(
-          backgroundColor: Color(0xffd76834),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+        style:
+        ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(
+            Color(0xffd76834),
           ),
-          padding: EdgeInsets.all(10),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+          ),
+          padding: MaterialStateProperty.all(
+            EdgeInsets.all(10),
+          ),
+          textStyle: MaterialStateProperty.resolveWith(
+                (state) {
+              if(state.contains(MaterialState.pressed)) {
+                return TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                );
+              }
+              return TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              );
+            },
+          ),
         ),
         child: Row( // align(→)
           children: [
@@ -40,8 +61,6 @@ class Main_League_Ranking extends StatelessWidget {
               style: TextStyle(
                 letterSpacing: -2,
                 color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ],
