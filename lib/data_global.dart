@@ -17,6 +17,8 @@ int get_todaySolved = 0;
 int get_problemsSolved = 0;
 String current_email = '';
 int new_cycle = 0;
+bool hasTodayProblems = false;
+
 final FirebaseAuth auth = FirebaseAuth.instance;
 
 int mode = 0; // 0: 오늘의 문제, 1: 오답 문제
@@ -24,5 +26,4 @@ int today_problem_count = 10;
 var hint = false; // hint 열람 여부
 int problem_no = 0; // 문제 번호
 String memo = ""; // 문제 풀이를 위한 메모
-int today_solved = 0; // 오늘의 푼 문제 수
 double today_progress = 0.0; // 오늘의 푼 문제 비율 (푼 문제 수/10)

@@ -107,10 +107,10 @@ class Result_Bottom_Menu extends StatelessWidget {
                             }
                             memo = ""; // 메모 리셋
 
-                            Navigator.pushAndRemoveUntil(context,
+                            Navigator.push(context,
                                 MaterialPageRoute(
                                     builder: (context) => Problem_Notice_Page()
-                                ),(route) => false
+                                )
                             );
                           },
                           child: Row(

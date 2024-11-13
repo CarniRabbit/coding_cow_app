@@ -17,10 +17,10 @@ class Result_Solution extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (bool didPop) {
-        Navigator.pushAndRemoveUntil(context,
+        Navigator.push(context,
             MaterialPageRoute(
                 builder: (context) => Main_Page()
-            ),(route) => false
+            )
         );
       },
       child: MaterialApp( // root widget

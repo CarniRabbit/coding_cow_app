@@ -27,7 +27,7 @@ class _LoginPageState extends State<Login_Page> {
 
       // await handleDailyAttendance(auth.currentUser?.email);
 
-      Navigator.of(context).pushReplacement(
+      Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => Main_Page()),
       );
     } on FirebaseAuthException catch (e) {

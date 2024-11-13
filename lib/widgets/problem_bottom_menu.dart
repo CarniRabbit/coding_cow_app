@@ -3,6 +3,7 @@
  * 딩카 문제 화면 - 하단 메뉴
  */
 
+import 'package:coding_cow_app/problem_notice.dart';
 import 'package:coding_cow_app/widgets/problem_memo_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/problem_hint_popup.dart';
@@ -25,6 +26,7 @@ class Problem_Bottom_Menu extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
+                flex: 1,
                 child:  SizedBox(
                   height: 80,
                   child: TextButton( // Hint Button
@@ -64,7 +66,48 @@ class Problem_Bottom_Menu extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 1,
+                child:  SizedBox(
+                  height: 80,
+                  child: TextButton( // Hint Button
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Problem_Notice_Page()),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Image(
+                          image: AssetImage('icon/notice.png'),
+                          width: 30,
+                          height: 30,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          '문제\n설명',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Color(0xff173893),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(0)),
+                      ),
+                      padding: EdgeInsets.all(10),
+                      // 상하좌우 padding 10px
+                    ),
+                  ), // end of Hint Button
+                ),
+              ),
+              Expanded(
+                flex: 1,
                 child: Container(
                   decoration: BoxDecoration(
                     color: Color(0xff2355DA),

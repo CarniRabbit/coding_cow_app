@@ -22,13 +22,13 @@ class Problem_Notice_Page extends StatelessWidget {
     hint = false;
 
     return PopScope(
-      canPop: false,
+      canPop: true,
       onPopInvoked: (bool didPop) {
-        Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(
-                builder: (context) => Main_Page()
-            ),(route) => false
-        );
+        // Navigator.push(context,
+        //     MaterialPageRoute(
+        //         builder: (context) => Main_Page()
+        //     ),
+        // );
       },
       child: MaterialApp( // root widget
         theme: ThemeData( // font setting (나눔고딕코딩)

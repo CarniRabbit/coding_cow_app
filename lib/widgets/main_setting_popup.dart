@@ -59,7 +59,7 @@ void setting_dialog(context) {
                 onPressed: () async {
                   await FirebaseAuth.instance.signOut();
                   Navigator.of(context).pop(); // 팝업 닫기
-                  Navigator.of(context).pushReplacement(
+                  Navigator.of(context).push(
                     MaterialPageRoute(
                         builder: (context) => Login_Page()),
                   );

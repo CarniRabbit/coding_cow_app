@@ -39,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       });
       await handleDailyAttendance(_emailController.text.trim());
 
-      Navigator.of(context).pushReplacement(
+      Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => Main_Page()),
       );
     } on FirebaseAuthException catch (e) {

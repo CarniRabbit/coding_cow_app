@@ -118,10 +118,14 @@ Future<(String, int, int)> getUserInfo(String? email) async {
   List<TodayProblems> get_today_problems =
   await _snapshot.docs.map((e) => TodayProblems.fromJson(e.data())).toList();
 
-  // 오늘의 문제의 ID를 따로 저장
-  get_today_problems.forEach((today_problem) {
-    get_today_problems_ID.add(today_problem.ID);
-  });
+  if (!hasTodayProblems) {
+    // 오늘의 문제의 ID를 따로 저장
+    get_today_problems.forEach((today_problem) {
+      get_today_problems_ID.add(today_problem.ID);
+    });
+
+    hasTodayProblems = true;
+  }
 
   get_today_problems_ID.shuffle();
 
