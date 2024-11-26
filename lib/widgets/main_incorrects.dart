@@ -60,7 +60,6 @@ class Main_Incorrects extends StatelessWidget {
             Text( // text
               '오답\n노트',
               style: TextStyle(
-                letterSpacing: -2,
                 color: Colors.white,
               ),
             ),

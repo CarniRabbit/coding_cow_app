@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:coding_cow_app/data_account.dart';
-import '../statistics.dart';
 
 class StatisticsChart extends StatefulWidget {
   final UserStats userStats;

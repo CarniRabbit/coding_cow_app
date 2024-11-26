@@ -58,11 +58,9 @@ class Main_Today_Coding_Button extends StatelessWidget {
               },
             ),
           ),
-
           child: Text(
             '오늘의 코딩',
             style: TextStyle(
-              letterSpacing: -2,
               color: Colors.white,
             ),
           ),

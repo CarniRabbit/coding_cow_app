@@ -3,8 +3,6 @@
  * 딩카 메인 화면 - 하단 메뉴 버튼(질의응답)
  */
 
-import 'package:coding_cow_app/result_solution.dart';
-import 'package:coding_cow_app/problem_notice.dart';
 import 'package:flutter/material.dart';
 
 class Main_QA extends StatelessWidget {
@@ -55,7 +53,6 @@ class Main_QA extends StatelessWidget {
             Text( // text
               '질의\n응답',
               style: TextStyle(
-                letterSpacing: -2,
                 color: Colors.white,
               ),
             ),
