@@ -3,9 +3,8 @@
  * 딩카 문제 화면
  */
 
-import 'package:coding_cow_app/problem_notice.dart';
-import 'package:flutter/services.dart';
 
+import 'package:flutter/services.dart';
 import 'data_global.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/widgets/topbar.dart';

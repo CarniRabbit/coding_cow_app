@@ -8,7 +8,6 @@ import 'package:coding_cow_app/widgets/main_navigator.dart';
 import 'package:coding_cow_app/widgets/statistics_resultDistribution.dart';
 import 'package:coding_cow_app/widgets/statistics_weeklyProblems.dart';
 import 'package:coding_cow_app/widgets/topbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_cow_app/data_account.dart';
 

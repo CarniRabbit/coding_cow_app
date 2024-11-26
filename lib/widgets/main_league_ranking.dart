@@ -59,7 +59,6 @@ class Main_League_Ranking extends StatelessWidget {
             Text(
               '리그\n랭킹',
               style: TextStyle(
-                letterSpacing: -2,
                 color: Colors.white,
               ),
             ),

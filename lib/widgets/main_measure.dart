@@ -66,7 +66,6 @@ class Main_Measure extends StatelessWidget {
             Text( // text
               '실력\n측정',
               style: TextStyle(
-                letterSpacing: -2,
                 color: Colors.white,
               ),
             ),
